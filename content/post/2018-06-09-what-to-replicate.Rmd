@@ -6,23 +6,23 @@ slug: what-to-replicate
 categories: []
 tags: ["replication"]
 bibliography: [what_to_replicate.bib]
-summary: "Justifications of study choice from 86 replication studies."
+summary: "Justifications of study choice from 85 replication studies."
 header: 
   caption: ''
   image: 'headers/what_to_replicate.jpg'
 ---
 
-##Justifications of study choice from 86 replication studies.
+##Justifications of study choice from 85 replication studies.
 <br/>
 In their recent BBS article, @Zwaan2017 synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article [@Coles2018]. In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate. In other words, assume that a researcher has limited resources and can either replicate a previous study or run an original study of their own. Both of these options have costs (e.g. money for subject recruitment, time spent conducting the study) and benefits (e.g. theoretical innovation, estimate accuracy, societal impact). Considering both options, the researcher will need to decide which has the higher cost/benefit ratio. 
 
 In a another project I am working on for the Open Science Collaboration, we are trying to develop some formalized tools to help researchers justify their decisions of which studies to replicate. We make the assumption that every researcher has to make decisions under resource constraints, and we assume that they have already decided to conduct a replication. They now face a new problem: There are many original findings that they could replicate. Which one should they choose? We may all agree with Zwaan et al. (2017) that “the idea that observations can be recreated and verified by independent sources is usually seen as a bright line of demarcation that separates science from non-science”, but that does not really help us prioritize which observations to recreate. What makes a study more valuable to replicate than another? 
 
-In the process of coming up with answers to this question, I thought it would be useful to take a look at how researchers “in the wild” justify their replication efforts. They must have some reason for choosing a specific study to replicate, and it seems reasonable to assume that authors would provide these reasons in their report. So I went to the “Curated Replications” dataset at [curatescience.org](http://curatescience.org) and started working my way through the links in the table. Eighty-six papers later, here are my takeaways.
+In the process of coming up with answers to this question, I thought it would be useful to take a look at how researchers “in the wild” justify their replication efforts. They must have some reason for choosing a specific study to replicate, and it seems reasonable to assume that authors would provide these reasons in their report. So I went to the “Curated Replications” dataset at [curatescience.org](http://curatescience.org) and started working my way through the links in the table. Eighty-five papers later, here are my takeaways.
 
 #Replication Justifications
 
-Based on my reading of and subjective judgement of similarity between the justifications for study selection mentioned in the 86 replication reports, I have grouped them into five major categories: theoretical impact, personal interest, academic impact, public/social impact, and methodological concerns. For each category I have included a short description, and a few illustrative quotes with a reference to the quoted articles in each case. It should be noted that any given replication will usually deploy more than one justification for why a finding was considered valuable to replicate, often drawing from several different categories. At the end of this article you can find a link to a spreadsheet containing the justification quotes I have based my review on, as well as article DOIs, for almost all of the 86 reports reviewed (some reports did not have a justification and/or DOI). 
+Based on my reading of and subjective judgement of similarity between the justifications for study selection mentioned in the 85 replication reports, I have grouped them into five major categories: theoretical impact, personal interest, academic impact, public/social impact, and methodological concerns. For each category I have included a short description, and a few illustrative quotes with a reference to the quoted articles in each case. It should be noted that any given replication will usually deploy more than one justification for why a finding was considered valuable to replicate, often drawing from several different categories. At the end of this article you can find a link to a spreadsheet containing the justification quotes I have based my review on, as well as article DOIs, for almost all of the 85 reports reviewed (some reports did not have a justification and/or DOI). 
 
 ##**Theoretical impact**
 
@@ -62,7 +62,7 @@ Another common justification for choosing a finding to replicate is to refer to 
 
 > *“Schachter’s groundbreaking demonstration of the deviation-rejection link has captivated social psychologists for decades. The findings and paradigm were so compelling that the deviation-rejection link is often taken for granted and sometimes may be misrepresented…”*
 
-A more quantifiable approach is to quote the citation impact of the original study in question. In these cases it is often common to state the date and source of the citation number as well. Though often used, it is not apparent what constitutes a “widely cited” article. In the 86 articles reviewed here, quoted numbers range from 21 to over 1600. To provide a reference point for these numbers, I acquired the Crossref citation counts for 2854 empirical papers from the psychology literature. These papers are part of a dataset of psychological effects reported in meta-analyses, which is currently being curated by our lab. Median citation count was 29. Citation frequencies are plotted in Figure 1.
+A more quantifiable approach is to quote the citation impact of the original study in question. In these cases it is often common to state the date and source of the citation number as well. Though often used, it is not apparent what constitutes a “widely cited” article. In the 85 articles reviewed here, quoted numbers range from 21 to over 1600. To provide a reference point for these numbers, I acquired the Crossref citation counts for 2854 empirical papers from the psychology literature. These papers are part of a dataset of psychological effects reported in meta-analyses, which is currently being curated by our lab. Median citation count was 29. Citation frequencies are plotted in Figure 1.
 
 **Example (citation count)**: @Harris2013
 
@@ -142,7 +142,7 @@ Happy replicating!
 
 https://docs.google.com/spreadsheets/d/1HzBePXvDAeGu8ND04E18u7BynT75LgW4vcLFNDUn7GU/edit?usp=sharing 
 
-The spreadsheet include quotes from the 86 papers reviewed for this piece. Please note the following:
+The spreadsheet include quotes from the 85 papers reviewed for this piece. Please note the following:
 
 * Three dots (...) signal that text has been skipped.
 * Square brackets [] signal paraphrasing.
