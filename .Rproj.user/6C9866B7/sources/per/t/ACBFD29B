@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528320734712.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3119444175",
+    "id" : "ACBFD29B",
+    "lastKnownWriteTime" : 1528558455,
+    "last_content_update" : 1528558455271,
+    "path" : "D:/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website/config.toml",
+    "project_path" : "config.toml",
+    "properties" : {
+        "cursorPosition" : "13,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "toml"
+}

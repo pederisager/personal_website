@@ -1,0 +1,35 @@
++++
+# About/Biography widget.
+widget = "about"
+active = true
+date = 2016-04-20T00:00:00
+
+# Order that this section will appear in.
+weight = 5
+
+# List your academic interests.
+[interests]
+  interests = [
+    "Research Practices",
+    "Visualization of Scientific Information",
+    "Statistics"
+  ]
+
+# List your qualifications (such as academic degrees).
+[[education.courses]]
+  course = "MPhil in Cognitive Neuroscience"
+  institution = "University of Oslo"
+  year = 2017
+
+[[education.courses]]
+  course = "BSc in Psychology"
+  institution = "University of Oslo"
+  year = 2015
+ 
++++
+
+# Biography
+
+I am a PhD student studying research practices in psychology at Eindhoven University of Technology. I am currently working with Daniël Lakens and Anne Scheel on the project "Increasing the Reliability and Efficiency of Psychological Science". So far I have worked on topics such as equivalence testing and replication value. I am also a board member on the Data Management committee at the Psychological Science Accelerator. 
+
+Before moving to the Netherlands I did a BA and an MPhil at the Univerity of Oslo, Norway. For my BA I conducted an experiment on social status perception. I then moved into cognitive neuroscience and spent my MPhil doing research on the rewarding properties of opioid administration in healthy humans. I also spent a summer at the University of Linköping, conducting an experiment on human emotional communication via touch. 
