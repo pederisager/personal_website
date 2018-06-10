@@ -74,7 +74,7 @@ load("../../static/files/masterdf.Rdata")
 
 x <- unique(master.df[!is.na(master.df$x_crcited),c("x_study", "x_crcited")])
 
-p <- ggplot(data = x) + geom_histogram(aes(x = x_crcited), fill = "#b5683f") +
+p <- ggplot(data = x) + geom_histogram(aes(x = x_crcited), fill = "#b5683f", bins = 100) +
   xlim(c(0,400)) + theme_bw(base_size = 20, base_family = "") + labs(x = "Citation count", y = "Frequency")
 plot(p)
 ```
