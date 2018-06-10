@@ -67,9 +67,9 @@
 &lt;p&gt;&lt;em&gt;“Because the paper has been cited well over 1100 times, an attempt to replicate its findings would seem warranted…”&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png&#34; alt=&#34;Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png&#34; alt=&#34;Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. The black vertical line represents the median of the distribution. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
-Figure 1: Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed.
+Figure 1: Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. The black vertical line represents the median of the distribution. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;

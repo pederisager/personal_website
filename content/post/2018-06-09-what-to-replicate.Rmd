@@ -68,14 +68,20 @@ A more quantifiable approach is to quote the citation impact of the original stu
 
 > *“Because the paper has been cited well over 1100 times, an attempt to replicate its findings would seem warranted…”*
 
-```{r figs, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7,fig.height=6,fig.cap="Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed."}
+```{r figs, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7,fig.height=6,fig.cap="Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. The black vertical line represents the median of the distribution. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed."}
 library(ggplot2)
 load("../../static/files/masterdf.Rdata")
 
 x <- unique(master.df[!is.na(master.df$x_crcited),c("x_study", "x_crcited")])
 
-p <- ggplot(data = x) + geom_histogram(aes(x = x_crcited), fill = "#b5683f", bins = 100) +
-  xlim(c(0,400)) + theme_bw(base_size = 20, base_family = "") + labs(x = "Citation count", y = "Frequency")
+p <- ggplot(data = x) + 
+  geom_histogram(aes(x = x_crcited), fill = "#b5683f", bins = 100) +
+  xlim(c(0,400)) + 
+  theme_bw(base_size = 20, base_family = "") + 
+  labs(x = "Citation count", y = "Frequency") +
+  geom_segment(aes(x = median(x$x_crcited), y = 0, xend = median(x$x_crcited), yend = 122))
+  
+  
 plot(p)
 ```
 <br/>
