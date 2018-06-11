@@ -144,6 +144,10 @@ In the paper I am working on, I hope to elaborate more on how researchers could 
 
 Happy replicating! 
 
+###Updates
+
+* A registered and citeable version of this blog post, including a copy of the linked spreadsheet, is available at https://doi.org/10.5281/zenodo.1286715
+
 ###Spreadsheet of Justifications
 
 https://docs.google.com/spreadsheets/d/1HzBePXvDAeGu8ND04E18u7BynT75LgW4vcLFNDUn7GU/edit?usp=sharing 
