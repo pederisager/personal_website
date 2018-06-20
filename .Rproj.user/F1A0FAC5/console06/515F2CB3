@@ -479,4 +479,164 @@ no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
 $[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
-[0K[?25h
+[0K[?25hwarning: LF will be replaced by CRLF in .Rhistory.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/windowlayoutstate.pper.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/rmd-outputs.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/44A03A40.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/D2F32523.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/INDEX.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/index.xml.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes to be committed:[0K
+  (use "git reset HEAD <file>..." to unstage)[0K
+[0K
+        [0;32mmodified:   .RData[0m[0K
+        [0;32mmodified:   .Rhistory[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/INDEX001[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/windowlayoutstate.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/rmd-outputs[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/44A03A40[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/D2F32523[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/INDEX[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/1509CDB6[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/1509CDB6-contents[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E-contents[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/6A076980[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/6A076980-contents[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/8020EE3[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/8020EE3-contents[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/C455FBD2[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/C455FBD2-contents[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/ED4F3622-contents[0m[0K
+        [0;32mdeleted:    .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/lock_file[0m[0K
+        [0;32mdeleted:    .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.met[0Ka
+data[0m[0K
+        [0;32mdeleted:    .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.png[0m[0K
+        [0;32mmodified:   .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/chunks.json[0m[0K
+        [0;32mnew file:   .gitignore[0m[0K
+        [0;32mmodified:   content/post/2018-06-09-what-to-replicate.Rmd[0m[0K
+        [0;32mmodified:   content/post/2018-06-09-what-to-replicate.html[0m[0K
+        [0;32mmodified:   public/index.xml[0m[0K
+        [0;32mmodified:   public/post/what-to-replicate/index.html[0m[0K
+[0K
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[6G[5G[?25l$ git[0K[?25h[7G[?25l$ git c[0K[?25hm[0Km[0Ki[0Kt[0K[13G[12G[?25l$ git cmmi[0K[?25h[?25l$ git cmm[0K[?25h[?25l$ git cm[0K[?25h[?25l$ git c[0K[?25ho[0Km[0K[?25lm[0K[10G[?25h[11G[?25l$ git commi[0K[?25ht[0K[14G[?25l$ git commit "[0K[?25h[?25l$ git commit[0K[14G[?25h[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m ""[0K[?25h[18G[?25l$ git commit -m "a"[0K[19G[?25h[?25l$ git commit -m "ad"[0K[20G[?25h[?25l$ git commit -m "add"[0K[21G[?25h[?25l$ git commit -m "adde"[0K[22G[?25h[?25l$ git commit -m "added"[0K[23G[?25h[?25l$ git commit -m "added "[0K[24G[?25h[?25l$ git commit -m "added l"[0K[24G[?25h[25G[?25l$ git commit -m "added li"[0K[26G[?25h[?25l$ git commit -m "added lin"[0K[27G[?25h[?25l$ git commit -m "added link"[0K[28G[?25h[?25l$ git commit -m "added link "[0K[28G[?25h[29G[?25l$ git commit -m "added link t"[0K[30G[?25h[?25l$ git commit -m "added link to"[0K[31G[?25h[?25l$ git commit -m "added link to "[0K[32G[?25h[?25l$ git commit -m "added link to"[0K[31G[?25h[?25l$ git commit -m "added link t"[0K[30G[?25h[?25l$ git commit -m "added link "[0K[29G[?25h[?25l$ git commit -m "added link"[0K[28G[?25h[?25l$ git commit -m "added lin"[0K[27G[?25h[?25l$ git commit -m "added li"[0K[26G[?25h[?25l$ git commit -m "added l"[0K[25G[?25h[?25l$ git commit -m "added"[0K[23G[?25h[?25l$ git commit -m "adde"[0K[?25h[?25l$ git commit -m "add"[0K[?25h[20G[?25l$ git commit -m "a"[0K[?25h[?25l$ git commit -m ""[0K[?25h[18G[?25l$ git commit -m "[0K[17G[?25h[?25l$ git commit -m ""[0K[18G[?25h[?25l$ git commit -m "i"[0K[19G[?25h[?25l$ git commit -m "in"[0K[20G[?25h[?25l$ git commit -m "in "[0K[20G[?25h[21G[?25l$ git commit -m "in p"[0K[22G[?25h[?25l$ git commit -m "in po"[0K[22G[?25h[23G[?25l$ git commit -m "in pos"[0K[24G[?25h[?25l$ git commit -m "in post"[0K[25G[?25h[?25l$ git commit -m "in post "[0K[26G[?25h[?25l$ git commit -m "in post w"[0K[27G[?25h[?25l$ git commit -m "in post wh"[0K[28G[?25h[?25l$ git commit -m "in post wha"[0K[29G[?25h[?25l$ git commit -m "in post what"[0K[30G[?25h[?25l$ git commit -m "in post what_"[0K[31G[?25h[?25l$ git commit -m "in post what_t"[0K[32G[?25h[?25l$ git commit -m "in post what_to"[0K[33G[?25h[?25l$ git commit -m "in post what_to_"[0K[34G[?25h[?25l$ git commit -m "in post what_to_r"[0K[35G[?25h[?25l$ git commit -m "in post what_to_re"[0K[36G[?25h[?25l$ git commit -m "in post what_to_rep"[0K[37G[?25h[?25l$ git commit -m "in post what_to_repl"[0K[37G[?25h[38G[?25l$ git commit -m "in post what_to_repli"[0K[39G[?25h[?25l$ git commit -m "in post what_to_replic"[0K[40G[?25h[?25l$ git commit -m "in post what_to_replica"[0K[41G[?25h[?25l$ git commit -m "in post what_to_replicat"[0K[42G[?25h[?25l$ git commit -m "in post what_to_replicate"[0K[43G[?25h[?25l$ git commit -m "in post what_to_replicate:"[0K[44G[?25h[?25l$ git commit -m "in post what_to_replicate: "[0K[44G[?25h[45G[?25l$ git commit -m "in post what_to_replicate: A"[0K[46G[?25h[?25l$ git commit -m "in post what_to_replicate: Ad"[0K[47G[?25h[?25l$ git commit -m "in post what_to_replicate: Add"[0K[48G[?25h[?25l$ git commit -m "in post what_to_replicate: Adde"[0K[49G[?25h[?25l$ git commit -m "in post what_to_replicate: Added"[0K[?25h[50G[?25l$ git commit -m "in post what_to_replicate: Added "[0K[51G[?25h[?25l$ git commit -m "in post what_to_replicate: Added l"[0K[52G[?25h[?25l$ git commit -m "in post what_to_replicate: Added li"[0K[52G[?25h[53G[?25l$ git commit -m "in post what_to_replicate: Added lin"[0K[54G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link"[0K[55G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link "[0K[56G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link t"[0K[57G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to"[0K[58G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to "[0K[59G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to z"[0K[60G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to ze"[0K[61G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zen"[0K[62G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zeno"[0K[63G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenod"[0K[64G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo"[0K[65G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo "[0K[65G[?25h[66G[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo r"[0K[67G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo re"[0K[67G[?25h[68G[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo reg"[0K[69G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo regi"[0K[70G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo regis"[0K[71G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo regist"[0K[72G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo registr"[0K[73G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo registra"[0K[74G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo registrat"[0K[75G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo registrati"[0K[76G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo registratio"[0K[77G[?25h[?25l$ git commit -m "in post what_to_replicate: Added link to zenodo registration"[0K[78G[?25h[?25l
+[0K[?25h[master b777cbd] in post what_to_replicate: Added link to zenodo registration[0K[?25l
+ Committer: Isager <p.isager@tue.nl>[0K
+Your name and email address were configured automatically based[0K
+on your username and hostname. Please check that they are accurate.[0K
+You can suppress this message by setting them explicitly. Run the[0K
+following command and follow the instructions in your editor to edit[0K
+your configuration file:[0K
+[0K
+    git config --global --edit[0K
+[0K
+After doing this, you may fix the identity used for this commit with:[0K
+[0K
+    git commit --amend --reset-author[0K
+[0K
+ 30 files changed, 539 insertions(+), 768 deletions(-)[0K
+ rewrite .RData (85%)[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/1509CDB6[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/1509CDB6-contents[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E-contents[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/6A076980[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/6A076980-contents[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/8020EE3[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/8020EE3-contents[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/C455FBD2[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/C455FBD2-contents[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/ED4F3622-contents[0K
+ delete mode 100644 .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/lock_file[0K
+ delete mode 100644 .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.met[0Ka
+data[0K
+ delete mode 100644 .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.png[0K
+ rewrite .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/chunks.json (100%)[0K
+ create mode 100644 .gitignore[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[?25lt[0K[5G[?25h[?25l$ gitr[0K[?25h[8G[7G[?25l$ git[0K[?25h[7G[?25l$ git p[0K[?25hu[0Ks[0Kh[0K[12G[?25l$ git push o[0K[?25h[?25lt[0K[13G[?25h[14G[?25l$ git push o[0K[14G[?25h[13G[?25l$ git push or[0K[13G[?25h[14G[?25l$ git push ori[0K[?25hg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hfatal: HttpRequestException encountered.[0K[?25l
+   An error occurred while sending the request.[0K
+[0K[?25herror: cannot spawn rpostback-askpass: No such file or directory[0K[?25l
+[0K[?25hUsername for 'https://github.com':[0K[36G[?25lUsername for 'https://github.com': p[0K[?25he[0Kd[0Ke[0Kr[0Ki[0Ks[0Ka[0Kg[0Ke[0Kr[0K[?25l
+[0K[?25herror: cannot spawn rpostback-askpass: No such file or directory[0K[?25l
+[0K[?25hPassword for 'https://pederisager@github.com':[0K[48G[?25l
+[0K[?25hCounting objects: 34, done.[0K[?25l
+Delta compression using up to 4 threads.[0K
+Compressing objects:  85% (24/28)[0K[1G[?25hCompressing objects: 100% (28/28), done.[0K[?25l
+Writing objects:   5% (2/34)[0K[1G[?25h[?25lWriting objects:   5% (2/34), 984.00 KiB | 468.00 KiB/s[0K[1G[?25hWriting objects: 100% (34/34), 1.10 MiB | 476.00 KiB/s, done.[0K[?25l
+Total 34 (delta 16), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  81% (13/16)[0K[1G[?25hremote: Resolving deltas: 100% (16/16), completed with 16 local objects.[0K[?25l
+[0K[?25hTo https://github.com/pederisager/personal_website.git[0K[?25l
+   243eef1..b777cbd  master -> master[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[0m[0K]0;[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+[?25l[1A[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0K
+[0m$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0K[?25lt[0K[10G[?25h[11G[?25l$ git statu[0K[?25hs[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .RData[0m[0K
+        [0;31mmodified:   .Rhistory[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/INDEX001[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/pcs/source-pane.pper[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/pcs/windowlayoutstate.pper[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/rmd-outputs[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/saved_source_markers[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/sources/prop/44A03A40[0m[0K
+        [0;31mmodified:   config.toml[0m[0K
+        [0;31mmodified:   public/404.html[0m[0K
+        [0;31mmodified:   public/categories/index.html[0m[0K
+        [0;31mmodified:   public/index.html[0m[0K
+        [0;31mmodified:   public/post/index.html[0m[0K
+        [0;31mmodified:   public/post/what-to-replicate/index.html[0m[0K
+        [0;31mmodified:   public/project/deep-learning/index.html[0m[0K
+        [0;31mmodified:   public/project/example-external-project/index.html[0m[0K
+        [0;31mmodified:   public/publication/clothing-search/index.html[0m[0K
+        [0;31mmodified:   public/publication/index.html[0m[0K
+        [0;31mmodified:   public/publication/person-re-identification/index.html[0m[0K
+        [0;31mmodified:   public/publication_types/1/index.html[0m[0K
+        [0;31mmodified:   public/publication_types/2/index.html[0m[0K
+        [0;31mmodified:   public/publication_types/index.html[0m[0K
+        [0;31mmodified:   public/tags/academic/index.html[0m[0K
+        [0;31mmodified:   public/tags/deep-learning/index.html[0m[0K
+        [0;31mmodified:   public/tags/demo/index.html[0m[0K
+        [0;31mmodified:   public/tags/index.html[0m[0K
+        [0;31mmodified:   public/tags/replication/index.html[0m[0K
+        [0;31mmodified:   public/talk/example-talk/index.html[0m[0K
+        [0;31mmodified:   public/talk/index.html[0m[0K
+[0K
+no changes added to commit (use "git add" and/or "git commit -a")[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[?25lt[0K[5G[?25h[6G[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
