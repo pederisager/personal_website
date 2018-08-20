@@ -639,4 +639,140 @@ Changes not staged for commit:[0K
 no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[?25lt[0K[5G[?25h[6G[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[?25lt[0K[5G[?25h[6G[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add .[0K[?25h[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rhistory.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/source-pane.pper.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/windowlayoutstate.pper.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/rmd-outputs.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/44A03A40.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/404.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/categories/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/post/index.html.[0K[49G[?25h[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/project/deep-learning/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/project/example-external-project/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/publication/clothing-search/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/publication/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/publication/person-re-identification/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/publication_types/1/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/publication_types/2/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/publication_types/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/tags/academic/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/deep-learning/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/demo/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/tags/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/tags/replication/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/talk/example-talk/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/talk/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git s[0K[?25ht[0Ka[0Kt[0Ku[0Ks[0K[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes to be committed:[0K
+  (use "git reset HEAD <file>..." to unstage)[0K
+[0K
+        [0;32mmodified:   .RData[0m[0K
+        [0;32mmodified:   .Rhistory[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/INDEX001[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/source-pane.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/windowlayoutstate.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/rmd-outputs[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/saved_source_markers[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/44A03A40[0m[0K
+        [0;32mmodified:   config.toml[0m[0K
+        [0;32mmodified:   public/404.html[0m[0K
+        [0;32mmodified:   public/categories/index.html[0m[0K
+        [0;32mmodified:   public/index.html[0m[0K
+        [0;32mmodified:   public/post/index.html[0m[0K
+        [0;32mmodified:   public/post/what-to-replicate/index.html[0m[0K
+        [0;32mmodified:   public/project/deep-learning/index.html[0m[0K
+        [0;32mmodified:   public/project/example-external-project/index.html[0m[0K
+        [0;32mmodified:   public/publication/clothing-search/index.html[0m[0K
+        [0;32mmodified:   public/publication/index.html[0m[0K
+        [0;32mmodified:   public/publication/person-re-identification/index.html[0m[0K
+        [0;32mmodified:   public/publication_types/1/index.html[0m[0K
+        [0;32mmodified:   public/publication_types/2/index.html[0m[0K
+        [0;32mmodified:   public/publication_types/index.html[0m[0K
+        [0;32mmodified:   public/tags/academic/index.html[0m[0K
+        [0;32mmodified:   public/tags/deep-learning/index.html[0m[0K
+        [0;32mmodified:   public/tags/demo/index.html[0m[0K
+        [0;32mmodified:   public/tags/index.html[0m[0K
+        [0;32mmodified:   public/tags/replication/index.html[0m[0K
+        [0;32mmodified:   public/talk/example-talk/index.html[0m[0K
+        [0;32mmodified:   public/talk/index.html[0m[0K
+[0K
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25ha[0Kd[0Kd[0K[?25le[0K[21G[?25h[22G[?25l$ git commit -m "added[0K[?25h[24G[?25l$ git commit -m "added c[0K[?25ho[0K[?25lm[0K[26G[?25h[27G[?25l$ git commit -m "added co[0K[?25h[?25l$ git commit -m "added c[0K[?25h[?25l$ git commit -m "added[0K[24G[?25h[?25l$ git commit -m "added d[0K[?25hi[0K[?25ls[0K[26G[?25h[27G[?25l$ git commit -m "added disq[0K[?25hu[0Ks[0K[31G[?25l$ git commit -m "added disqus c[0K[?25ho[0Km[0Km[0K[?25le[0K[35G[?25h[36G[?25l$ git commit -m "added disqus commen[0K[?25ht[0K[39G[?25l$ git commit -m "added disqus comment f[0K[?25he[0Ka[0Kt[0Ku[0Kr[0K[?25le[0K[45G[?25h[46G[47G[?25l$ git commit -m "added disqus comment feature t[0K[?25ho[0K[50G[?25l$ git commit -m "added disqus comment feature to t[0K[?25ho[0Km[0Kl[0K[55G[54G[?25l$ git commit -m "added disqus comment feature to tom[0K[?25h[?25l$ git commit -m "added disqus comment feature to to[0K[?25h[?25l$ git commit -m "added disqus comment feature to t[0K[?25h[?25l$ git commit -m "added disqus comment feature to[0K[50G[?25h[49G[?25l$ git commit -m "added disqus comment feature t[0K[?25h[?25l$ git commit -m "added disqus comment feature[0K[47G[?25h[?25l$ git commit -m "added disqus comment feature i[0K[?25hn[0K[50G[?25l$ git commit -m "added disqus comment feature in s[0K[?25hi[0Kt[0Ke[0K[55G[?25l$ git commit -m "added disqus comment feature in site t[0K[?25ho[0Km[0Kl[0K[60G[59G[?25l$ git commit -m "added disqus comment feature in site toml"[0K[?25h[?25l
+[0K[?25h[master 90e0c15] added disqus comment feature in site toml[0K[?25l
+ Committer: Isager <p.isager@tue.nl>[0K
+Your name and email address were configured automatically based[0K
+on your username and hostname. Please check that they are accurate.[0K
+You can suppress this message by setting them explicitly. Run the[0K
+following command and follow the instructions in your editor to edit[0K
+your configuration file:[0K
+[0K
+    git config --global --edit[0K
+[0K
+After doing this, you may fix the identity used for this commit with:[0K
+[0K
+    git commit --amend --reset-author[0K
+[0K
+ 31 files changed, 252 insertions(+), 11 deletions(-)[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0K[?25ls[0K[9G[?25h[10G[?25l$ git push[0K[?25h[12G[?25l$ git push o[0K[12G[?25h[13G[?25l$ git push or[0K[?25hi[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hfatal: HttpRequestException encountered.[0K[?25l
+   An error occurred while sending the request.[0K
+error: cannot spawn rpostback-askpass: No such file or directory[0K
+[0K[?25h[?25lUsername for 'https://github.com':[0K[1G[?25h[36G[?25lUsername for 'https://github.com': o[0K[?25h[?25lUsername for 'https://github.com':[0K[36G[?25h[?25lUsername for 'https://github.com': p[0K[?25he[0Kd[0Ke[0Kr[0Ki[0Ks[0Ka[0Kg[0Ke[0Kr[0K[?25l
+[0K[?25herror: cannot spawn rpostback-askpass: No such file or directory[0K[?25l
+[0K[?25hPassword for 'https://pederisager@github.com':[0K[48G[?25l
+[0K[?25hCounting objects: 59, done.[0K[?25l
+Delta compression using up to 4 threads.[0K
+Compressing objects:  17% (10/56)[0K[1G[?25hCompressing objects: 100% (56/56), done.[0K[?25l
+Writing objects:   3% (2/59)[0K[1G[?25hWriting objects:  59% (35/59)[0K[32G[?25lWriting objects: 100% (59/59), 143.50 KiB | 4.35 MiB/s, done.[0K
+Total 59 (delta 46), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:   2% (1/46)[0K[1G[?25hremote: Resolving deltas: 100% (46/46), completed with 41 local objects.[0K[?25l
+[0K[?25hTo https://github.com/pederisager/personal_website.git[0K[?25l
+   b777cbd..90e0c15  master -> master[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[0m[0K]0;[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+[?25l[1A[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0K
+[0m$[0K[3G[?25h
