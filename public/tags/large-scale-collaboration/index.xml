@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Peder M. Isager</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Peder M. Isager</description>
+    <title>Large scale collaboration on Peder M. Isager</title>
+    <link>/tags/large-scale-collaboration/</link>
+    <description>Recent content in Large scale collaboration on Peder M. Isager</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 31 Aug 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/large-scale-collaboration/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       
       <guid>/post/ganging-up-on-psych-science/</guid>
       <description>Everything is awesome. Everything is cool when you’re part of a team. The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
-    </item>
-    
-    <item>
-      <title>What to Replicate?</title>
-      <link>/post/what-to-replicate/</link>
-      <pubDate>Sat, 09 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/what-to-replicate/</guid>
-      <description>Justifications of study choice from 85 replication studies. In their recent BBS article, Zwaan et al. (2017) synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article (Coles et al. 2018). In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate.</description>
     </item>
     
   </channel>
