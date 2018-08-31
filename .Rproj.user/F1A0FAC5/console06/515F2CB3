@@ -865,4 +865,164 @@ no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
 $[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add -[0K[?25hA[0K[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rhistory.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/source-pane.pper.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper.[0K[83G[?25h[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/rmd-outputs.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/D2F32523.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/E392D098.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/INDEX.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/shared/notebooks/paths.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/404.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/index.xml.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/post/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/sitemap.xml.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/tags/index.xml.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in content/post/large_scale_collaboration.bib.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/post/large_scale_collaboration.bib.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/large-scale-collaboration/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/psa/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/research-practice/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/weird/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git add -A[0K[?25h[?25l$ git status[0K[?25h[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes to be committed:[0K
+  (use "git reset HEAD <file>..." to unstage)[0K
+[0K
+        [0;32mmodified:   .RData[0m[0K
+        [0;32mmodified:   .Rhistory[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/INDEX001[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/source-pane.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/rmd-outputs[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/D2F32523[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/E392D098[0m[0K
+        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/INDEX[0m[0K
+        [0;32mmodified:   .Rproj.user/shared/notebooks/paths[0m[0K
+        [0;32mnew file:   content/post/2018-31-08-ganging-up-on-psychological-science.Rmd[0m[0K
+        [0;32mnew file:   content/post/2018-31-08-ganging-up-on-psychological-science.html[0m[0K
+        [0;32mnew file:   content/post/large_scale_collaboration.bib[0m[0K
+        [0;32mmodified:   public/404.html[0m[0K
+        [0;32mnew file:   public/img/PSA_map.png[0m[0K
+        [0;32mnew file:   public/img/headers/CERN-blog-header.jpg[0m[0K
+        [0;32mnew file:   public/img/posts/PSA_map.png[0m[0K
+        [0;32mmodified:   public/index.html[0m[0K
+        [0;32mmodified:   public/index.xml[0m[0K
+        [0;32mnew file:   public/post/ganging-up-files/PSA_map.png[0m[0K
+        [0;32mnew file:   public/post/ganging-up-on-psych-science/index.html[0m[0K
+        [0;32mmodified:   public/post/index.html[0m[0K
+        [0;32mmodified:   public/post/index.xml[0m[0K
+        [0;32mnew file:   public/post/large_scale_collaboration.bib[0m[0K
+        [0;32mmodified:   public/sitemap.xml[0m[0K
+        [0;32mmodified:   public/tags/index.html[0m[0K
+        [0;32mmodified:   public/tags/index.xml[0m[0K
+        [0;32mnew file:   public/tags/large-scale-collaboration/index.html[0m[0K
+        [0;32mnew file:   public/tags/large-scale-collaboration/index.xml[0m[0K
+        [0;32mnew file:   public/tags/large-scale-collaboration/page/1/index.html[0m[0K
+        [0;32mnew file:   public/tags/psa/index.html[0m[0K
+        [0;32mnew file:   public/tags/psa/index.xml[0m[0K
+        [0;32mnew file:   public/tags/psa/page/1/index.html[0m[0K
+        [0;32mnew file:   public/tags/research-practice/index.html[0m[0K
+        [0;32mnew file:   public/tags/research-practice/index.xml[0m[0K
+        [0;32mnew file:   public/tags/research-practice/page/1/index.html[0m[0K
+        [0;32mnew file:   public/tags/weird/index.html[0m[0K
+        [0;32mnew file:   public/tags/weird/index.xml[0m[0K
+        [0;32mnew file:   public/tags/weird/page/1/index.html[0m[0K
+        [0;32mnew file:   static/img/PSA_map.png[0m[0K
+        [0;32mnew file:   static/img/posts/PSA_map.png[0m[0K
+[0K
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[6G[5G[?25l$ git[0K[?25h[7G[?25l$ git c[0K[7G[?25h[8G[?25l$ git co[0K[?25hm[0Km[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[?25hm[0K[17G[?25l$ git commit -m "[0K[?25hA[0K[?25ld[0K[19G[?25h[20G[?25l$ git commit -m "Add[0K[?25he[0Kd[0K[24G[?25l$ git commit -m "Added b[0K[?25hl[0Ko[0Kg[0K[29G[?25l$ git commit -m "Added blog p[0K[?25ho[0Ks[0Kt[0K[34G[?25l$ git commit -m "Added blog post o[0K[?25hn[0K[37G[?25l$ git commit -m "Added blog post on l[0K[?25ha[0Kr[0Kg[0Ke[0K[43G[?25l$ git commit -m "Added blog post on large s[0K[?25hc[0Ka[0Kl[0Ke[0K[49G[?25l$ git commit -m "Added blog post on large scale r[0K[?25he[0Kp[0K[?25l$ git commit -m "Added blog post on large scale re[0K[?25h[?25l$ git commit -m "Added blog post on large scale r[0K[?25h[?25l$ git commit -m "Added blog post on large scale[0K[49G[?25h[?25l$ git commit -m "Added blog post on large scale c[0K[?25h[?25lo[0K[50G[?25h[51G[?25l$ git commit -m "Added blog post on large scale col[0K[51G[?25h[52G[?25l$ git commit -m "Added blog post on large scale coll[0K[?25ha[0Kb[0Ko[0Kr[0Ka[0Kt[0Ki[0Ko[0Kn[0K[63G[?25l$ git commit -m "Added blog post on large scale collaboration p[0K[?25hr[0Ko[0Kj[0Ke[0Kc[0K[?25lt[0K[69G[?25h[70G[?25l$ git commit -m "Added blog post on large scale collaboration projects[0K[?25h"[0K[71G[70G[69G[68G[67G[66G[65G[64G[63G[62G[61G[60G[59G[58G[57G[56G[55G[54G[53G[51G[50G[49G[48G[47G[46G[45G[44G[43G[42G[41G[40G[39G[38G[37G[36G[35G[34G[33G[32G[31G[30G[28G[27G[26G[27G[28G[29G[30G[31G[32G[33G[34G[35G[36G[37G[38G[39G[40G[41G[43G[44G[46G[47G[48G[50G[51G[52G[53G[54G[55G[56G[57G[58G[59G[60G[61G[62G[63G[64G[65G[66G[67G[69G[70G[71G[72G[?25l$ git commit -m "Added blog post on large scale collaboration projects[0K[?25h[?25l$ git commit -m "Added blog post on large scale collaboration project[0K[?25h[?25l$ git commit -m "Added blog post on large scale collaboration projec[0K[?25h[?25l$ git status[0K[?25h[?25l$ git commit -m "Added blog post on large scale collaboration projec[0K[?25h[?25l$ git status[0K[?25h[?25l$ git add -A[0K[?25h[?25l$ git status[0K[?25h[?25l$ git commit -m "Added blog post on large scale collaboration projec[0K[?25ht[0Ks[0K"[0K[71G[?25l$ git commit -m "Added blog post on large scale collaboration projects."[0K[72G[?25h[?25l
+[0K[?25h[master 6454df8] Added blog post on large scale collaboration projects.[0K[?25l
+ Committer: Isager <p.isager@tue.nl>[0K
+Your name and email address were configured automatically based[0K
+on your username and hostname. Please check that they are accurate.[0K
+You can suppress this message by setting them explicitly. Run the[0K
+following command and follow the instructions in your editor to edit[0K
+your configuration file:[0K
+[0K
+    git config --global --edit[0K
+[0K
+After doing this, you may fix the identity used for this commit with:[0K
+[0K
+    git commit --amend --reset-author[0K
+[0K
+ 42 files changed, 28959 insertions(+), 8 deletions(-)[0K
+ rewrite .Rproj.user/F1A0FAC5/console06/INDEX001 (84%)[0K
+ create mode 100644 content/post/2018-31-08-ganging-up-on-psychological-science.Rmd[0K
+ create mode 100644 content/post/2018-31-08-ganging-up-on-psychological-science.html[0K
+ create mode 100644 content/post/large_scale_collaboration.bib[0K
+ create mode 100644 public/img/PSA_map.png[0K
+ create mode 100644 public/img/headers/CERN-blog-header.jpg[0K
+ create mode 100644 public/img/posts/PSA_map.png[0K
+ create mode 100644 public/post/ganging-up-files/PSA_map.png[0K
+ create mode 100644 public/post/ganging-up-on-psych-science/index.html[0K
+ create mode 100644 public/post/large_scale_collaboration.bib[0K
+ create mode 100644 public/tags/large-scale-collaboration/index.html[0K
+ create mode 100644 public/tags/large-scale-collaboration/index.xml[0K
+ create mode 100644 public/tags/large-scale-collaboration/page/1/index.html[0K
+ create mode 100644 public/tags/psa/index.html[0K
+ create mode 100644 public/tags/psa/index.xml[0K
+ create mode 100644 public/tags/psa/page/1/index.html[0K
+ create mode 100644 public/tags/research-practice/index.html[0K
+ create mode 100644 public/tags/research-practice/index.xml[0K
+ create mode 100644 public/tags/research-practice/page/1/index.html[0K
+ create mode 100644 public/tags/weird/index.html[0K
+ create mode 100644 public/tags/weird/index.xml[0K
+ create mode 100644 public/tags/weird/page/1/index.html[0K
+ create mode 100644 static/img/PSA_map.png[0K
+ create mode 100644 static/img/posts/PSA_map.png[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[?25lt[0K[5G[?25h[6G[7G[?25l$ git p[0K[?25h[?25lu[0K[8G[?25h[9G[?25l$ git pus[0K[?25h[?25lh[0K[10G[?25h[11G[12G[?25l$ git push o[0K[?25hr[0Ki[0Kg[0Ki[0Kn[0K[19G[?25l$ git push origin m[0K[?25ha[0Ks[0Kt[0Ke[0K[?25lr[0K[24G[?25h[25G[?25l
+[0K[?25hfatal: HttpRequestException encountered.[0K[?25l
+   An error occurred while sending the request.[0K
+[0K[?25herror: cannot spawn rpostback-askpass: No such file or directory[0K[?25l
+[0K[?25hUsername for 'https://github.com':[0K[36G[?25lUsername for 'https://github.com': p[0K[?25he[0Kd[0Ke[0Kr[0Ki[0Ks[0Ka[0Kg[0Ke[0Kr[0K[?25l
+error: cannot spawn rpostback-askpass: No such file or directory[0K
+[0K[?25hPassword for 'https://pederisager@github.com':[0K[48G[?25l
+[0K[?25hCounting objects: 71, done.[0K[?25l
+Delta compression using up to 4 threads.[0K
+Compressing objects:  70% (41/58)[0K[1G[?25h[?25lCompressing objects:  96% (56/58)[0K[1G[?25h[?25lCompressing objects:  98% (57/58)[0K[1G[?25hCompressing objects: 100% (58/58), done.[0K[?25l
+Writing objects:   2% (2/71)[0K[1G[?25h[?25lWriting objects:  36% (26/71)[0K[1G[?25h[?25lWriting objects:  45% (32/71)[0K[1G[?25h[?25lWriting objects:  45% (32/71), 984.00 KiB | 448.00 KiB/s[0K[1G[?25h[?25lWriting objects:  45% (32/71), 1.60 MiB | 505.00 KiB/s[0K[1G[?25h[?25lWriting objects:  45% (32/71), 2.25 MiB | 537.00 KiB/s[0K[1G[?25h[?25lWriting objects:  45% (32/71), 2.90 MiB | 555.00 KiB/s[0K[1G[?25h[?25lWriting objects:  69% (49/71), 2.90 MiB | 555.00 KiB/s[0K[1G[?25hWriting objects: 100% (71/71), 2.95 MiB | 556.00 KiB/s, done.[0K[?25l
+Total 71 (delta 38), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  10% (4/38)[0K[1G[?25hremote: Resolving deltas: 100% (38/38), completed with 25 local objects.[0K[?25l
+[0K[?25hTo https://github.com/pederisager/personal_website.git[0K[?25l
+   175e8a8..6454df8  master -> master[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "Added blog post on large scale collaboration projects."[0K[?25h[?25l$ git status[0K[?25h[?25l$ git commit -m "Added blog post on large scale collaboration projects."[0K[?25h[?25l$ git add -A[0K[?25h[?25l$ git status[0K[?25h[?25l$ git add -A[0K[?25h[?25l
 [0K[?25h
