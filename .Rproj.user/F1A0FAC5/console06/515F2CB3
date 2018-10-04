@@ -1,173 +1,4 @@
 
-r[0m[0K
-        [0;31mmodified:   .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/chunks.json[0m[0K
-        [0;31mmodified:   content/post/2018-06-09-what-to-replicate.Rmd[0m[0K
-        [0;31mmodified:   content/post/2018-06-09-what-to-replicate.html[0m[0K
-        [0;31mmodified:   public/index.xml[0m[0K
-        [0;31mmodified:   public/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png[0m[0K
-        [0;31mmodified:   public/post/what-to-replicate/index.html[0m[0K
-        [0;31mmodified:   static/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png[0m[0K
-[0K
-Untracked files:[0K
-  (use "git add <file>..." to include in what will be committed)[0K
-[0K
-        [0;31m.Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.metadata[0m[0K
-        [0;31m.Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.png[0m[0K
-[0K
-no changes added to commit (use "git add" and/or "git commit -a")[0K
-[0K[?25h[?25l
-[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git status[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies to 85"[0K[?25h[?25l$ git add .[0K[?25h[?25l
-[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/D2F32523.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E-contents.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in public/404.html.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/categories/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/categories/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/home/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in public/post/index.html.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in public/post/what_to_replicate.bib.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/project/deep-learning/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/project/example-external-project/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/project/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication/clothing-search/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication/person-re-identification/index.html.[0K
-The file will have its original line endings in your working directory.[0K[41G[?25h[?25l
-warning: LF will be replaced by CRLF in public/publication_types/1/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication_types/1/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication_types/2/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication_types/2/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication_types/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/publication_types/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/sitemap.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/styles.css.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/academic/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/academic/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/deep-learning/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/deep-learning/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25hwarning: LF will be replaced by CRLF in public/tags/demo/index.html.[0K[?25l
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/demo/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/tags/replication/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/talk/example-talk/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/talk/index.html.[0K
-The file will have its original line endings in your working directory.[0K
-warning: LF will be replaced by CRLF in public/talk/index.xml.[0K
-The file will have its original line endings in your working directory.[0K
-[0K[?25h[?25l
-[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git add .[0K[?25h[?25l$ git status[0K[?25h[?25l
-[0K[?25hOn branch master[0K[?25l
-Changes to be committed:[0K
-  (use "git reset HEAD <file>..." to unstage)[0K
-[0K
-        [0;32mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
-        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/prop/D2F32523[0m[0K
-        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E[0m[0K
-        [0;32mmodified:   .Rproj.user/F1A0FAC5/sources/s-30C6C2D8/206A87E-contents[0m[0K
-        [0;32mmodified:   .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/F1A0FAC530C6C2D8/chunks.js[0Ko
-n[0m[0K
-        [0;32mdeleted:    .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000004.csv[0m[0K
-        [0;32mdeleted:    .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000005.err[0Ko
-r[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.met[0Ka
-data[0m[0K
-        [0;32mnew file:   .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.png[0m[0K
-        [0;32mmodified:   .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/chunks.json[0m[0K
-        [0;32mmodified:   content/post/2018-06-09-what-to-replicate.Rmd[0m[0K
-        [0;32mmodified:   content/post/2018-06-09-what-to-replicate.html[0m[0K
-        [0;32mmodified:   public/index.xml[0m[0K
-        [0;32mmodified:   public/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png[0m[0K
-        [0;32mmodified:   public/post/what-to-replicate/index.html[0m[0K
-        [0;32mmodified:   static/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png[0m[0K
-[0K
-Changes not staged for commit:[0K
-  (use "git add <file>..." to update what will be committed)[0K
-  (use "git checkout -- <file>..." to discard changes in working directory)[0K
-[0K
-        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
-[0K
-[0K[?25h[?25l
-[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git status[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git status[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies to 85"[0K[?25h[87G[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies to 8"[0K[86G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies to "[0K[85G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies to"[0K[84G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies t"[0K[83G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies "[0K[82G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studies"[0K[81G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studie"[0K[80G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed studi"[0K[79G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed stud"[0K[78G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed stu"[0K[77G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed st"[0K[76G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed s"[0K[75G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed "[0K[74G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewed"[0K[73G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of reviewe"[0K[72G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of review"[0K[71G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of revie"[0K[70G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of revi"[0K[69G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of rev"[0K[68G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of re"[0K[67G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of r"[0K[66G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of "[0K[65G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number of"[0K[64G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number o"[0K[63G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number "[0K[62G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected number"[0K[61G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected numbe"[0K[60G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected numb"[0K[59G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected num"[0K[58G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected nu"[0K[57G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected n"[0K[56G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected "[0K[55G[?25h[?25l$ git commit -m "in post what_to_replicate: corrected"[0K[54G[?25h[?25l$ git commit -m "in post what_to_replicate: correcte"[0K[53G[?25h[?25l$ git commit -m "in post what_to_replicate: correct"[0K[52G[?25h[?25l$ git commit -m "in post what_to_replicate: correc"[0K[51G[?25h[?25l$ git commit -m "in post what_to_replicate: corre"[0K[50G[?25h[?25l$ git commit -m "in post what_to_replicate: corr"[0K[49G[?25h[?25l$ git commit -m "in post what_to_replicate: cor"[0K[48G[?25h[?25l$ git commit -m "in post what_to_replicate: co"[0K[47G[?25h[?25l$ git commit -m "in post what_to_replicate: c"[0K[46G[?25h[?25l$ git commit -m "in post what_to_replicate: "[0K[45G[?25h[?25l$ git commit -m "in post what_to_replicate: a"[0K[46G[?25h[?25l$ git commit -m "in post what_to_replicate: ad"[0K[47G[?25h[?25l$ git commit -m "in post what_to_replicate: add"[0K[48G[?25h[?25l$ git commit -m "in post what_to_replicate: adde"[0K[49G[?25h[?25l$ git commit -m "in post what_to_replicate: added"[0K[50G[?25h[?25l$ git commit -m "in post what_to_replicate: added "[0K[51G[?25h[?25l$ git commit -m "in post what_to_replicate: added m"[0K[52G[?25h[?25l$ git commit -m "in post what_to_replicate: added me"[0K[53G[?25h[?25l$ git commit -m "in post what_to_replicate: added med"[0K[54G[?25h[?25l$ git commit -m "in post what_to_replicate: added medi"[0K[55G[?25h[?25l$ git commit -m "in post what_to_replicate: added media"[0K[56G[?25h[?25l$ git commit -m "in post what_to_replicate: added median"[0K[57G[?25h[?25l$ git commit -m "in post what_to_replicate: added median "[0K[58G[?25h[?25l$ git commit -m "in post what_to_replicate: added median l"[0K[58G[?25h[59G[?25l$ git commit -m "in post what_to_replicate: added median li"[0K[60G[?25h[?25l$ git commit -m "in post what_to_replicate: added median lin"[0K[60G[?25h[61G[?25l$ git commit -m "in post what_to_replicate: added median line"[0K[62G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line "[0K[63G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line o"[0K[64G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line "[0K[63G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line t"[0K[64G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to"[0K[65G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to "[0K[66G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to c"[0K[67G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to ci"[0K[68G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to cit"[0K[69G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to cita"[0K[69G[?25h[70G[?25l$ git commit -m "in post what_to_replicate: added median line to citat"[0K[71G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citati"[0K[72G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citatio"[0K[73G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation"[0K[74G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation "[0K[75G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation p"[0K[76G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation pl"[0K[77G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation plo"[0K[78G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation plot"[0K[79G[?25h[?25l
-[0K[?25h[master 243eef1] in post what_to_replicate: added median line to citation plot[0K[?25l
- Committer: Isager <p.isager@tue.nl>[0K
-Your name and email address were configured automatically based[0K
-on your username and hostname. Please check that they are accurate.[0K
-You can suppress this message by setting them explicitly. Run the[0K
-following command and follow the instructions in your editor to edit[0K
-your configuration file:[0K
-[0K
-    git config --global --edit[0K
-[0K
-After doing this, you may fix the identity used for this commit with:[0K
-[0K
-    git commit --amend --reset-author[0K
-[0K
- 16 files changed, 120 insertions(+), 27 deletions(-)[0K
- rewrite .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/F1A0FAC530C6C2D8/chunks.json (70%)[0K
- delete mode 100644 .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000004.csv[0K
- delete mode 100644 .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000005.err[0Ko
-r[0K
- create mode 100644 .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.met[0Ka
-data[0K
- create mode 100644 .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/c18g71s5dg6rw/000013.png[0K
- rewrite .Rproj.user/shared/notebooks/322D1490-2018-06-09-what-to-replicate/1/s/chunks.json (70%)[0K
-[0K[?25h[?25l
-[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git commit -m "in post what_to_replicate: added median line to citation plot"[0K[3G[?25h[80G[?25l$ git status[0K[?25h[?25l$ git add .[0K[?25h[?25l$ git status[0K[11G[?25h[13G[?25l$ git push origin master[0K[?25h[?25l
-[0K[?25hfatal: HttpRequestException encountered.[0K[?25l
-   An error occurred while sending the request.[0K
-error: cannot spawn rpostback-askpass: No such file or directory[0K
-[0K[?25hUsername for 'https://github.com':[0K[36G[?25lUsername for 'https://github.com': p[0K[?25he[0Kd[0Ke[0Kr[0Ki[0Ks[0Ka[0Kg[0Ke[0Kr[0K[?25l
-error: cannot spawn rpostback-askpass: No such file or directory[0K
-[0K[?25hPassword for 'https://pederisager@github.com':[0K[48G[?25l
-[0K[?25hremote: Invalid username or password.[0K[?25l
-fatal: Authentication failed for 'https://github.com/pederisager/personal_website.git/'[0K
-[0K[?25h[?25l
-[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ git push origin master[0K[3G[?25h[25G[?25l
-[0K[?25hfatal: HttpRequestException encountered.[0K[?25l
    An error occurred while sending the request.[0K
 [0K[?25herror: cannot spawn rpostback-askpass: No such file or directory[0K[?25l
 [0K[?25hUsername for 'https://github.com':[0K[36G[?25lUsername for 'https://github.com': p[0K[?25he[0Kd[0Ke[0Kr[0Ki[0Ks[0Ka[0Kg[0Ke[0Kr[0K[?25l
@@ -1046,4 +877,147 @@ Untracked files:[0K
 no changes added to commit (use "git add" and/or "git commit -a")[0K
 [0K[?25h[?25l
 [0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
-$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add -[0K[?25hA[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add -[0K[?25hA[0K[?25l
+[0K[?25hwarning: LF will be replaced by CRLF in .Rhistory.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/source-pane.pper.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/windowlayoutstate.pper.[0K
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/F1A0FAC5/sources/prop/INDEX.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in .Rproj.user/shared/notebooks/paths.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/404.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/index.xml.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/post/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/sitemap.xml.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/tags/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/index.xml.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/gdpr/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/licensing/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/open-data/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/open-science/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/osf/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+[0K[?25hwarning: LF will be replaced by CRLF in public/tags/page/2/index.html.[0K[?25l
+The file will have its original line endings in your working directory.[0K
+warning: LF will be replaced by CRLF in public/tags/tutorial/index.html.[0K
+The file will have its original line endings in your working directory.[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0K[?25lt[0K[5G[?25h[?25l$ gitr[0K[?25h[8G[7G[?25l$ git[0K[?25h[7G[?25l$ git c[0K[?25ho[0Km[0Km[0Ki[0Kt[0K[14G[?25l$ git commit -[0K[14G[?25h[15G[?25l$ git commit -m[0K[?25h[17G[?25l$ git commit -m "[0K[?25h"[0K[18G[?25l$ git commit -m "s"[0K[19G[?25h[?25l$ git commit -m ""[0K[18G[?25h[?25l$ git commit -m "A"[0K[19G[?25h[?25l$ git commit -m "Ad"[0K[20G[?25h[?25l$ git commit -m "Add"[0K[21G[?25h[?25l$ git commit -m "Adde"[0K[22G[?25h[?25l$ git commit -m "Added"[0K[23G[?25h[?25l$ git commit -m "Added "[0K[24G[?25h[?25l$ git commit -m "Added p"[0K[25G[?25h[?25l$ git commit -m "Added po"[0K[26G[?25h[?25l$ git commit -m "Added pos"[0K[27G[?25h[?25l$ git commit -m "Added post"[0K[28G[?25h[?25l$ git commit -m "Added post "[0K[29G[?25h[?25l$ git commit -m "Added post a"[0K[30G[?25h[?25l$ git commit -m "Added post ab"[0K[30G[?25h[31G[?25l$ git commit -m "Added post a"[0K[?25h[30G[?25l$ git commit -m "Added post "[0K[?25h[29G[?25l$ git commit -m "Added post"[0K[28G[?25h[?25l$ git commit -m "Added pos"[0K[27G[?25h[?25l$ git commit -m "Added po"[0K[26G[?25h[?25l$ git commit -m "Added p"[0K[?25h[25G[?25l$ git commit -m "Added "[0K[24G[?25h[?25l$ git commit -m "Added h"[0K[25G[?25h[?25l$ git commit -m "Added ho"[0K[26G[?25h[?25l$ git commit -m "Added how"[0K[27G[?25h[?25l$ git commit -m "Added how-"[0K[28G[?25h[?25l$ git commit -m "Added how-t"[0K[29G[?25h[?25l$ git commit -m "Added how-to"[0K[30G[?25h[?25l$ git commit -m "Added how-to "[0K[31G[?25h[?25l$ git commit -m "Added how-to"[0K[30G[?25h[?25l$ git commit -m "Added how-t"[0K[29G[?25h[?25l$ git commit -m "Added how-"[0K[28G[?25h[?25l$ git commit -m "Added how"[0K[27G[?25h[?25l$ git commit -m "Added ho"[0K[26G[?25h[?25l$ git commit -m "Added h"[0K[25G[?25h[24G[?25l$ git commit -m "Added "[0K[24G[?25h[?25l$ git commit -m "Added t"[0K[25G[?25h[?25l$ git commit -m "Added tu"[0K[26G[?25h[?25l$ git commit -m "Added tut"[0K[27G[?25h[?25l$ git commit -m "Added tuto"[0K[28G[?25h[?25l$ git commit -m "Added tutor"[0K[29G[?25h[?25l$ git commit -m "Added tutori"[0K[30G[?25h[?25l$ git commit -m "Added tutoria"[0K[31G[?25h[?25l$ git commit -m "Added tutorial"[0K[32G[?25h[?25l$ git commit -m "Added tutorial "[0K[33G[?25h[?25l$ git commit -m "Added tutorial"[0K[?25h[32G[?25l$ git commit -m "Added tutoria"[0K[31G[?25h[?25l$ git commit -m "Added tutori"[0K[30G[?25h[?25l$ git commit -m "Added tutor"[0K[29G[?25h[?25l$ git commit -m "Added tuto"[0K[28G[?25h[?25l$ git commit -m "Added tut"[0K[27G[?25h[?25l$ git commit -m "Added tu"[0K[?25h[26G[?25l$ git commit -m "Added t"[0K[?25h[25G[?25l$ git commit -m "Added "[0K[24G[?25h[?25l$ git commit -m "Added O"[0K[25G[?25h[?25l$ git commit -m "Added OS"[0K[26G[?25h[?25l$ git commit -m "Added OSF"[0K[27G[?25h[?25l$ git commit -m "Added OSF "[0K[28G[?25h[?25l$ git commit -m "Added OSF t"[0K[29G[?25h[?25l$ git commit -m "Added OSF tu"[0K[30G[?25h[?25l$ git commit -m "Added OSF tut"[0K[31G[?25h[?25l$ git commit -m "Added OSF tuto"[0K[32G[?25h[?25l$ git commit -m "Added OSF tutor"[0K[33G[?25h[?25l$ git commit -m "Added OSF tutori"[0K[34G[?25h[?25l$ git commit -m "Added OSF tutoria"[0K[34G[?25h[35G[?25l$ git commit -m "Added OSF tutorial"[0K[36G[?25h[?25l$ git commit -m "Added OSF tutorial "[0K[37G[?25h[?25l$ git commit -m "Added OSF tutorial p"[0K[38G[?25h[?25l$ git commit -m "Added OSF tutorial po"[0K[38G[?25h[39G[?25l$ git commit -m "Added OSF tutorial pos"[0K[40G[?25h[?25l$ git commit -m "Added OSF tutorial post"[0K[41G[?25h[?25l
+[0K[?25h[master 740c3a3] Added OSF tutorial post[0K[?25l
+ Committer: Isager <p.isager@tue.nl>[0K
+Your name and email address were configured automatically based[0K
+on your username and hostname. Please check that they are accurate.[0K
+You can suppress this message by setting them explicitly. Run the[0K
+following command and follow the instructions in your editor to edit[0K
+your configuration file:[0K
+[0K
+    git config --global --edit[0K
+[0K
+After doing this, you may fix the identity used for this commit with:[0K
+[0K
+    git commit --amend --reset-author[0K
+[0K
+ 46 files changed, 3500 insertions(+), 102 deletions(-)[0K
+ rewrite .Rproj.user/F1A0FAC5/console06/INDEX001 (84%)[0K
+ create mode 100644 content/post/2018-31-08-how-to-make-data-open-with-OSF.Rmd[0K
+ create mode 100644 content/post/2018-31-08-how-to-make-data-open-with-OSF.html[0K
+ create mode 100644 public/img/OSF_how_to/OSF_frontpage.png[0K
+ create mode 100644 public/img/OSF_how_to/OSF_project_page_reference_image2.png[0K
+ create mode 100644 public/img/OSF_how_to/new_project_dialogue.png[0K
+ create mode 100644 public/img/headers/badge_header.png[0K
+ create mode 100644 public/post/how-to-share-your-data-with-osf/index.html[0K
+ create mode 100644 public/tags/gdpr/index.html[0K
+ create mode 100644 public/tags/gdpr/index.xml[0K
+ create mode 100644 public/tags/gdpr/page/1/index.html[0K
+ create mode 100644 public/tags/licensing/index.html[0K
+ create mode 100644 public/tags/licensing/index.xml[0K
+ create mode 100644 public/tags/licensing/page/1/index.html[0K
+ create mode 100644 public/tags/open-data/index.html[0K
+ create mode 100644 public/tags/open-data/index.xml[0K
+ create mode 100644 public/tags/open-data/page/1/index.html[0K
+ create mode 100644 public/tags/open-science/index.html[0K
+ create mode 100644 public/tags/open-science/index.xml[0K
+ create mode 100644 public/tags/open-science/page/1/index.html[0K
+ create mode 100644 public/tags/osf/index.html[0K
+ create mode 100644 public/tags/osf/index.xml[0K
+ create mode 100644 public/tags/osf/page/1/index.html[0K
+ create mode 100644 public/tags/page/2/index.html[0K
+ create mode 100644 public/tags/tutorial/index.html[0K
+ create mode 100644 public/tags/tutorial/index.xml[0K
+ create mode 100644 public/tags/tutorial/page/1/index.html[0K
+ create mode 100644 static/img/OSF_how_to/OSF_frontpage.png[0K
+ create mode 100644 static/img/OSF_how_to/OSF_project_page_reference_image2.png[0K
+ create mode 100644 static/img/OSF_how_to/new_project_dialogue.png[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[?25hu[0K[?25ll[0K[9G[?25h[10G[?25l$ git pull[0K[?25h[12G[?25l$ git pull o[0K[?25hr[0Ki[0Kg[0K[?25li[0K[16G[?25h[17G[?25l$ git pull origin[0K[?25h[19G[?25l$ git pull origin m[0K[?25ha[0Ks[0Kt[0Ke[0Kr[0K[?25l
+[0K[?25hFrom https://github.com/pederisager/personal_website[0K[?25l
+ * branch            master     -> FETCH_HEAD[0K
+[0K[?25hAlready up-to-date.[0K[?25l
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ g[0K[?25hi[0Kt[0K[7G[?25l$ git p[0K[7G[?25h[8G[?25l$ git pu[0K[?25hs[0Kh[0K[?25l
+[0K[?25hfatal: The current branch master has no upstream branch.[0K[?25l
+To push the current branch and set the remote as upstream, use[0K
+[0K
+    git push --set-upstream origin master[0K
+[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git push[0K[?25h[12G[?25l$ git push o[0K[12G[?25h[13G[?25l$ git push or[0K[?25hi[0Kg[0Ki[0Kn[0Ka[0K[?25l$ git push origin[0K[?25h[19G[?25l$ git push origin m[0K[?25h[?25la[0K[20G[?25h[21G[?25l$ git push origin mas[0K[?25ht[0Ke[0Kr[0K[?25l
+[0K[?25hfatal: HttpRequestException encountered.[0K[?25l
+   An error occurred while sending the request.[0K
+[0K[?25herror: cannot spawn rpostback-askpass: No such file or directory[0K[?25l
+[0K[?25hUsername for 'https://github.com':[0K[36G[?25lUsername for 'https://github.com': p[0K[?25he[0Kd[0Ke[0Kr[0Ki[0Ks[0Ka[0Kg[0Ke[0Kr[0K[?25l
+error: cannot spawn rpostback-askpass: No such file or directory[0K
+[0K[?25hPassword for 'https://pederisager@github.com':[0K[48G[?25l
+[0K[?25hCounting objects: 84, done.[0K[?25l
+Delta compression using up to 4 threads.[0K
+Compressing objects:  10% (7/67)[0K[1G[?25h[?25lCompressing objects: 100% (67/67)[0K[1G[?25hCompressing objects: 100% (67/67), done.[0K[?25l
+Writing objects:  32% (27/84)[0K[1G[?25h[?25lWriting objects:  33% (28/84)[0K[1G[?25h[?25lWriting objects:  33% (28/84), 984.00 KiB | 518.00 KiB/s[0K[1G[?25h[?25lWriting objects:  36% (31/84), 984.00 KiB | 518.00 KiB/s[0K[1G[?25h[?25lWriting objects:  63% (53/84), 984.00 KiB | 518.00 KiB/s[0K[46G[?25h[?25lWriting objects: 100% (84/84), 984.00 KiB | 518.00 KiB/s[0K[1G[?25hWriting objects: 100% (84/84), 1.30 MiB | 537.00 KiB/s, done.[0K[?25l
+Total 84 (delta 44), reused 0 (delta 0)[0K
+[0K[?25h[?25lremote: Resolving deltas:  13% (6/44)[0K[1G[?25h[?25lremote: Resolving deltas:  29% (13/44)[0K[1G[?25hremote: Resolving deltas: 100% (44/44), completed with 26 local objects.[0K[?25l
+[0K[?25hTo https://github.com/pederisager/personal_website.git[0K[?25l
+   bacb2eb..740c3a3  master -> master[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[0m[0K]0;[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "First complete commit of repo"[0K[?25h[?25l$ git status[0K[?25h[?25l
+[0K[?25hOn branch master[0K[?25l
+Changes not staged for commit:[0K
+  (use "git add <file>..." to update what will be committed)[0K
+  (use "git checkout -- <file>..." to discard changes in working directory)[0K
+[0K
+        [0;31mmodified:   .RData[0m[0K
+        [0;31mmodified:   .Rhistory[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/515F2CB3[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/console06/INDEX001[0m[0K
+        [0;31mmodified:   .Rproj.user/F1A0FAC5/pcs/workbench-pane.pper[0m[0K
+        [0;31mmodified:   content/post/2018-31-08-how-to-make-data-open-with-OSF.Rmd[0m[0K
+        [0;31mmodified:   content/post/2018-31-08-how-to-make-data-open-with-OSF.html[0m[0K
+        [0;31mmodified:   public/index.xml[0m[0K
+        [0;31mmodified:   public/post/how-to-share-your-data-with-osf/index.html[0m[0K
+[0K
+no changes added to commit (use "git add" and/or "git commit -a")[0K
+[0K[?25h[?25l
+[0;32m20176239@TUE004517 [0;35m [0;33m~/Dropbox/jobb/PhD/Projects/Personal_Puzzles/Blog/personal_website[0;36m (master)[0m[0K
+$[0K[3G[?25h[?25l$ git status[0K[?25h[?25l$ git push origin master[0K[?25h[?25l$ git commit -m "First complete commit of repo"[0K[?25h[?25l$ git status[0K[?25h[?25l$ git commit -m "First complete commit of repo"[0K[?25h[?25l$ git status[0K[?25h[?25l$ git statu[0K[?25h[?25l$ git stat[0K[?25h[?25l$ git sta[0K[11G[?25h[10G[?25l$ git st[0K[10G[?25h[9G[?25l$ git s[0K[?25h[?25l$ git[0K[7G[?25h[?25l$ git a[0K[?25hd[0Kd[0K[11G[?25l$ git add -[0K[11G[?25h[12G[?25l$ git add -A[0K[?25h
