@@ -191,6 +191,7 @@ Travel Grant, Open Science Conference, Berlin, DE (USD 300)
 2018
 :   **[SpecialiTea 5 - Peder](https://soundcloud.com/reproducibilitea/specialitea-5-peder)**; ReproducibiliTea (Podcast)
 
+<<<<<<< HEAD
 
 ## References
 
@@ -215,3 +216,5 @@ Travel Grant, Open Science Conference, Berlin, DE (USD 300)
     
     Email: thomas.wolfgang.schubert@gmail.com
     
+=======
+>>>>>>> b6a079070226c9a2ddd46c3f26534c41b6d5a1f3
