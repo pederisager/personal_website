@@ -13,13 +13,12 @@
     
     
     <item>
-      <title>How to share your data online with OSF</title>
-      <link>/post/how-to-share-your-data-with-osf/</link>
-      <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
+      <title>Quantifying the corroboration of a finding</title>
+      <link>/post/quantifying-the-corroboration-of-a-finding/</link>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/how-to-share-your-data-with-osf/</guid>
-      <description>Disclaimer:In the time I spent writing up this blog post, Courtney Soderberg published a tutorial manuscript for data sharing on OSF in the journal AMPPS. I highly recommend checking it out!
-IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs.</description>
+      <guid>/post/quantifying-the-corroboration-of-a-finding/</guid>
+      <description>AbstractIn a fourthcoming paper by members of the Open Science Collaboration, we outline how one could use quantitative estimates of “replication value” to guide study selection in replication research. We define replication value conceptually as a ratio of “impact” over “corroboration”, and we show how to derive quantifiable estimates from this definition. Here I will try to identify a reasonable and quantitative operationalization of corroboration. I first propose to approximate corroboration through the more narrow concept “precision of the estimate” (figure 1).</description>
     </item>
     
     <item>
@@ -28,8 +27,8 @@
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/how-to-share-your-data-with-osf/</guid>
-      <description>####Disclaimer: In the time I spent writing up this blog post, Courtney Soderberg published a tutorial manuscript for data sharing on OSF in the journal AMPPS. I highly recommend checking it out!
-Intro The Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs.</description>
+      <description>Disclaimer:In the time I spent writing up this blog post, Courtney Soderberg published a tutorial manuscript for data sharing on OSF in the journal AMPPS. I highly recommend checking it out!
+IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs.</description>
     </item>
     
     <item>

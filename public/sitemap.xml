@@ -5,8 +5,8 @@
     
     <url>
     
-      <loc>/post/how-to-share-your-data-with-osf/</loc>
-      <lastmod>2018-10-02T00:00:00+00:00</lastmod>
+      <loc>/post/quantifying-the-corroboration-of-a-finding/</loc>
+      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -151,6 +151,16 @@
     
     <url>
     
+      <loc>/tags/corroboration/</loc>
+      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/deep-learning/</loc>
       <lastmod>2016-04-27T00:00:00+02:00</lastmod>
       <priority>0</priority>
@@ -251,6 +261,16 @@
     
     <url>
     
+      <loc>/tags/precision/</loc>
+      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/project/</loc>
       <lastmod>2016-04-27T00:00:00+02:00</lastmod>
       <priority>0</priority>
@@ -272,7 +292,17 @@
     <url>
     
       <loc>/tags/replication/</loc>
-      <lastmod>2018-06-09T00:00:00+00:00</lastmod>
+      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/replication-value/</loc>
+      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

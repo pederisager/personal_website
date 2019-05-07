@@ -22,6 +22,15 @@
     </item>
     
     <item>
+      <title>Corroboration</title>
+      <link>/tags/corroboration/</link>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/corroboration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Deep-learning</title>
       <link>/tags/deep-learning/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
@@ -103,11 +112,29 @@
     </item>
     
     <item>
+      <title>Precision</title>
+      <link>/tags/precision/</link>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/precision/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Replication</title>
       <link>/tags/replication/</link>
-      <pubDate>Sat, 09 Jun 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/replication/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Replication value</title>
+      <link>/tags/replication-value/</link>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/replication-value/</guid>
       <description></description>
     </item>
     

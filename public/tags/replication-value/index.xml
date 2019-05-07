@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Replication value on Peder M. Isager</title>
+    <link>/tags/replication-value/</link>
+    <description>Recent content in Replication value on Peder M. Isager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Fri, 12 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/replication-value/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Quantifying the corroboration of a finding</title>
+      <link>/post/quantifying-the-corroboration-of-a-finding/</link>
+      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/quantifying-the-corroboration-of-a-finding/</guid>
+      <description>AbstractIn a fourthcoming paper by members of the Open Science Collaboration, we outline how one could use quantitative estimates of “replication value” to guide study selection in replication research. We define replication value conceptually as a ratio of “impact” over “corroboration”, and we show how to derive quantifiable estimates from this definition. Here I will try to identify a reasonable and quantitative operationalization of corroboration. I first propose to approximate corroboration through the more narrow concept “precision of the estimate” (figure 1).</description>
+    </item>
+    
+  </channel>
+</rss>
