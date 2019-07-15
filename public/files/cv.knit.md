@@ -121,6 +121,11 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 
 ### Posters
 
+2019
+:   **Society for the Improvement of Psychological Science**; Rotterdam, Netherlands
+
+    **Peder M. Isager**, Anna van ‘t Veer, Tobias Nosten, Els Janson, Daniël Lakens. *Quantifying Replication Value: A guide in the decision of what to replicate.* Poster on OSF: https://osf.io/92ecp
+    
 2016
 :   **Reading Emotions**; Reading, United Kingdom
 
@@ -188,7 +193,6 @@ Travel Grant, Open Science Conference, Berlin, DE (USD 300)
 
 2018
 :   **[SpecialiTea 5 - Peder](https://soundcloud.com/reproducibilitea/specialitea-5-peder)**; ReproducibiliTea (Podcast)
-
 
 ## References
 
