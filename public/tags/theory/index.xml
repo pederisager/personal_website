@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Research practice on Peder M. Isager</title>
-    <link>/tags/research-practice/</link>
-    <description>Recent content in Research practice on Peder M. Isager</description>
+    <title>Theory on Peder M. Isager</title>
+    <link>/tags/theory/</link>
+    <description>Recent content in Theory on Peder M. Isager</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/research-practice/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/theory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,15 +20,6 @@
       <guid>/post/psa-theory-committee/</guid>
       <description>(written in collaboration with Nicholas A. Coles)
 The Psychological Science Accelerator (PSA) is a global network of psychological laboratories that organizes large-scale empirical research projects. The organization aims “to accelerate the accumulation of reliable and generalizable evidence in psychological science” (Moshontz et al. 2018). To succeed in this mission, the PSA has created several committees that work together to address important challenges in producing high quality research, such as having access to an inferentially meaningful sample size, reducing the reliance on WEIRD participants, and improving the methodological quality of designs and analyses.</description>
-    </item>
-    
-    <item>
-      <title>Ganging Up on Psychological Science</title>
-      <link>/post/ganging-up-on-psych-science/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/ganging-up-on-psych-science/</guid>
-      <description>##Everything is awesome. Everything is cool when you’re part of a team.The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
     </item>
     
   </channel>

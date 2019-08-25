@@ -13,6 +13,16 @@
     
     
     <item>
+      <title>Proposal for a Theory Committee at the Psychological Science Accelerator</title>
+      <link>/post/psa-theory-committee/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/psa-theory-committee/</guid>
+      <description>(written in collaboration with Nicholas A. Coles)
+The Psychological Science Accelerator (PSA) is a global network of psychological laboratories that organizes large-scale empirical research projects. The organization aims “to accelerate the accumulation of reliable and generalizable evidence in psychological science” (Moshontz et al. 2018). To succeed in this mission, the PSA has created several committees that work together to address important challenges in producing high quality research, such as having access to an inferentially meaningful sample size, reducing the reliance on WEIRD participants, and improving the methodological quality of designs and analyses.</description>
+    </item>
+    
+    <item>
       <title>Quantifying the corroboration of a finding</title>
       <link>/post/quantifying-the-corroboration-of-a-finding/</link>
       <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
@@ -27,8 +37,8 @@
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/how-to-share-your-data-with-osf/</guid>
-      <description>Disclaimer:In the time I spent writing up this blog post, Courtney Soderberg published a tutorial manuscript for data sharing on OSF in the journal AMPPS. I highly recommend checking it out!
-IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs.</description>
+      <description>####Disclaimer:In the time I spent writing up this blog post, Courtney Soderberg published a tutorial manuscript for data sharing on OSF in the journal AMPPS. I highly recommend checking it out!
+IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs.</description>
     </item>
     
     <item>
@@ -37,7 +47,7 @@
       <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/ganging-up-on-psych-science/</guid>
-      <description>Everything is awesome. Everything is cool when you’re part of a team. The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
+      <description>##Everything is awesome. Everything is cool when you’re part of a team.The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
     </item>
     
     <item>
@@ -46,7 +56,7 @@
       <pubDate>Sat, 09 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/what-to-replicate/</guid>
-      <description>Justifications of study choice from 85 replication studies. In their recent BBS article, Zwaan et al. (2017) synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article (Coles et al. 2018). In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate.</description>
+      <description>##Justifications of study choice from 85 replication studies.In their recent BBS article, Zwaan et al. (2017) synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article (Coles et al. 2018). In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate.</description>
     </item>
     
   </channel>
