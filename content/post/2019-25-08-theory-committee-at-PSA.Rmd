@@ -1,5 +1,5 @@
 ---
-title: "Proposal for a Theory Committee at the Psychological Science Accelerator"
+title: "Proposing a theory committee at the Psychological Science Accelerator"
 author: "Peder M. Isager & Nicholas A. Coles"
 date: "2019-08-25"
 output:
