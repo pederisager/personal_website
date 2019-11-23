@@ -109,6 +109,11 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 ### Presentations
 
 2019
+:   **Tilburg Meta-Research Day**; Tilburg, Netherlands
+
+    Isager, P. M., van Assen, M., *How can meta-research improve the Psychological Science Accelerator (PSA) and how can the PSA improve meta-research?*
+
+2019
 :   **ZPID Open Science**; Trier, Germany
 
     Isager, P. M., *Quantifying replication value: A formula-based approach to study selection in replication research*
@@ -161,9 +166,10 @@ Travel Grant, Open Science Conference, Berlin, DE (USD 300)
 
 ## Teaching experience
 
-* Introduction to the HTI domain (MA course, 1 lecture)
-* Advanced Cognition (MA course, 1 lecture)
+* Advanced Cognition (MA course, lecture)
 * Bachelor End Project - Human Technology Interaction (BA course, 2 projects completed)
+* Brain, Body and Behavior (BA course, lectures)
+* Introduction to the HTI domain (MA course, lecture)
 * Quantitative Research methods (BA course, experiment design and student mentoring)
 
 ## Service experience
@@ -180,7 +186,9 @@ Travel Grant, Open Science Conference, Berlin, DE (USD 300)
 
 ### Ad-hoc reviews
 
+* Advances in Methods and Practices in Psychological Science
 * CollabraOA
+* Meta-psychology
 * PAIN
 * Royal Society Open Science
 * Social Cognitive and Affective Neuroscience

@@ -71,22 +71,23 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Curriculum Vitae}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Peder M Isager}
-  \preauthor{\centering\large\emph}
+    \author{Peder M Isager}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{March 17, 2019}
+    \date{March 17, 2019}
 
 
 \begin{document}
@@ -94,6 +95,7 @@
 
 \begin{longtable}[]{@{}lr@{}}
 \toprule
+\endhead
 P.O. Box 513 & email:
 \href{mailto:p.isager@tue.nl}{\nolinkurl{p.isager@tue.nl}}\tabularnewline
 5600 MB, Eindhoven & twitter: @peder\_isager\tabularnewline
@@ -101,7 +103,8 @@ Netherlands & phone: 0047 976 51 974\tabularnewline
 \bottomrule
 \end{longtable}
 
-\subsection{Education}\label{education}
+\hypertarget{education}{%
+\subsection{Education}\label{education}}
 
 \begin{description}
 \item[2015-2017]
@@ -126,19 +129,20 @@ Thesis link: \url{https://doi.org/10.31237/osf.io/w6qkv}
 Supervisors: Thomas W. Schubert
 \end{description}
 
-\subsection{Employment history}\label{employment-history}
+\hypertarget{employment-history}{%
+\subsection{Employment history}\label{employment-history}}
 
 \begin{description}
 \item[2017-present]
 \textbf{Doctoral candidate}; Eindhoven University of Technology
 
 Four year fully finded PhD position to work on the VIDI funded project
-âIncreasing the Reliability and Efficiency of Psychological
-Scienceâ.\\
+``Increasing the Reliability and Efficiency of Psychological
+Science''.\\
 \item[2017]
 \textbf{Research assistant,
 \href{https://liu.se/en/organisation/liu/ike/csan}{Center for Social and
-Affective Neuroscience}}; LinkÃ¶ping University
+Affective Neuroscience}}; Linköping University
 
 Two-month funded RA position. Assisted with experiment logistics, data
 collection, and analysis in project studying social touch in human
@@ -160,15 +164,17 @@ Qualtrics for the MTurk platform; Assisting with setup of Virtual
 Reality laboratory; Assisting literature search.
 \end{description}
 
-\subsection{Publications}\label{publications}
+\hypertarget{publications}{%
+\subsection{Publications}\label{publications}}
 
-\subsubsection{2018}\label{section}
+\hypertarget{section}{%
+\subsubsection{2018}\label{section}}
 
 Moshontz, H., Campbell, L., Ebersole, C. R., IJzerman, H., Urry, H. L.,
 \ldots{}, \textbf{Isager, P. M.}., \ldots{} Chartier, C. R. (2018). The
 Psychological Science Accelerator: Advancing Psychology Through a
 Distributed Collaborative Network. \emph{Advances in Methods and
-Practices in Psychological Science}, 1(4), 501â``515.
+Practices in Psychological Science}, 1(4), 501--515.
 \url{https://doi.org/10.1177/2515245918797607}
 
 Holmgren, J.*, \textbf{Isager, P. M.,}*, Schubert, T. W. (2018).
@@ -184,12 +190,12 @@ D. (2018). The costs and benefits of replication studies.
 
 Lakens, D., Scheel, A. M., \& \textbf{Isager, P. M}. (2018). Equivalence
 Testing for Psychological Research: A Tutorial. \emph{Advances in
-Methods and Practices in Psychological Science}, 1(2), 259â``269.
+Methods and Practices in Psychological Science}, 1(2), 259--269.
 \url{https://doi.org/10.1177/2515245918770963}
 
-LÃ¸seth, G. E., Eikemo, M., \textbf{Isager, P.}, Holmgren, J., Laeng,
-B., Vindenes, V., \ldots{} \& Leknes, S. (2018). Morphine reduced
-perceived anger from neutral and implicit emotional expressions.
+Løseth, G. E., Eikemo, M., \textbf{Isager, P.}, Holmgren, J., Laeng, B.,
+Vindenes, V., \ldots{} \& Leknes, S. (2018). Morphine reduced perceived
+anger from neutral and implicit emotional expressions.
 \emph{Psychoneuroendocrinology}, 91, 123-131. DOI:
 10.1038/s41562-018-0311-x
 
@@ -202,7 +208,8 @@ Dienes, Z. (2018). Improving inferences about null effects with Bayes
 factors and equivalence tests. \emph{The Journals of Gerontology: Series
 B.}, gby065, \url{https://doi.org/10.1093/geronb/gby065}
 
-\subsection{Invited talks}\label{invited-talks}
+\hypertarget{invited-talks}{%
+\subsection{Invited talks}\label{invited-talks}}
 
 \begin{description}
 \tightlist
@@ -216,9 +223,11 @@ University of Technology\\
 University of Oslo
 \end{description}
 
-\subsection{Conferences}\label{conferences}
+\hypertarget{conferences}{%
+\subsection{Conferences}\label{conferences}}
 
-\subsubsection{Organization}\label{organization}
+\hypertarget{organization}{%
+\subsubsection{Organization}\label{organization}}
 
 \begin{description}
 \item[2016]
@@ -229,9 +238,16 @@ Responsibilities: Securing funding; Recruiting speakers; Promotion;
 Event logistics, project presentation at event.
 \end{description}
 
-\subsubsection{Presentations}\label{presentations}
+\hypertarget{presentations}{%
+\subsubsection{Presentations}\label{presentations}}
 
 \begin{description}
+\item[2019]
+\textbf{Tilburg Meta-Research Day}; Tilburg, Netherlands
+
+Isager, P. M., van Assen, M., \emph{How can meta-research improve the
+Psychological Science Accelerator (PSA) and how can the PSA improve
+meta-research?}
 \item[2019]
 \textbf{ZPID Open Science}; Trier, Germany
 
@@ -246,9 +262,18 @@ The distance effect in social hierarchies. Part of the symposium Space
 for Cognition: Consequences of Biases in Spatial Cognition.}
 \end{description}
 
-\subsubsection{Posters}\label{posters}
+\hypertarget{posters}{%
+\subsubsection{Posters}\label{posters}}
 
 \begin{description}
+\item[2019]
+\textbf{Society for the Improvement of Psychological Science};
+Rotterdam, Netherlands
+
+\textbf{Peder M. Isager}, Anna van `t Veer, Tobias Nosten, Els Janson,
+Daniël Lakens. \emph{Quantifying Replication Value: A guide in the
+decision of what to replicate.} Poster on OSF:
+\url{https://osf.io/92ecp}
 \item[2016]
 \textbf{Reading Emotions}; Reading, United Kingdom
 
@@ -257,22 +282,23 @@ Johnstone T, Leknes S. \emph{Effect of morphine on hedonic evaluation of
 palatable food images in healthy humans.}
 \item[2015]
 \textbf{Center for Social and Affective Neuroscience, Inaugural
-symposium}; LinkÃ¶ping, Sweden
+symposium}; Linköping, Sweden
 
 \textbf{Isager P}, Eikemo E, Vindenes V, Leknes S. \emph{Effects of
 \(\mu\)-opioid agonism on reward behavior: subjective liking and
 disliking of win/loss stimuli.}
 \end{description}
 
-\subsubsection{Abstracts}\label{abstracts}
+\hypertarget{abstracts}{%
+\subsubsection{Abstracts}\label{abstracts}}
 
 \begin{description}
 \item[2018]
 \textbf{Organization for Human Brain Mapping, annual meeting}; Singapore
 
-Eikemo, M., \textbf{Isager, P. M.}, Lie, S. Ã., Holmgren, J., Nilsen,
-A. S., Ernst, G., Vindenes, V., HjÃ¸rnevik, T., Leknes, S., Johnstone,
-T., \emph{Bayes Factor analysis of pulse, respiration and BOLD signal
+Eikemo, M., \textbf{Isager, P. M.}, Lie, S. Ø., Holmgren, J., Nilsen, A.
+S., Ernst, G., Vindenes, V., Hjørnevik, T., Leknes, S., Johnstone, T.,
+\emph{Bayes Factor analysis of pulse, respiration and BOLD signal
 changes following a low analgesic dose of morphine.}
 \item[2018]
 \textbf{51. Kongress de DGPs}; Frankfurt am Main, Germany
@@ -289,31 +315,36 @@ Moungou, A., Nagi, S., Israr, A., Gerling, G. J., Olausson, H.,
 communication.}
 \end{description}
 
+\hypertarget{competitive-funding-and-awards}{%
 \subsection{Competitive funding and
-awards}\label{competitive-funding-and-awards}
+awards}\label{competitive-funding-and-awards}}
 
 Travel Grant, Society for the Improvement of Open Science, Rotterdam, NL
 (USD 400)
 
 Travel Grant, Open Science Conference, Berlin, DE (USD 300)
 
-\subsection{Teaching experience}\label{teaching-experience}
+\hypertarget{teaching-experience}{%
+\subsection{Teaching experience}\label{teaching-experience}}
 
 \begin{itemize}
 \tightlist
 \item
-  Introduction to the HTI domain (MA course, 1 lecture)
-\item
-  Advanced Cognition (MA course, 1 lecture)
+  Advanced Cognition (MA course, lecture)
 \item
   Bachelor End Project - Human Technology Interaction (BA course, 2
   projects completed)
+\item
+  Brain, Body and Behavior (BA course, lectures)
+\item
+  Introduction to the HTI domain (MA course, lecture)
 \item
   Quantitative Research methods (BA course, experiment design and
   student mentoring)
 \end{itemize}
 
-\subsection{Service experience}\label{service-experience}
+\hypertarget{service-experience}{%
+\subsection{Service experience}\label{service-experience}}
 
 \begin{description}
 \item[2018-present]
@@ -331,12 +362,17 @@ preprint server powered by OSF Preprints. Primary contribution consisted
 of promoting the service to early adopters.
 \end{description}
 
-\subsubsection{Ad-hoc reviews}\label{ad-hoc-reviews}
+\hypertarget{ad-hoc-reviews}{%
+\subsubsection{Ad-hoc reviews}\label{ad-hoc-reviews}}
 
 \begin{itemize}
 \tightlist
 \item
+  Advances in Methods and Practices in Psychological Science
+\item
   CollabraOA
+\item
+  Meta-psychology
 \item
   PAIN
 \item
@@ -345,7 +381,8 @@ of promoting the service to early adopters.
   Social Cognitive and Affective Neuroscience
 \end{itemize}
 
-\subsection{Media outreach}\label{media-outreach}
+\hypertarget{media-outreach}{%
+\subsection{Media outreach}\label{media-outreach}}
 
 \begin{description}
 \tightlist
@@ -357,13 +394,11 @@ research}; Psykologisk Tidsskrift (Norwegian)\\
 5 - Peder}}; ReproducibiliTea (Podcast)
 \end{description}
 
-\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
-HEAD
-
-\subsection{References}\label{references}
+\hypertarget{references}{%
+\subsection{References}\label{references}}
 
 \begin{description}
-\item[\textbf{Prof.~DaniÃ«l Lakens}]
+\item[\textbf{Prof.~Daniël Lakens}]
 Industrial Engineering \& Innovation Sciences, Eindhoven University of
 Technology
 
@@ -385,10 +420,6 @@ Phone: (+47) 46 29 95 81
 Email:
 \href{mailto:thomas.wolfgang.schubert@gmail.com}{\nolinkurl{thomas.wolfgang.schubert@gmail.com}}
 \end{description}
-
-=======
-\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}
-b6a079070226c9a2ddd46c3f26534c41b6d5a1f3
 
 
 \end{document}
