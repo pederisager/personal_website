@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/mixed_model_equivalence_references/</loc>
+      <lastmod>2019-11-25T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/psa-theory-committee/</loc>
       <lastmod>2019-08-25T00:00:00+00:00</lastmod>
     </url>
@@ -113,15 +122,6 @@
     
     <url>
     
-      <loc>/publication/person-re-identification/</loc>
-      <lastmod>2015-09-01T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/publication/clothing-search/</loc>
       <lastmod>2013-07-01T00:00:00+02:00</lastmod>
     </url>
@@ -133,16 +133,6 @@
     
       <loc>/publication_types/1/</loc>
       <lastmod>2013-07-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/publication_types/2/</loc>
-      <lastmod>2015-09-01T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -190,6 +180,16 @@
     
     <url>
     
+      <loc>/tags/equivalence/</loc>
+      <lastmod>2019-11-25T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/gdpr/</loc>
       <lastmod>2018-10-02T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -212,6 +212,16 @@
     
       <loc>/tags/licensing/</loc>
       <lastmod>2018-10-02T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/mixed-model/</loc>
+      <lastmod>2019-11-25T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -322,6 +332,16 @@
     
       <loc>/tags/research-practice/</loc>
       <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/statistics/</loc>
+      <lastmod>2019-11-25T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

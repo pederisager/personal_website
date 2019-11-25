@@ -11,6 +11,249 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Mixed model equivalence test using R and PANGEA</title>
+      <link>/post/mixed_model_equivalence_references/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mixed_model_equivalence_references/</guid>
+      <description>&lt;p&gt;&lt;em&gt;How to calculate an equivalence test, and power for an equivalence test, for a fixed effect in a mixed effects model using R and PANGEA.&lt;/em&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction-to-a-two-part-problem&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction to a two-part problem&lt;/h2&gt;
+&lt;p&gt;Calculating equivalence test (TOST) power for fixed effects in a mixed model can be compartmentalized into two independent problems. First, we need a method for calculating TOST power from the non-centrality parameters (ncp) and degrees of freedom (df) of a test. TOSTER &lt;span class=&#34;citation&#34;&gt;(Lakens 2017)&lt;/span&gt; does not currently take this approach when calculating power, but it is straight-forward to recast the calculations in terms of ncps and dfs based on formulas provided in the literature.&lt;/p&gt;
+&lt;p&gt;Once a method for calculating power based on ncp and df has been identified, the problem of calculating power reduces to a problem of identifying an appropriate ncp and df for the expected mixed model effect. This is by no means trivial, as calculations of ncp and df can become quite complicated with multiple random factors in the model &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014)&lt;/span&gt;. Fortunately, the free and open source power calculator PANGEA can be used to extract the ncp and df for a wide array of mixed model designs &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;. We can use PANGEA to extract the ncp and df for both tests of a TOST procedure, given some equivalence bounds. From there, we can simply plug these values into our formula for calculating power since, at this point, power for mixed and fixed designs are calculated in the same way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;part-1-calculating-power-for-a-one-sample-equivalence-test-using-noncentrality-parameters-ncp&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Part 1: Calculating power for a (one-sample) equivalence test using noncentrality parameters (ncp)&lt;/h2&gt;
+&lt;p&gt;Say we want to calculate the power of an equivalence test for a one-sample t-test with the following parameters:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;es &amp;lt;- 0            # Assumed effect size (alternative hypothesis). Set to 0 to assume that there is no true effect.
+s &amp;lt;- 1             # Standard deviation. When set to 1, &amp;quot;ës&amp;quot; contain values on Cohen&amp;#39;s d scale.
+n &amp;lt;- 100           # Number of subjects. 
+se &amp;lt;- (s/sqrt(n))  # Standard error.
+df &amp;lt;- n-1          # degrees of freedom.
+alpha &amp;lt;- 0.05      # Type I error rate.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we wanted to calculate power for a traditional two-sided null hypothesis test using noncentrality parameters and degrees of freedom, we could set up the analysis in the following way (from &lt;a href=&#34;https://www.cyclismo.org/tutorial/R/power.html&#34; class=&#34;uri&#34;&gt;https://www.cyclismo.org/tutorial/R/power.html&lt;/a&gt;):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ncp &amp;lt;- es/se                    # notice that the ncp is just a t value - the t value on which we would expect the t-distribution to be centered, given some difference between the groups. If the npc is 0, we assume a central t-distribution. 
+crit_t &amp;lt;- qt(1-alpha/2, df=df)  # alpha/2 denotes a two-sided t test, and is the same as specifying alpha=0.025. 
+
+typeII &amp;lt;- pt(crit_t, df=df, ncp=ncp) - pt(-crit_t, df=df, ncp=ncp)   # The type II error of the test.
+power &amp;lt;- 1-(pt(crit_t,df=df,ncp=ncp) - pt(-crit_t, df=df, ncp=ncp))  # The power of the test, which equals 1-typeII
+paste(&amp;quot;Power =&amp;quot;, power)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Power = 0.05&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can verify that this calculation is correct by comparing it against the results of the &lt;code&gt;power.t.test()&lt;/code&gt; function in base R and the &lt;code&gt;pwr.t.test&lt;/code&gt; function in the “pwr” package. When &lt;code&gt;es = 0&lt;/code&gt;, power will reduce to the type I error rate (in reality we have no power, since there is no true effect to detect). You can change the value of &lt;code&gt;es&lt;/code&gt; to see that the calculations are identical regardless of effect size.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;power.t.test(n = n, delta = es, sd = s, sig.level = alpha, type = &amp;quot;one&amp;quot;, alternative = &amp;quot;two.sided&amp;quot;, strict = TRUE)  # The strict argument must be set to TRUE for this test to calculate power correctly for the two-sample case.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##      One-sample t test power calculation 
+## 
+##               n = 100
+##           delta = 0
+##              sd = 1
+##       sig.level = 0.05
+##           power = 0.05
+##     alternative = two.sided&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pwr::pwr.t.test(n = n, d = es/s, sig.level = alpha, type = &amp;quot;one&amp;quot;, alternative = &amp;quot;two.sided&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##      One-sample t test power calculation 
+## 
+##               n = 100
+##               d = 0
+##       sig.level = 0.05
+##           power = 0.05
+##     alternative = two.sided&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let us extend the use of noncentrality parameters to the case of the two-one-sided-tests (TOST) used for equivalence testing. First we must decide on a smallest effect size of interest (SESOI) to use as bounds for the equivalence test. Let us assume that we consider a group difference of 0.3, in either direction, to be the smallest effect we care about. Because the population standard deviation &lt;code&gt;s&lt;/code&gt; is 1, we can choose whether to think of the group difference as a raw difference or a difference in Cohen’s &lt;em&gt;d&lt;/em&gt;. The two will the same for this example since &lt;code&gt;d = es/s&lt;/code&gt;, and s is 1, so &lt;code&gt;d = es/1 = es&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bound_l &amp;lt;- -0.3  # Smallest negative effect size of interest (TOST null hypothesis)
+bound_u &amp;lt;-  0.3  # Smallest positive effect size of interest (TOST null hypothesis)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Having defined our bounds, we can calculate the ncp for the tests against the upper and lower bounds (the assumed effect size is the difference between the assumed (null) effect and the bound). We then use these npc values to calculate the power for the equivalence test &lt;span class=&#34;citation&#34;&gt;(Chow, Shao, and Wang 2008, p55, 3rd equation)&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ncp_l &amp;lt;- (es + bound_l) / se 
+ncp_u &amp;lt;- (es + bound_u) / se
+crit_t &amp;lt;- qt(alpha, df, lower.tail = FALSE)
+
+power &amp;lt;- ifelse(1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE) &amp;gt; 0,
+                1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE),
+                0)  # Derived from Chow, Shao &amp;amp; Wang (2008), page 55, third formula, slightly tweaked to allow different SESOI for upper and lower bound.
+
+paste(&amp;quot;Power =&amp;quot;, power)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Power = 0.817975007468883&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can verify our calculations against the results from the &lt;code&gt;powerTOSTone()&lt;/code&gt; function in TOSTER.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TOSTER::powerTOSTone(alpha = alpha, N = n, low_eqbound_d = bound_l, high_eqbound_d = bound_u)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The statistical power is 82.46 % for equivalence bounds of -0.3 and 0.3 .&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.8246325&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that these results are similar but not exactly the same. The reason for the discrepancy is that TOSTER assumes z-distributed populations, while the ncp procedure assumes t-distributed populations. This means that TOSTER will tend to slightly overestimate power for low sample sizes compared to the ncp approach, which assumes fatter distribution tails for small samples. As the sample size increase, the t-distribution will converge towards the z-distribution, and the difference between the approaches becomes miniscule. A quick simulation reveals that the two approaches are highly correlated for the entire range of power estimates.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;simPower &amp;lt;- function(es = 0, s = 1, n = sample(10:100, 1), alpha = 0.05, bound_l = -0.3, bound_u = 0.3) {
+
+  ncp_l &amp;lt;- ( (es + bound_l) / (s/sqrt(n)) )
+  ncp_u &amp;lt;- ( (es + bound_u) / (s/sqrt(n)) )
+  crit_t &amp;lt;- qt(0.05, df, lower.tail = FALSE)
+  
+  pow_ncp &amp;lt;- ifelse(1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE) &amp;gt; 0,
+                    1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE),
+                    0)  # Derived from Chow, Wang $ Chao (2008), page 55, third formula, slightly tweaked to allow different SESOI for upper and lower bound.
+  
+  invisible(capture.output(pow_toster &amp;lt;- TOSTER::powerTOSTone(alpha = alpha, N = n, low_eqbound_d = bound_l, high_eqbound_d = bound_u)))
+  c(pow_ncp, pow_toster, s, n)
+  
+}
+sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alpha = alpha, bound_l = bound_l, bound_u = bound_u))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sim &amp;lt;- matrix(sim, ncol = 4, byrow = TRUE)
+plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999946234458505&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;
+&lt;p&gt;Having resolved the issue of how to calculate equivalence test power from the degrees of freedom and noncentrality parameter, we must now turn to the issue of how to calculate noncentrality parameters in the first place. The ncp equals the effect size divided by the effect standard error, or:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(ncp=\frac{\theta}{\sigma/\sqrt{n}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is the assumed effect size in the population, &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt; is the assumed standard deviation in the population, and &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of observations.&lt;/p&gt;
+&lt;p&gt;For simple designs, this formula is easily calculated (just calculate the &lt;em&gt;t&lt;/em&gt;-value of the assumed effect). However, for mixed model desigs, the details of the calculation becomes more complicated due to the partitioning of variance among the random variables and their interactions. In practice, the details of the calculation will depend on the specifics of the design and the number of random variables involved &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014; Westfall 2015)&lt;/span&gt;. For example, the ncp for a two-group fully crossed design, where the effect is assumed to vary randomly across participants and stimuli, is defined as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(npc=\frac{d}{2\sqrt{\frac{V_P\times_C}{p}+\frac{V_S\times_C}{q}+\frac{V_E}{2pq}}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;(see Table A1 in Westfall, Kenny, and Judd 2014 for a definition of formula parameters)&lt;/span&gt;. Fortunately, the Shiny application PANGEA &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt; can take care of the ncp calculation for us. All we need to do is to specify the planned design, the random variables, and make some assumptions about the variance partitioning coefficients &lt;span class=&#34;citation&#34;&gt;(“VCP”, Westfall, Kenny, and Judd 2014)&lt;/span&gt; involved. PANGEA will then return the ncp and Welch-Satterthwaite approximated degrees of freedom. It will also return the power for a selected fixed effect given the specified design. The power is based on a &lt;em&gt;t&lt;/em&gt;-test for the effect. This approach can in principle be extended to tests of any fixed linear contrast &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;In order to plug the information from PANGEA into the equivalence test power formula, we need to perform two tests in PANGEA; one for the test against each of the bounds we have defined. For example, if we define d=-0.5 and d=0.5 as our lower and upper bound, respectively, then we need to compute the ncp in PANGEA for one test where “Effect size (d)” is set to &lt;code&gt;theta + bound_l&lt;/code&gt;, and for another test where “Effect size (d)” is set to &lt;code&gt;theta + bound_u&lt;/code&gt;. We can then simply plug the ncp and df reported by PANGEA into the power calculation defined in part 1 to get equivalence test power for a fixed effect in our mixed model design.&lt;/p&gt;
+&lt;p&gt;As an example of how to excecute the whole procedure, suppose we would like to calculate power for the fully crossed design mentioned above. First, let us assume the following input parameters for the tests &lt;span class=&#34;citation&#34;&gt;(see the appendix of Westfall, Kenny, and Judd 2014 for detailes on how Cohen’s d is defined in this design)&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;d &amp;lt;- 0    # assumed effect size in units of Cohen&amp;#39;s d, using a joint standard deviation over all variance components.
+bound_l &amp;lt;- -0.3  # Smallest negative effect size of interest in same units as d (null hypothesis)
+bound_u &amp;lt;-  0.3  # Smallest positive effect size of interest in same units as d (null hypothesis)
+p &amp;lt;- 100  # number of subjects
+q &amp;lt;- 100  # number of stimuli
+alpha &amp;lt;- 0.05  # significance threshold
+## Assumed variance component ratios, following default partition procedure described in Westfall (2014, 2015):
+Ve &amp;lt;- 0.3
+Vpxc &amp;lt;- 0.1
+Vsxc &amp;lt;- 0.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could obtain the ncp and df via the following formulas &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014)&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;se &amp;lt;- 2 * sqrt( Vpxc/p + Vsxc/q + Ve/(2*p*q) )  # standard error of the estimate (information about standard deviation contained within d)
+ncp &amp;lt;- d / se  # calculate t value/non-centrality parameter for the assumed effect size
+df &amp;lt;- (q*Vpxc + p*Vsxc + Ve)^2 / ( (q*Vpxc+Ve)^2/(p-1) + (p*Vsxc+Ve)^2/(q-1) + Ve^2/((p-1)*(q-1)))  # Welch-Satterthwaite approximation
+
+
+ncp_l &amp;lt;- (d + bound_l) / se  # calculate t value/non-centrality parameter corresponding to the smallest negative effect size of interest
+ncp_u &amp;lt;- (d + bound_u) / se  # calculate t value/non-centrality parameter corresponding to the smallest positive effect size of interest&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could also extract these values from PANGEA. In either case, we then take the df and ncp and calculate power in exactly the same way as we would for the simple t-test*.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;crit_t &amp;lt;- qt(alpha, df, lower.tail = FALSE)
+power &amp;lt;- ifelse(1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE) &amp;gt; 0,
+                1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE),
+                0)  # Derived from Chow, Wang $ Chao (2008), page 55, third formula, slightly tweaked to allow different SESOI for upper and lower bound. 
+power&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9080016&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;*&lt;strong&gt;OBS!&lt;/strong&gt; Note that the ncp calculated using the formula derived from &lt;span class=&#34;citation&#34;&gt;Westfall, Kenny, and Judd (2014)&lt;/span&gt; does not perfectly correspond to the ncp calculated by PANGEA! The numbers &lt;em&gt;should&lt;/em&gt; be identical. Neither I nor Jake Westfall is currently sure what the source of this divergence is. I have done some informal testing which suggests that the two methods seem to produce very similar numbers, which means that either methold will probably be quite accurate for practical purposes. However, I cannot guarantee that there are not some conditions where the two methods might produce very different numbers&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;calculating-an-equivalence-test-for-an-estimated-fixed-effect-in-mixed-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Calculating an equivalence test for an estimated fixed effect in mixed model&lt;/h1&gt;
+&lt;p&gt;Having derived a solution for how to calculate the power of a mixed model fixed effect equivalence test, we may reasonably ask how we would calculate the actual equivalence test once the data are in. A relatively straight-forward approach is to fit the model using the &lt;code&gt;lme4&lt;/code&gt; package in R. From this model we can extract the effect size estimate and Welch-Satterthwaite degrees of freedom for the fixed effect of interest. We then calculate TOST in the same way as we would for a simple t-test with no random effects assumed.&lt;/p&gt;
+&lt;p&gt;Suppose we have the following dataset (counter-balanced design, no true effect), and a SESOI of raw effect size = 0.5:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(3)
+# Dataset
+data &amp;lt;- data.frame(&amp;quot;participant&amp;quot; = as.factor(rep(1:10, each = 10)),
+                   &amp;quot;condition&amp;quot; = as.factor(rep(c(0,1,1,0), 5, each = 5)),
+                   &amp;quot;stimulus&amp;quot; = as.factor(rep(1:10, 10)),
+                   &amp;quot;response&amp;quot; = rnorm(100))
+summary(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   participant condition    stimulus     response       
+##  1      :10   0:50      1      :10   Min.   :-2.26540  
+##  2      :10   1:50      2      :10   1st Qu.:-0.72254  
+##  3      :10             3      :10   Median : 0.03419  
+##  4      :10             4      :10   Mean   : 0.01104  
+##  5      :10             5      :10   3rd Qu.: 0.73927  
+##  6      :10             6      :10   Max.   : 1.73554  
+##  (Other):40             (Other):40&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Equivalence bounds
+bound_u &amp;lt;-  0.5  # Upper equivalence bound
+bound_l &amp;lt;- -0.5  # Lower equivalence bound&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we fit a linear mixed model to the data, assuming a fixed effect of condition, and random effects of participants and stimuli:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lme4)
+library(lmerTest)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fm &amp;lt;- lmer(response ~ condition + 
+             (1 + condition | participant) + 
+             (1 + condition | stimulus), 
+           data)
+summary(fm)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed model fit by REML. t-tests use Satterthwaite&amp;#39;s method [
+## lmerModLmerTest]
+## Formula: 
+## response ~ condition + (1 + condition | participant) + (1 + condition |  
+##     stimulus)
+##    Data: data
+## 
+## REML criterion at convergence: 252.8
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.38964 -0.77469  0.01926  0.77850  1.77989 
+## 
+## Random effects:
+##  Groups      Name        Variance Std.Dev. Corr 
+##  participant (Intercept) 0.095561 0.30913       
+##              condition1  0.179121 0.42323  -0.90
+##  stimulus    (Intercept) 0.001334 0.03652       
+##              condition1  0.023547 0.15345  1.00 
+##  Residual                0.647701 0.80480       
+## Number of obs: 100, groups:  participant, 10; stimulus, 10
+## 
+## Fixed effects:
+##             Estimate Std. Error      df t value Pr(&amp;gt;|t|)
+## (Intercept)   0.1316     0.1505  8.9488   0.874    0.405
+## condition1   -0.2411     0.2149  8.5999  -1.122    0.292
+## 
+## Correlation of Fixed Effects:
+##            (Intr)
+## condition1 -0.749&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;lmerTest&lt;/code&gt; package adds a t-test with Welch-Satterthwaite approximation to df for each fixed effect in our model (in this case, intercept and condition). This is the same t-test approach that PANGEA calculates power for &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;. It is directly calculated from the estimated effect and std.error provided in the basic &lt;code&gt;lmer&lt;/code&gt; model.&lt;/p&gt;
+&lt;p&gt;There are at least three ways to calculate an equivalence test from the data provided in this model. First, we can use the &lt;code&gt;contest1D&lt;/code&gt; functions of the lmerTest package to perform tests centered on the lower and upper equivalence bound, using the &lt;code&gt;rhs&lt;/code&gt; option:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower &amp;lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l) # get t value for test against lower bound
+upper &amp;lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_u) # get t value for test against upper bound
+lower&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
+## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.7306643 0.2484732 0.2603645&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df   t value      lower     upper
+## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732
+##      Pr(&amp;gt;|t|)
+## 1 0.007803275&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The test provided by &lt;code&gt;contest1D&lt;/code&gt; is two-sided, but we can easily recalculate the required one-sided tests from the t-values provided (or simply divide by 2 the p-values provided by &lt;code&gt;contest1D&lt;/code&gt;):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(lower$`t value`, lower$df, lower.tail = FALSE)  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower$`Pr(&amp;gt;|t|)`/2  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(upper$`t value`, upper$df, lower.tail = TRUE)  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper$`Pr(&amp;gt;|t|)`/2  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If both these tests are significant, so is the test for equivalence. In this case, the test against the lower bound is not significant, which means that we cannot reject that the true value is not equal to or more extreme than &lt;code&gt;bound_l&lt;/code&gt;, which means that we failed to obtain an equivalent result.&lt;/p&gt;
+&lt;p&gt;Instead of relying on &lt;code&gt;lmerTest&lt;/code&gt;, we can also calculate the equivalence test directly from the estimated effects, standard error and degrees of freedom in the basic &lt;code&gt;lme4&lt;/code&gt; model. All we need to do is subtract each bound from the effect size when calculating the t value:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Reproduce test without the use of rhs, by subtracting the bound t values from the estimated effect
+pt((lower$Estimate-bound_l)/lower$`Std. Error`, lower$df, lower.tail = FALSE)  # test against lower bound &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt((upper$Estimate-bound_u)/upper$`Std. Error`, upper$df, lower.tail = TRUE)  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result should be identical to the solution provided by lmerTest.&lt;/p&gt;
+&lt;p&gt;Finally, we can compare our upper and lower equivalence bound to the 90% (or alpha*2 more generally) confidence interval of an effect estimate, again using &lt;code&gt;contest1D&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l, level = 0.9)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
+## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.6370974 0.1549064 0.2603645&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the &lt;code&gt;lower&lt;/code&gt; and &lt;code&gt;upper&lt;/code&gt; bounds of the 90% confidence interval falls within the boundry specified by our SESOI, the equivalence test is significant.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-Chow2008&#34;&gt;
+&lt;p&gt;Chow, Shein-Chung, Jun Shao, and Hansheng Wang, eds. 2008. &lt;em&gt;Sample Size Calculations in Clinical Research&lt;/em&gt;. 2nd ed. Chapman &amp;amp; Hall/CRC Biostatistics Series 20. Boca Raton: Chapman &amp;amp; Hall/CRC.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakens2017d&#34;&gt;
+&lt;p&gt;Lakens, Daniel. 2017. “Equivalence Testing with TOSTER.” &lt;em&gt;APS Observer&lt;/em&gt; 30 (3).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-westfall2015pangea&#34;&gt;
+&lt;p&gt;Westfall, Jacob. 2015. “PANGEA: Power Analysis for General Anova Designs.” &lt;em&gt;Unpublished Manuscript. Available at Http://Jakewestfall.org/Publications/Pangea.pdf&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Westfall2014&#34;&gt;
+&lt;p&gt;Westfall, Jacob, David A. Kenny, and Charles M. Judd. 2014. “Statistical Power and Optimal Design in Experiments in Which Samples of Participants Respond to Samples of Stimuli.” &lt;em&gt;Journal of Experimental Psychology: General&lt;/em&gt; 143 (5): 2020–45. &lt;a href=&#34;https://doi.org/10.1037/xge0000014&#34;&gt;https://doi.org/10.1037/xge0000014&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Proposing a theory committee at the Psychological Science Accelerator</title>
       <link>/post/psa-theory-committee/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
@@ -89,7 +332,7 @@
 &lt;p&gt;Popper, Karl R. 2002. &lt;em&gt;Conjectures and Refutations: The Growth of Scientific Knowledge&lt;/em&gt;. Routledge Classics. London ; New York: Routledge.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-Scheel2018&#34;&gt;
-&lt;p&gt;Scheel, Anne M., Stuart J. Ritchie, Nicholas J.L. Brown, and Steven L. Jacques. 2018. “Methodological Problems in a Study of Fetal Visual Perception.” &lt;em&gt;Current Biology&lt;/em&gt; 28 (10): R594–R596. &lt;a href=&#34;https://doi.org/10.1016/j.cub.2018.03.047&#34;&gt;https://doi.org/10.1016/j.cub.2018.03.047&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Scheel, Anne M., Stuart J. Ritchie, Nicholas J. L. Brown, and Steven L. Jacques. 2018. “Methodological Problems in a Study of Fetal Visual Perception.” &lt;em&gt;Current Biology&lt;/em&gt; 28 (10): R594–R596. &lt;a href=&#34;https://doi.org/10.1016/j.cub.2018.03.047&#34;&gt;https://doi.org/10.1016/j.cub.2018.03.047&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-Smaldino2015&#34;&gt;
 &lt;p&gt;Smaldino, Paul E., Jimmy Calanchini, and Cynthia L. Pickett. 2015. “Theory Development with Agent-Based Models.” &lt;em&gt;Organizational Psychology Review&lt;/em&gt; 5 (4): 300–317. &lt;a href=&#34;https://doi.org/10.1177/2041386614546944&#34;&gt;https://doi.org/10.1177/2041386614546944&lt;/a&gt;.&lt;/p&gt;
@@ -482,15 +725,15 @@ r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;p&gt;Add a description of your project (fig 3.3). If you have already written a manuscript on the data, you could just click this field and paste the abstract. In any case, the description should make it clear what the project is intended for, and what kind of information one can expect to find here.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Add a license for your project (fig 3.4). Having a liberal license for your data is more important than you may think. If you share materials without a license, people are not strictly allowed to reuse it (without risking legal prosecution from you). You can find more information about licensing your data &lt;a href=&#34;https://wiki.creativecommons.org/wiki/Data&#34;&gt;here&lt;/a&gt;. If you just want to get on with it however, click “add a license”, and in the “&lt;strong&gt;Choose a license:&lt;/strong&gt;” drop-down menu, choose either the &lt;a href=&#34;https://creativecommons.org/publicdomain/zero/1.0/&#34;&gt;CC0 1.0 Universal&lt;/a&gt; or the &lt;a href=&#34;https://creativecommons.org/licenses/by/4.0/&#34;&gt;CC By Attribution 4.0 International&lt;/a&gt;. They are both aimed at making your data open and reducable by others with minimal legal restrictions. If you want to know more about why licensing is important, or you want to know the difference between the CC licenses, &lt;a href=&#34;https://twitter.com/chartgerink&#34;&gt;Chris Hartgerink&lt;/a&gt; has written &lt;a href=&#34;https://medium.com/read-write-participate/copyright-and-licenses-in-open-access-publishing-da73e0ca8ed3&#34;&gt;a short, informative, and accessible article on Medium&lt;/a&gt; about it.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;Before uploading, make sure that people can understand and work with the materials you upload. This implies the following:
+&lt;li&gt;&lt;p&gt;Before uploading, make sure that people can understand and work with the materials you upload. This implies the following:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: lower-alpha&#34;&gt;
 &lt;li&gt;Name the variables in your dataset sensibly, and perhaps add a document that defines and describes each variable (a &lt;a href=&#34;http://www.ddialliance.org/training/getting-started-new-content/create-a-codebook&#34;&gt;codebook&lt;/a&gt;). In addition, adding extra materials, such as experiment presentation files, design descriptions, etc., can be a crucial supplement to the methods section of your paper for someone who really wants to understand how the experiment was conducted.&lt;/li&gt;
 &lt;li&gt;Provide a complete recipe script for any published analyses in case someone wants to doublecheck your reporting. In SPSS, this is made in a syntax (.sps) file. In R, this is made in an R script (.R) file. The script should start by importing/loading the raw (anonymized) data, then include every manipulation imposed on the data (like deletions, renamings, and exclusions), and end with the functions for generating the plots running the statistical tests that you report. In other words, a person who downloads your data and analysis files should just have to press play in the appropriate software to reproduce the numbers in your paper. If you can’t add raw data for ethical reasons, add a dataset as close to the raw as possible. Why? Imagine you made a mistake in renaming a variable, or someone disagrees with your exclusion critera. If someone then wants to change the way the data is manipulated, they will need access to the pre-manipulation version of the dataset.&lt;/li&gt;
 &lt;li&gt;Make sure that accessing your data is free, or as cheap as possible. If you use SPSS for data analysis, something you might never think about is the fact that all the files you save in .sav, .spv, and .sps format requires SPSS to open them. So anyone who wants to reuse your data will need SPSS as well, and that baby costs $99 per month! Same goes for matlab ($580-$2300 per license), e-prime ($995 per license) and other common commercial research software. A &lt;a href=&#34;https://www.computerhope.com/issues/ch001357.htm&#34;&gt;.csv&lt;/a&gt; version of your dataset can be read and created by basically any program, so &lt;a href=&#34;https://www.computerhope.com/issues/ch001356.htm&#34;&gt;create one&lt;/a&gt; and add it just in case.&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;Upload your data and materials! This is as simple as dragging and dropping the files into the “Files” box (fig 3.5). You can also click on “OSF Storage” (fig 3.6) and click on the “upload” button that appears above. If you want to import data directly from services like Dropbox, Google Drive, or GitHub, you will find a list of add-ons you can integrate by going to Settings (fig 3.7).&lt;/li&gt;
-&lt;li&gt;Add some relevant tags (fig 3.8) to make your project easy to find on Google and OSF search.&lt;/li&gt;
-&lt;li&gt;If you want to add some information about the project, consider putting it into the project Wiki (fig 3.9). Detailed info on how to edit the wiki can be found &lt;a href=&#34;http://help.osf.io/m/collaborating/l/524109-using-the-wiki&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Upload your data and materials! This is as simple as dragging and dropping the files into the “Files” box (fig 3.5). You can also click on “OSF Storage” (fig 3.6) and click on the “upload” button that appears above. If you want to import data directly from services like Dropbox, Google Drive, or GitHub, you will find a list of add-ons you can integrate by going to Settings (fig 3.7).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add some relevant tags (fig 3.8) to make your project easy to find on Google and OSF search.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If you want to add some information about the project, consider putting it into the project Wiki (fig 3.9). Detailed info on how to edit the wiki can be found &lt;a href=&#34;http://help.osf.io/m/collaborating/l/524109-using-the-wiki&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Let the public in! If you are happy with the content, settings, and information included in your project (and you want to make it public), press the “Make Public” button (fig 3.10). Read through the warnings that pops up and, if you are sure that your project meets ethical requirements for open data sharing, click “Confirm”.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;####Finding help and more information&lt;/p&gt;
@@ -759,16 +1002,6 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
       
       <guid>/project/example-external-project/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0200</pubDate>
-      
-      <guid>/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
     </item>
     
     <item>

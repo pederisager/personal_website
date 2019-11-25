@@ -8,9 +8,250 @@
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0100</lastBuildDate>
+    <atom:link href="/post/" rel="self" type="application/rss+xml" />
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>Mixed model equivalence test using R and PANGEA</title>
+      <link>/post/mixed_model_equivalence_references/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mixed_model_equivalence_references/</guid>
+      <description>&lt;p&gt;&lt;em&gt;How to calculate an equivalence test, and power for an equivalence test, for a fixed effect in a mixed effects model using R and PANGEA.&lt;/em&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction-to-a-two-part-problem&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction to a two-part problem&lt;/h2&gt;
+&lt;p&gt;Calculating equivalence test (TOST) power for fixed effects in a mixed model can be compartmentalized into two independent problems. First, we need a method for calculating TOST power from the non-centrality parameters (ncp) and degrees of freedom (df) of a test. TOSTER &lt;span class=&#34;citation&#34;&gt;(Lakens 2017)&lt;/span&gt; does not currently take this approach when calculating power, but it is straight-forward to recast the calculations in terms of ncps and dfs based on formulas provided in the literature.&lt;/p&gt;
+&lt;p&gt;Once a method for calculating power based on ncp and df has been identified, the problem of calculating power reduces to a problem of identifying an appropriate ncp and df for the expected mixed model effect. This is by no means trivial, as calculations of ncp and df can become quite complicated with multiple random factors in the model &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014)&lt;/span&gt;. Fortunately, the free and open source power calculator PANGEA can be used to extract the ncp and df for a wide array of mixed model designs &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;. We can use PANGEA to extract the ncp and df for both tests of a TOST procedure, given some equivalence bounds. From there, we can simply plug these values into our formula for calculating power since, at this point, power for mixed and fixed designs are calculated in the same way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;part-1-calculating-power-for-a-one-sample-equivalence-test-using-noncentrality-parameters-ncp&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Part 1: Calculating power for a (one-sample) equivalence test using noncentrality parameters (ncp)&lt;/h2&gt;
+&lt;p&gt;Say we want to calculate the power of an equivalence test for a one-sample t-test with the following parameters:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;es &amp;lt;- 0            # Assumed effect size (alternative hypothesis). Set to 0 to assume that there is no true effect.
+s &amp;lt;- 1             # Standard deviation. When set to 1, &amp;quot;ës&amp;quot; contain values on Cohen&amp;#39;s d scale.
+n &amp;lt;- 100           # Number of subjects. 
+se &amp;lt;- (s/sqrt(n))  # Standard error.
+df &amp;lt;- n-1          # degrees of freedom.
+alpha &amp;lt;- 0.05      # Type I error rate.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we wanted to calculate power for a traditional two-sided null hypothesis test using noncentrality parameters and degrees of freedom, we could set up the analysis in the following way (from &lt;a href=&#34;https://www.cyclismo.org/tutorial/R/power.html&#34; class=&#34;uri&#34;&gt;https://www.cyclismo.org/tutorial/R/power.html&lt;/a&gt;):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ncp &amp;lt;- es/se                    # notice that the ncp is just a t value - the t value on which we would expect the t-distribution to be centered, given some difference between the groups. If the npc is 0, we assume a central t-distribution. 
+crit_t &amp;lt;- qt(1-alpha/2, df=df)  # alpha/2 denotes a two-sided t test, and is the same as specifying alpha=0.025. 
+
+typeII &amp;lt;- pt(crit_t, df=df, ncp=ncp) - pt(-crit_t, df=df, ncp=ncp)   # The type II error of the test.
+power &amp;lt;- 1-(pt(crit_t,df=df,ncp=ncp) - pt(-crit_t, df=df, ncp=ncp))  # The power of the test, which equals 1-typeII
+paste(&amp;quot;Power =&amp;quot;, power)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Power = 0.05&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can verify that this calculation is correct by comparing it against the results of the &lt;code&gt;power.t.test()&lt;/code&gt; function in base R and the &lt;code&gt;pwr.t.test&lt;/code&gt; function in the “pwr” package. When &lt;code&gt;es = 0&lt;/code&gt;, power will reduce to the type I error rate (in reality we have no power, since there is no true effect to detect). You can change the value of &lt;code&gt;es&lt;/code&gt; to see that the calculations are identical regardless of effect size.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;power.t.test(n = n, delta = es, sd = s, sig.level = alpha, type = &amp;quot;one&amp;quot;, alternative = &amp;quot;two.sided&amp;quot;, strict = TRUE)  # The strict argument must be set to TRUE for this test to calculate power correctly for the two-sample case.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##      One-sample t test power calculation 
+## 
+##               n = 100
+##           delta = 0
+##              sd = 1
+##       sig.level = 0.05
+##           power = 0.05
+##     alternative = two.sided&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pwr::pwr.t.test(n = n, d = es/s, sig.level = alpha, type = &amp;quot;one&amp;quot;, alternative = &amp;quot;two.sided&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##      One-sample t test power calculation 
+## 
+##               n = 100
+##               d = 0
+##       sig.level = 0.05
+##           power = 0.05
+##     alternative = two.sided&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now let us extend the use of noncentrality parameters to the case of the two-one-sided-tests (TOST) used for equivalence testing. First we must decide on a smallest effect size of interest (SESOI) to use as bounds for the equivalence test. Let us assume that we consider a group difference of 0.3, in either direction, to be the smallest effect we care about. Because the population standard deviation &lt;code&gt;s&lt;/code&gt; is 1, we can choose whether to think of the group difference as a raw difference or a difference in Cohen’s &lt;em&gt;d&lt;/em&gt;. The two will the same for this example since &lt;code&gt;d = es/s&lt;/code&gt;, and s is 1, so &lt;code&gt;d = es/1 = es&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bound_l &amp;lt;- -0.3  # Smallest negative effect size of interest (TOST null hypothesis)
+bound_u &amp;lt;-  0.3  # Smallest positive effect size of interest (TOST null hypothesis)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Having defined our bounds, we can calculate the ncp for the tests against the upper and lower bounds (the assumed effect size is the difference between the assumed (null) effect and the bound). We then use these npc values to calculate the power for the equivalence test &lt;span class=&#34;citation&#34;&gt;(Chow, Shao, and Wang 2008, p55, 3rd equation)&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ncp_l &amp;lt;- (es + bound_l) / se 
+ncp_u &amp;lt;- (es + bound_u) / se
+crit_t &amp;lt;- qt(alpha, df, lower.tail = FALSE)
+
+power &amp;lt;- ifelse(1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE) &amp;gt; 0,
+                1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE),
+                0)  # Derived from Chow, Shao &amp;amp; Wang (2008), page 55, third formula, slightly tweaked to allow different SESOI for upper and lower bound.
+
+paste(&amp;quot;Power =&amp;quot;, power)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Power = 0.817975007468883&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can verify our calculations against the results from the &lt;code&gt;powerTOSTone()&lt;/code&gt; function in TOSTER.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TOSTER::powerTOSTone(alpha = alpha, N = n, low_eqbound_d = bound_l, high_eqbound_d = bound_u)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The statistical power is 82.46 % for equivalence bounds of -0.3 and 0.3 .&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.8246325&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that these results are similar but not exactly the same. The reason for the discrepancy is that TOSTER assumes z-distributed populations, while the ncp procedure assumes t-distributed populations. This means that TOSTER will tend to slightly overestimate power for low sample sizes compared to the ncp approach, which assumes fatter distribution tails for small samples. As the sample size increase, the t-distribution will converge towards the z-distribution, and the difference between the approaches becomes miniscule. A quick simulation reveals that the two approaches are highly correlated for the entire range of power estimates.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;simPower &amp;lt;- function(es = 0, s = 1, n = sample(10:100, 1), alpha = 0.05, bound_l = -0.3, bound_u = 0.3) {
+
+  ncp_l &amp;lt;- ( (es + bound_l) / (s/sqrt(n)) )
+  ncp_u &amp;lt;- ( (es + bound_u) / (s/sqrt(n)) )
+  crit_t &amp;lt;- qt(0.05, df, lower.tail = FALSE)
+  
+  pow_ncp &amp;lt;- ifelse(1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE) &amp;gt; 0,
+                    1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE),
+                    0)  # Derived from Chow, Wang $ Chao (2008), page 55, third formula, slightly tweaked to allow different SESOI for upper and lower bound.
+  
+  invisible(capture.output(pow_toster &amp;lt;- TOSTER::powerTOSTone(alpha = alpha, N = n, low_eqbound_d = bound_l, high_eqbound_d = bound_u)))
+  c(pow_ncp, pow_toster, s, n)
+  
+}
+sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alpha = alpha, bound_l = bound_l, bound_u = bound_u))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sim &amp;lt;- matrix(sim, ncol = 4, byrow = TRUE)
+plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999946234458505&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;
+&lt;p&gt;Having resolved the issue of how to calculate equivalence test power from the degrees of freedom and noncentrality parameter, we must now turn to the issue of how to calculate noncentrality parameters in the first place. The ncp equals the effect size divided by the effect standard error, or:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(ncp=\frac{\theta}{\sigma/\sqrt{n}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is the assumed effect size in the population, &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt; is the assumed standard deviation in the population, and &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of observations.&lt;/p&gt;
+&lt;p&gt;For simple designs, this formula is easily calculated (just calculate the &lt;em&gt;t&lt;/em&gt;-value of the assumed effect). However, for mixed model desigs, the details of the calculation becomes more complicated due to the partitioning of variance among the random variables and their interactions. In practice, the details of the calculation will depend on the specifics of the design and the number of random variables involved &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014; Westfall 2015)&lt;/span&gt;. For example, the ncp for a two-group fully crossed design, where the effect is assumed to vary randomly across participants and stimuli, is defined as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(npc=\frac{d}{2\sqrt{\frac{V_P\times_C}{p}+\frac{V_S\times_C}{q}+\frac{V_E}{2pq}}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;(see Table A1 in Westfall, Kenny, and Judd 2014 for a definition of formula parameters)&lt;/span&gt;. Fortunately, the Shiny application PANGEA &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt; can take care of the ncp calculation for us. All we need to do is to specify the planned design, the random variables, and make some assumptions about the variance partitioning coefficients &lt;span class=&#34;citation&#34;&gt;(“VCP”, Westfall, Kenny, and Judd 2014)&lt;/span&gt; involved. PANGEA will then return the ncp and Welch-Satterthwaite approximated degrees of freedom. It will also return the power for a selected fixed effect given the specified design. The power is based on a &lt;em&gt;t&lt;/em&gt;-test for the effect. This approach can in principle be extended to tests of any fixed linear contrast &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;In order to plug the information from PANGEA into the equivalence test power formula, we need to perform two tests in PANGEA; one for the test against each of the bounds we have defined. For example, if we define d=-0.5 and d=0.5 as our lower and upper bound, respectively, then we need to compute the ncp in PANGEA for one test where “Effect size (d)” is set to &lt;code&gt;theta + bound_l&lt;/code&gt;, and for another test where “Effect size (d)” is set to &lt;code&gt;theta + bound_u&lt;/code&gt;. We can then simply plug the ncp and df reported by PANGEA into the power calculation defined in part 1 to get equivalence test power for a fixed effect in our mixed model design.&lt;/p&gt;
+&lt;p&gt;As an example of how to excecute the whole procedure, suppose we would like to calculate power for the fully crossed design mentioned above. First, let us assume the following input parameters for the tests &lt;span class=&#34;citation&#34;&gt;(see the appendix of Westfall, Kenny, and Judd 2014 for detailes on how Cohen’s d is defined in this design)&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;d &amp;lt;- 0    # assumed effect size in units of Cohen&amp;#39;s d, using a joint standard deviation over all variance components.
+bound_l &amp;lt;- -0.3  # Smallest negative effect size of interest in same units as d (null hypothesis)
+bound_u &amp;lt;-  0.3  # Smallest positive effect size of interest in same units as d (null hypothesis)
+p &amp;lt;- 100  # number of subjects
+q &amp;lt;- 100  # number of stimuli
+alpha &amp;lt;- 0.05  # significance threshold
+## Assumed variance component ratios, following default partition procedure described in Westfall (2014, 2015):
+Ve &amp;lt;- 0.3
+Vpxc &amp;lt;- 0.1
+Vsxc &amp;lt;- 0.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could obtain the ncp and df via the following formulas &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014)&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;se &amp;lt;- 2 * sqrt( Vpxc/p + Vsxc/q + Ve/(2*p*q) )  # standard error of the estimate (information about standard deviation contained within d)
+ncp &amp;lt;- d / se  # calculate t value/non-centrality parameter for the assumed effect size
+df &amp;lt;- (q*Vpxc + p*Vsxc + Ve)^2 / ( (q*Vpxc+Ve)^2/(p-1) + (p*Vsxc+Ve)^2/(q-1) + Ve^2/((p-1)*(q-1)))  # Welch-Satterthwaite approximation
+
+
+ncp_l &amp;lt;- (d + bound_l) / se  # calculate t value/non-centrality parameter corresponding to the smallest negative effect size of interest
+ncp_u &amp;lt;- (d + bound_u) / se  # calculate t value/non-centrality parameter corresponding to the smallest positive effect size of interest&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could also extract these values from PANGEA. In either case, we then take the df and ncp and calculate power in exactly the same way as we would for the simple t-test*.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;crit_t &amp;lt;- qt(alpha, df, lower.tail = FALSE)
+power &amp;lt;- ifelse(1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE) &amp;gt; 0,
+                1 - pt(-crit_t, df, ncp_l, lower.tail = FALSE) - pt(crit_t, df, ncp_u, lower.tail = TRUE),
+                0)  # Derived from Chow, Wang $ Chao (2008), page 55, third formula, slightly tweaked to allow different SESOI for upper and lower bound. 
+power&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9080016&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;*&lt;strong&gt;OBS!&lt;/strong&gt; Note that the ncp calculated using the formula derived from &lt;span class=&#34;citation&#34;&gt;Westfall, Kenny, and Judd (2014)&lt;/span&gt; does not perfectly correspond to the ncp calculated by PANGEA! The numbers &lt;em&gt;should&lt;/em&gt; be identical. Neither I nor Jake Westfall is currently sure what the source of this divergence is. I have done some informal testing which suggests that the two methods seem to produce very similar numbers, which means that either methold will probably be quite accurate for practical purposes. However, I cannot guarantee that there are not some conditions where the two methods might produce very different numbers&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;calculating-an-equivalence-test-for-an-estimated-fixed-effect-in-mixed-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Calculating an equivalence test for an estimated fixed effect in mixed model&lt;/h1&gt;
+&lt;p&gt;Having derived a solution for how to calculate the power of a mixed model fixed effect equivalence test, we may reasonably ask how we would calculate the actual equivalence test once the data are in. A relatively straight-forward approach is to fit the model using the &lt;code&gt;lme4&lt;/code&gt; package in R. From this model we can extract the effect size estimate and Welch-Satterthwaite degrees of freedom for the fixed effect of interest. We then calculate TOST in the same way as we would for a simple t-test with no random effects assumed.&lt;/p&gt;
+&lt;p&gt;Suppose we have the following dataset (counter-balanced design, no true effect), and a SESOI of raw effect size = 0.5:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(3)
+# Dataset
+data &amp;lt;- data.frame(&amp;quot;participant&amp;quot; = as.factor(rep(1:10, each = 10)),
+                   &amp;quot;condition&amp;quot; = as.factor(rep(c(0,1,1,0), 5, each = 5)),
+                   &amp;quot;stimulus&amp;quot; = as.factor(rep(1:10, 10)),
+                   &amp;quot;response&amp;quot; = rnorm(100))
+summary(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   participant condition    stimulus     response       
+##  1      :10   0:50      1      :10   Min.   :-2.26540  
+##  2      :10   1:50      2      :10   1st Qu.:-0.72254  
+##  3      :10             3      :10   Median : 0.03419  
+##  4      :10             4      :10   Mean   : 0.01104  
+##  5      :10             5      :10   3rd Qu.: 0.73927  
+##  6      :10             6      :10   Max.   : 1.73554  
+##  (Other):40             (Other):40&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Equivalence bounds
+bound_u &amp;lt;-  0.5  # Upper equivalence bound
+bound_l &amp;lt;- -0.5  # Lower equivalence bound&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we fit a linear mixed model to the data, assuming a fixed effect of condition, and random effects of participants and stimuli:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lme4)
+library(lmerTest)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fm &amp;lt;- lmer(response ~ condition + 
+             (1 + condition | participant) + 
+             (1 + condition | stimulus), 
+           data)
+summary(fm)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed model fit by REML. t-tests use Satterthwaite&amp;#39;s method [
+## lmerModLmerTest]
+## Formula: 
+## response ~ condition + (1 + condition | participant) + (1 + condition |  
+##     stimulus)
+##    Data: data
+## 
+## REML criterion at convergence: 252.8
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.38964 -0.77469  0.01926  0.77850  1.77989 
+## 
+## Random effects:
+##  Groups      Name        Variance Std.Dev. Corr 
+##  participant (Intercept) 0.095561 0.30913       
+##              condition1  0.179121 0.42323  -0.90
+##  stimulus    (Intercept) 0.001334 0.03652       
+##              condition1  0.023547 0.15345  1.00 
+##  Residual                0.647701 0.80480       
+## Number of obs: 100, groups:  participant, 10; stimulus, 10
+## 
+## Fixed effects:
+##             Estimate Std. Error      df t value Pr(&amp;gt;|t|)
+## (Intercept)   0.1316     0.1505  8.9488   0.874    0.405
+## condition1   -0.2411     0.2149  8.5999  -1.122    0.292
+## 
+## Correlation of Fixed Effects:
+##            (Intr)
+## condition1 -0.749&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;lmerTest&lt;/code&gt; package adds a t-test with Welch-Satterthwaite approximation to df for each fixed effect in our model (in this case, intercept and condition). This is the same t-test approach that PANGEA calculates power for &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;. It is directly calculated from the estimated effect and std.error provided in the basic &lt;code&gt;lmer&lt;/code&gt; model.&lt;/p&gt;
+&lt;p&gt;There are at least three ways to calculate an equivalence test from the data provided in this model. First, we can use the &lt;code&gt;contest1D&lt;/code&gt; functions of the lmerTest package to perform tests centered on the lower and upper equivalence bound, using the &lt;code&gt;rhs&lt;/code&gt; option:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower &amp;lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l) # get t value for test against lower bound
+upper &amp;lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_u) # get t value for test against upper bound
+lower&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
+## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.7306643 0.2484732 0.2603645&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df   t value      lower     upper
+## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732
+##      Pr(&amp;gt;|t|)
+## 1 0.007803275&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The test provided by &lt;code&gt;contest1D&lt;/code&gt; is two-sided, but we can easily recalculate the required one-sided tests from the t-values provided (or simply divide by 2 the p-values provided by &lt;code&gt;contest1D&lt;/code&gt;):&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(lower$`t value`, lower$df, lower.tail = FALSE)  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower$`Pr(&amp;gt;|t|)`/2  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(upper$`t value`, upper$df, lower.tail = TRUE)  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper$`Pr(&amp;gt;|t|)`/2  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If both these tests are significant, so is the test for equivalence. In this case, the test against the lower bound is not significant, which means that we cannot reject that the true value is not equal to or more extreme than &lt;code&gt;bound_l&lt;/code&gt;, which means that we failed to obtain an equivalent result.&lt;/p&gt;
+&lt;p&gt;Instead of relying on &lt;code&gt;lmerTest&lt;/code&gt;, we can also calculate the equivalence test directly from the estimated effects, standard error and degrees of freedom in the basic &lt;code&gt;lme4&lt;/code&gt; model. All we need to do is subtract each bound from the effect size when calculating the t value:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Reproduce test without the use of rhs, by subtracting the bound t values from the estimated effect
+pt((lower$Estimate-bound_l)/lower$`Std. Error`, lower$df, lower.tail = FALSE)  # test against lower bound &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt((upper$Estimate-bound_u)/upper$`Std. Error`, upper$df, lower.tail = TRUE)  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result should be identical to the solution provided by lmerTest.&lt;/p&gt;
+&lt;p&gt;Finally, we can compare our upper and lower equivalence bound to the 90% (or alpha*2 more generally) confidence interval of an effect estimate, again using &lt;code&gt;contest1D&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l, level = 0.9)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
+## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.6370974 0.1549064 0.2603645&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the &lt;code&gt;lower&lt;/code&gt; and &lt;code&gt;upper&lt;/code&gt; bounds of the 90% confidence interval falls within the boundry specified by our SESOI, the equivalence test is significant.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-Chow2008&#34;&gt;
+&lt;p&gt;Chow, Shein-Chung, Jun Shao, and Hansheng Wang, eds. 2008. &lt;em&gt;Sample Size Calculations in Clinical Research&lt;/em&gt;. 2nd ed. Chapman &amp;amp; Hall/CRC Biostatistics Series 20. Boca Raton: Chapman &amp;amp; Hall/CRC.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakens2017d&#34;&gt;
+&lt;p&gt;Lakens, Daniel. 2017. “Equivalence Testing with TOSTER.” &lt;em&gt;APS Observer&lt;/em&gt; 30 (3).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-westfall2015pangea&#34;&gt;
+&lt;p&gt;Westfall, Jacob. 2015. “PANGEA: Power Analysis for General Anova Designs.” &lt;em&gt;Unpublished Manuscript. Available at Http://Jakewestfall.org/Publications/Pangea.pdf&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Westfall2014&#34;&gt;
+&lt;p&gt;Westfall, Jacob, David A. Kenny, and Charles M. Judd. 2014. “Statistical Power and Optimal Design in Experiments in Which Samples of Participants Respond to Samples of Stimuli.” &lt;em&gt;Journal of Experimental Psychology: General&lt;/em&gt; 143 (5): 2020–45. &lt;a href=&#34;https://doi.org/10.1037/xge0000014&#34;&gt;https://doi.org/10.1037/xge0000014&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Proposing a theory committee at the Psychological Science Accelerator</title>
@@ -18,8 +259,91 @@
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/psa-theory-committee/</guid>
-      <description>(written in collaboration with Nicholas A. Coles)
-The Psychological Science Accelerator (PSA) is a global network of psychological laboratories that organizes large-scale empirical research projects. The organization aims “to accelerate the accumulation of reliable and generalizable evidence in psychological science” (Moshontz et al. 2018). To succeed in this mission, the PSA has created several committees that work together to address important challenges in producing high quality research, such as having access to an inferentially meaningful sample size, reducing the reliance on WEIRD participants, and improving the methodological quality of designs and analyses.</description>
+      <description>&lt;p&gt;(written in collaboration with &lt;a href=&#34;https://twitter.com/coles_nicholas_&#34;&gt;Nicholas A. Coles&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;https://psysciacc.org/&#34;&gt;Psychological Science Accelerator&lt;/a&gt; (PSA) is a global network of psychological laboratories that organizes large-scale empirical research projects. The organization aims “to accelerate the accumulation of reliable and generalizable evidence in psychological science” &lt;span class=&#34;citation&#34;&gt;(Moshontz et al. 2018)&lt;/span&gt;. To succeed in this mission, the PSA has created &lt;a href=&#34;https://psysciacc.org/people/&#34;&gt;several committees&lt;/a&gt; that work together to address important challenges in producing high quality research, such as having access to an inferentially meaningful sample size, reducing the reliance on WEIRD participants, and improving the methodological quality of designs and analyses. However, one task critical to fulfilling the mission of the PSA has not yet been addressed: assessing the theoretical quality of research proposals (and by extension, the quality of theories in psychology).&lt;/p&gt;
+&lt;p&gt;Christopher R. &lt;span class=&#34;citation&#34;&gt;Chartier (2017)&lt;/span&gt; stated that the PSA would like “… to direct the network’s resources towards the best possible research questions in 2018 and beyond.” To succeed in this, and to follow the mission statement of the organization, we must be able to determine what makes a research question valuable to pursue, and we must be able to assess whether a research design will be theoretically innovative. We therefore propose establishing a committee or sub-committee devoted to theoretical development and assessment within the PSA.&lt;/p&gt;
+&lt;div id=&#34;substantive-arguments-for-focus-on-theoretical-quality&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Substantive arguments for focus on theoretical quality&lt;/h1&gt;
+&lt;p&gt;A strong grounding in theory within the field is perhaps the largest difference between the PSA and CERN, the organization on which the PSA was modelled. The CERN Large Hadron Collider was primarily designed to answer very specific theoretical questions in physics &lt;span class=&#34;citation&#34;&gt;(e.g. Zeppenfeld et al. 2000)&lt;/span&gt;, and it appears that many physicists agreed that these questions would in fact be answered by the experiments conducted at the Large Hadron Collider. In comparison, the PSA is not designed to address any particular theory within psychology. This makes sense as psychology is not nearly as theoretically coherent as physics. Thus, in our field there are many theories, not obviously connected, that may be important to consider for large scale replication. Nonetheless, in order to reduce the distance between truth and our current understanding, we will require strong theory and sound empirical operationalization of those theories.&lt;/p&gt;
+&lt;p&gt;Sir Karl Popper, Thomas Kuhn, Imre Lakatos, and other prominent philosophers of science have all made it clear that the relationship between observation, theory and truth is complicated &lt;span class=&#34;citation&#34;&gt;(e.g. de Groot 1969; Kuhn 2012; Lakatos 1976; Popper 2002)&lt;/span&gt;. This is perhaps especially true in the field of psychology. As one example, Meehl &lt;span class=&#34;citation&#34;&gt;(Meehl 1967, 1978, 1990)&lt;/span&gt; has outlined major problems with theorizing specific to psychology for half a century, and these criticisms still apply to the field to this day. In many areas of psychology, theory remains underdeveloped &lt;span class=&#34;citation&#34;&gt;(e.g. Fiedler 2004; Muthukrishna and Henrich 2019)&lt;/span&gt;. If the mission of the PSA is to generate highly informative studies then we have a problem, because the informativeness of a study is often directly linked to the quality of the theory it is derived from &lt;span class=&#34;citation&#34;&gt;(de Groot 1969; Meehl 1990)&lt;/span&gt;. Fortunately, there exist a number of promising proposals for how to improve the current state of affairs &lt;span class=&#34;citation&#34;&gt;(e.g. Landreth and Silva 2013; Smaldino, Calanchini, and Pickett 2015; Muthukrishna and Henrich 2019)&lt;/span&gt; which the PSA theory committee could evaluate and help implement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pragmatic-argument-for-focus-on-theoretical-quality&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Pragmatic argument for focus on theoretical quality&lt;/h1&gt;
+&lt;p&gt;The PSA is in a unique position to spearhead meaningful theoretical development in psychology because of the diversity and size of its &lt;a href=&#34;https://nicholas-coles.shinyapps.io/PSA_Map_Prototype/&#34;&gt;collaborative network&lt;/a&gt;. Theoretical progress in our field may depend on specialist knowledge of the subfield the theory is being developed in, as well as formal training in logic and philosophy of science, scientific methodology, model construction, different subfields within psychology, and different fields within science. It may be challenging, if not impossible, for one researcher to acquire all the knowledge necessary to make real theoretical progress. Therefore, increased knowledge sharing between specialists will likely be crucial for accelerated theory development in psychology. Due to the scale and diversity of its member network, the PSA is well-suited to facilitate such collaboration.&lt;/p&gt;
+&lt;p&gt;The PSA also have more selfish reasons for facilitating work on theory development. Studies conducted by the PSA have large costs that are most justifiable if they lead to theoretical innovation. For example, there are currently 166 labs participating in the &lt;a href=&#34;https://psysciacc.org/001-face-perception/&#34;&gt;“Global Valence Dominance”&lt;/a&gt; project. Thus, if this study does not lead to theoretical innovation, it would be mean a 166-fold waste of resources compared to a single lab conducting the same study. For factors such as precision and generalizability, the current operation strategy more or less guarantees value for the resources invested. But even a highly precise and generalizable result can be theoretically uninteresting. Furthermore, even a test of a highly interesting hypothesis might be fatally weakened by theoretical flaws in the research design &lt;span class=&#34;citation&#34;&gt;(e.g. Scheel et al. 2018)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;A theory committee would also be symbolically important, both to the field and to potential funders. To the extent that the PSA wants to be a model of exemplary research in psychology, the establishment of a theory committee might inspire the field as a whole to seriously address the need for more rigorous theory - much like the “Reproducibility Project: Psychology” inspired the field to seriously address the issue of replicability.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;potential-responsibilities-of-a-theory-committee&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Potential responsibilities of a theory committee&lt;/h1&gt;
+&lt;p&gt;The proposed theory committee would serve in an advisory role, providing input during the assessment of submitted research proposal, and assisting with the design of experiments. Its primary foci could be: (a) identify and update the PSA on promising theoretical advancements in psychology, (b) help researchers working with the PSA derive theory-driven, falsifiable predictions, and (c) produce and publish research on the state of theory within the field of psychology, as well as methods to facilitate theoretical development. Concrete responsibilities of the committee could include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Define and recommend strategies for optimizing research designs to provide the best possible corroboration and/or falsification of theories.&lt;/li&gt;
+&lt;li&gt;Develop criteria for identifying progressive vs degenerative research programmes.&lt;/li&gt;
+&lt;li&gt;Develop criteria for assessing the theoretical quality of proposed studies.&lt;/li&gt;
+&lt;li&gt;Engineer cumulative/meta-analytic approaches to formally relate research findings to theory (e.g. Landreth &amp;amp; Silva, 2013).&lt;/li&gt;
+&lt;li&gt;Help construct and justify grant proposals to secure funding for the PSA.&lt;/li&gt;
+&lt;li&gt;(During proposal evaluation) collect reviews from, and facilitate discussion between, a diverse set scholars with specialist knowledge related to the theory/subfield in question.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A separated but related task that could be designated to this committee is to investigate opportunities for diversifying the theoretical background of members within the PSA, and for fostering interdisciplinary collaboration. Although it is named the Psychological Science Accelerator, psychological science is tightly connected with different branches of science, and would likely benefit from at least occasional infusion of knowledge from other fields &lt;span class=&#34;citation&#34;&gt;(see e.g. &lt;em&gt;Facilitating Interdisciplinary Research&lt;/em&gt; 2004)&lt;/span&gt;. Other large scale collaboration projects are already exploring ways of accessing a more interdisciplinary knowledge base. As one example, NASA is currently applying citizen science to optimize solutions to various engineering problems (see &lt;a href=&#34;https://air.mozilla.org/open-by-design-how-nasa-innovates-to-take-on-the-universe-with-steven-rader/&#34;&gt;this video&lt;/a&gt; for an explanation by Steven Rader). This would be an interesting model to employ in the social sciences. Compared with individual labs, interdisciplinary outreach from a large scale collaboration such as the PSA might be perceived as more legitimate by researchers from fields outside psychology. This would hopefully increase engagement from these communities. Interdisciplinary engagement would also nicely dovetail with the within-psychology outreach that is already facilitated when a PSA project is launched.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;The PSA is an organization committed to producing high-quality psychological research in representative samples. However, empirical studies are only as informative as the theories they inform. If the hypotheses that spawn a PSA study are vague or uninformative, the results of the study will be as well, no matter how large and representative the sample is. Consequently, we propose establishing a committee or working group at the PSA that will be devoted to theory development and assessment.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-Chartier2017&#34;&gt;
+&lt;p&gt;Chartier, Christopher R. 2017. “The Psychological Science Accelerator. Rapid Progress. More Help Needed.” &lt;em&gt;Christopher R. Chartier&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-DeGroot1969&#34;&gt;
+&lt;p&gt;de Groot, Adriaan Dingeman. 1969. &lt;em&gt;Methodology (Methodologie, Engl.) Foundations of Inference and Research in the Behavioral Sciences&lt;/em&gt;. MTH.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-2004a&#34;&gt;
+&lt;p&gt;&lt;em&gt;Facilitating Interdisciplinary Research&lt;/em&gt;. 2004. Washington, D.C.: National Academies Press. &lt;a href=&#34;https://doi.org/10.17226/11153&#34;&gt;https://doi.org/10.17226/11153&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Fiedler2004&#34;&gt;
+&lt;p&gt;Fiedler, Klaus. 2004. “Tools, Toys, Truisms, and Theories: Some Thoughts on the Creative Cycle of Theory Formation.” &lt;em&gt;Personality and Social Psychology Review&lt;/em&gt; 8 (2): 123–31. &lt;a href=&#34;https://doi.org/10.1207/s15327957pspr0802_5&#34;&gt;https://doi.org/10.1207/s15327957pspr0802_5&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Kuhn2012&#34;&gt;
+&lt;p&gt;Kuhn, Thomas S. 2012. &lt;em&gt;The Structure of Scientific Revolutions: 50th Anniversary Edition&lt;/em&gt;. University of Chicago Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakatos1976&#34;&gt;
+&lt;p&gt;Lakatos, Imre. 1976. “Falsification and the Methodology of Scientific Research Programmes.” In &lt;em&gt;Can Theories Be Refuted?&lt;/em&gt;, 205–59. Dodrecht: Springer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Landreth2013&#34;&gt;
+&lt;p&gt;Landreth, Anthony, and Alcino J. Silva. 2013. “The Need for Research Maps to Navigate Published Work and Inform Experiment Planning.” &lt;em&gt;Neuron&lt;/em&gt; 79 (3): 411–15. &lt;a href=&#34;https://doi.org/10.1016/j.neuron.2013.07.024&#34;&gt;https://doi.org/10.1016/j.neuron.2013.07.024&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Meehl1967&#34;&gt;
+&lt;p&gt;Meehl, Paul E. 1967. “Theory-Testing in Psychology and Physics: A Methodological Paradox.” &lt;em&gt;Philosophy of Science&lt;/em&gt; 34 (2): 103–15. &lt;a href=&#34;https://doi.org/10.1086/288135&#34;&gt;https://doi.org/10.1086/288135&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Meehl1978&#34;&gt;
+&lt;p&gt;———. 1978. “Theoretical Risks and Tabular Asterisks: Sir Karl, Sir Ronald, and the Slow Progress of Soft Psychology.” &lt;em&gt;Journal of Consulting and Clinical Psychology&lt;/em&gt; 46 (4): 806–34. &lt;a href=&#34;https://doi.org/10.1037/0022-006X.46.4.806&#34;&gt;https://doi.org/10.1037/0022-006X.46.4.806&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Meehl1990&#34;&gt;
+&lt;p&gt;———. 1990. “Appraising and Amending Theories: The Strategy of Lakatosian Defense and Two Principles That Warrant It.” &lt;em&gt;Psychological Inquiry&lt;/em&gt; 1 (2): 108–41. &lt;a href=&#34;https://doi.org/10.1207/s15327965pli0102_1&#34;&gt;https://doi.org/10.1207/s15327965pli0102_1&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Moshontz2018&#34;&gt;
+&lt;p&gt;Moshontz, Hannah, Lorne Campbell, Charles R. Ebersole, Hans IJzerman, Heather L. Urry, Patrick S. Forscher, Jon E. Grahe, et al. 2018. “Psychological Science Accelerator: Advancing Psychology Through a Distributed Collaborative Network.” &lt;em&gt;Advances in Methods and Practices in Psychological Science&lt;/em&gt;, July.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Muthukrishna2019&#34;&gt;
+&lt;p&gt;Muthukrishna, Michael, and Joseph Henrich. 2019. “A Problem in Theory.” &lt;em&gt;Nature Human Behaviour&lt;/em&gt; 3 (3): 221–29. &lt;a href=&#34;https://doi.org/10.1038/s41562-018-0522-1&#34;&gt;https://doi.org/10.1038/s41562-018-0522-1&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Popper2002&#34;&gt;
+&lt;p&gt;Popper, Karl R. 2002. &lt;em&gt;Conjectures and Refutations: The Growth of Scientific Knowledge&lt;/em&gt;. Routledge Classics. London ; New York: Routledge.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Scheel2018&#34;&gt;
+&lt;p&gt;Scheel, Anne M., Stuart J. Ritchie, Nicholas J. L. Brown, and Steven L. Jacques. 2018. “Methodological Problems in a Study of Fetal Visual Perception.” &lt;em&gt;Current Biology&lt;/em&gt; 28 (10): R594–R596. &lt;a href=&#34;https://doi.org/10.1016/j.cub.2018.03.047&#34;&gt;https://doi.org/10.1016/j.cub.2018.03.047&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Smaldino2015&#34;&gt;
+&lt;p&gt;Smaldino, Paul E., Jimmy Calanchini, and Cynthia L. Pickett. 2015. “Theory Development with Agent-Based Models.” &lt;em&gt;Organizational Psychology Review&lt;/em&gt; 5 (4): 300–317. &lt;a href=&#34;https://doi.org/10.1177/2041386614546944&#34;&gt;https://doi.org/10.1177/2041386614546944&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Zeppenfeld2000&#34;&gt;
+&lt;p&gt;Zeppenfeld, D., R. Kinnunen, A. Nikitenko, and E. Richter-Wa̧s. 2000. “Measuring Higgs Boson Couplings at the CERN LHC.” &lt;em&gt;Physical Review D&lt;/em&gt; 62 (1): 013009. &lt;a href=&#34;https://doi.org/10.1103/PhysRevD.62.013009&#34;&gt;https://doi.org/10.1103/PhysRevD.62.013009&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -28,7 +352,339 @@ The Psychological Science Accelerator (PSA) is a global network of psychological
       <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/quantifying-the-corroboration-of-a-finding/</guid>
-      <description>AbstractIn a fourthcoming paper by members of the Open Science Collaboration, we outline how one could use quantitative estimates of “replication value” to guide study selection in replication research. We define replication value conceptually as a ratio of “impact” over “corroboration”, and we show how to derive quantifiable estimates from this definition. Here I will try to identify a reasonable and quantitative operationalization of corroboration. I first propose to approximate corroboration through the more narrow concept “precision of the estimate” (figure 1).</description>
+      <description>&lt;div id=&#34;abstract&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Abstract&lt;/h1&gt;
+&lt;p&gt;In a fourthcoming paper by members of the Open Science Collaboration, we outline how one could use quantitative estimates of “replication value” to guide study selection in replication research. We define replication value conceptually as a ratio of “impact” over “corroboration”, and we show how to derive quantifiable estimates from this definition. Here I will try to identify a reasonable and quantitative operationalization of corroboration. I first propose to approximate corroboration through the more narrow concept “precision of the estimate” (figure 1). I then quantify precision of the estimate as the variance of Fisher’s &lt;em&gt;Z&lt;/em&gt;, which only depends on sample size (although the variance of the common language effect size &lt;em&gt;A&lt;/em&gt; could also be used for group comparisons, if information about group sample sizes is available. See table 1 for a summary).&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-04-12-quantifying-and-comparing-the-precision-of-multiple-estimates_files/figure-html/figs-1.png&#34; alt=&#34;\label{fig:figs}Illustration of the nested conceptual relationship between corroboration, precision and the Fisher&#39;s *Z* statistic.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Illustration of the nested conceptual relationship between corroboration, precision and the Fisher’s &lt;em&gt;Z&lt;/em&gt; statistic.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;needles-in-haystacks&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Needles in haystacks&lt;/h1&gt;
+&lt;p&gt;When we seek to replicate findings in psychology, we may often face the problem that there are multiple findings we could replicate, but we only have resources available to address one or a few of our options. This means that we will have to decide which finding would be the most valuable to spend our time replicating. But the process of study selection can itself be a challenge. For example, in a replication effort I am currently involved with, we have more than 1000 studies we could consider for replication, each of which will contain multiple findings. We would like to discover and choose from the most valuable findings to replicate in this sample, but we simply do not have the time or cognitive capacity available to manually inspect and compare 1000 studies to each other. Is there a way to evaluate this set of studies and identify the most promising replication candidates, without committing years of time to combing through all the individual studies?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;quantifying-replication-value&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Quantifying replication value&lt;/h1&gt;
+&lt;p&gt;Together with members of the Open Science collaboration I am currently trying to develop an approach for quantifying the “replication value” of published findings through formulas. If we could quantify estimates of replication, and if we could make sure that these estimates could be calculated relatively quickly, then this should allow researchers to evaluate large sets of findings and identify promising replication candidates. Manual inspection will still be required, but can be focused on the most promising candidates from the formula evaluation. As such, the aim is to increase the efficiency of manual inspection efforts, and to maximize the chance that high-value replication targets are discovered. We propose that the replication value of a finding can be thought of as a combination of the impact and the corroboration of that finding in the literature:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+RV=\frac{Impact}{Corroboration}
+\label{eq:repval}
+\tag{1}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In words, the more impactful a study has become, the higher its replication value (“RV” in formula) will be. Conversely, the better corroborated a finding has become, the lower its replication value will be. We can gain an understanding of what researchers might take as indicators of “impact” and “corroboration” by surveying the literature of published replication studies. In &lt;a href=&#34;https://pedermisager.netlify.com/post/what-to-replicate/&#34;&gt;a previous blog post&lt;/a&gt; I provide a brief summary of the most common factors that researchers seem to take into account.&lt;/p&gt;
+&lt;p&gt;There are multiple issues and caveats that will need to be considered when trying to approximate the “true” replication value of a finding through quantitative information. Among other things, we need to know whether formula &lt;span class=&#34;math inline&#34;&gt;\(\eqref{eq:repval}\)&lt;/span&gt; captures our conceptual understanding of replication value, whether it can be expressed in quantitative terms, and if so, how to operationalize the concepts contained in formula &lt;span class=&#34;math inline&#34;&gt;\(\eqref{eq:repval}\)&lt;/span&gt; numerically. In this post I will deal with one rather fundamental question: &lt;strong&gt;How do we quantify corroboration?&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;quantifying-corroboration&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Quantifying corroboration&lt;/h1&gt;
+&lt;p&gt;By “corroboration”, I generally mean something akin to the definition held by the Lakatosian falsificationist &lt;span class=&#34;citation&#34;&gt;(e.g. Hands 2008; Lakatos 1978)&lt;/span&gt;. That is, a prediction (or finding) of the form “X is Y” achieves corroboration if we fail to falsify it after subjecting the prediction to a severe test&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. Further, generating this kind of corroboration is a hallmark of scientific progress, even if we accept that all theories are born false &lt;span class=&#34;citation&#34;&gt;(Hands 2008)&lt;/span&gt;. There are many aspects of corroboration that a researcher could care about, which subsequently informs the quantitative information they would be interested in &lt;span class=&#34;citation&#34;&gt;(Lakens 2019)&lt;/span&gt;. For example, we might want to prioritize findings for replication that have low evidence in favor of certain hypotheses compared to others &lt;span class=&#34;citation&#34;&gt;(Field et al. 2018)&lt;/span&gt;. Or we may want to prioritize findings that display signs of biased and/or erroneous reporting &lt;span class=&#34;citation&#34;&gt;(Brown and Heathers 2017; Heathers et al. 2018; Simonsohn, Nelson, and Simmons 2014; Dwan et al. 2008; Nuijten et al. 2017; Kerr 1998)&lt;/span&gt;. Or perhaps we simply want to replicate findings where we are surprised about the likelihood of the data under the null hypothesis. Focusing on different aspects of corroboration would lead to different justifications for any quantifiable operationalization of corroboration. Here we choose to focus on precision, and the following discussion of operationalizations is based on the assumption that our predictions are corroborated by precise estimates of parameters. The arguments that follow will not necessarily hold when focusing on other aspects of corroboration &lt;span class=&#34;citation&#34;&gt;(e.g. Field et al. 2018)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Precision of the estimate can normally be thought of as the variance, standard error, or confidence/credible interval of a measurement (Borenstein, chapter 8). However, precision can also be related to qualitative estimates (e.g. people generally experience set S of side effects after taking drug D) and predictions involving multiple estimates (e.g. people experience side effect X, Y, and Z, with magnitude A, B and C, respectively, after taking drug D). More generally, precision can be thought of as the reciprocal to uncertainty. That is, for any estimand (a set, a magnitude, a mean, etc.), the less uncertain we are about whether it could be this way or that, the more precisely it is estimated. Precision can be considered one subcategory of what determines the corroboration of a finding. Everything else being equal, we may assume that a finding that has been estimated precisely has attained more corroboration than a finding that has been estimated imprecisely. Consequently, we may also assume that, everything else being equal, a precisely measured estimate is less replication-worthy than an imprecisely measured estimate, which is what follows from our conceptual definition of replication value in formula &lt;span class=&#34;math inline&#34;&gt;\(\eqref{eq:repval}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Of course, everything else is usually not equal, and corroboration as a construct encompasses much more than the precision of an estimate (figure 1). This is partly why manual inspection should always be part of evaluating whether one finding is truly more worth replicating than another. Still, we consider it plausible that precision of the estimate is positively correlated with corroboration on average. By substituting precision for corroboration in the replication value formula &lt;span class=&#34;math inline&#34;&gt;\(\eqref{eq:repval}\)&lt;/span&gt;, we will essentially prioritize findings for replication that have been imprecisely measured in the literature thus far.&lt;/p&gt;
+&lt;p&gt;When comparing the precision of a set of estimates, we may want to compare two or more effects that stem from different designs, and that are expressed on different scales. That is, sometimes we may wish to compare effects expressed in Cohen’s &lt;em&gt;d&lt;/em&gt; to effects expressed in Pearson’s &lt;em&gt;r&lt;/em&gt;, odds ratio, etc. In order to compare effects expressed on different scales, we need an estimate of precision that is comparable across the scales. Otherwise, we cannot meaningfully compare the corroboration of two different kinds of effects. Consider a confidence interval &lt;em&gt;CI&lt;/em&gt;[2.27, 14.04] for an effect expressed in units of Cohen’s &lt;em&gt;d&lt;/em&gt;. In the context of most behavioral research, this would be considered a highly imprecise measurement. Now consider a confidence interval &lt;em&gt;CI&lt;/em&gt;[0.75, 0.99] expressed in units of Pearson’s &lt;em&gt;r&lt;/em&gt;. If directly compared, the latter interval might appear more precise than the former, but this is simply due to the fact that Pearson’s &lt;em&gt;r&lt;/em&gt; is a non-linear scale bounded between -1 and 1, whereas Cohen’s &lt;em&gt;d&lt;/em&gt; is a linear scale bounded between -∞ and ∞. In fact, the two intervals in this example are the same interval, expressed in two units of measurement. We can compare their precision only if we first convert either interval into the scale of the other, or convert both intervals into some other common unit of measurement. It is not meaningful to compare intervals measured on different scales directly.&lt;/p&gt;
+&lt;p&gt;This problem is similar to that faced by meta-analysts who want to compare effect sizes measured on different scales &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, Chapter 7)&lt;/span&gt;. However, the two problems are not quite the same. For example, meta-analyses ideally deal with studies on the same effect that are either “close” replications &lt;span class=&#34;citation&#34;&gt;(LeBel et al. 2018)&lt;/span&gt;, or at least conceptually similar. The replication value, on the other hand, should be comparable even for studies that are not on the same topic. In addition, the effect size is often the statistic of interest in traditional meta-analysis. In contrast, since the size of the effect is orthogonal to the precision of the estimate of the effect, effect size should be irrelevant for our corroboration estimate.&lt;/p&gt;
+&lt;div id=&#34;requirements-for-a-precision-statistic&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Requirements for a precision statistic&lt;/h2&gt;
+&lt;p&gt;In order for a precision statistic to be useful in the context of the replication value, we should expect it to adhere to the following requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Standardization:&lt;/strong&gt; The measure must express precision on a standardized scale. If calculated for a number of estimates, the precision of the estimates must always be placed on the same scale.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Meta-analytic updating:&lt;/strong&gt; we must be able to update the precision statistic after a replication is performed. Replication generally adds information about a finding, and should tend to increase the precision of an estimate and thus decrease the replication value of a finding.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Size independence:&lt;/strong&gt; The measure must not depend on the size of the effect.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Exhaustiveness:&lt;/strong&gt; The measure must accurately represent the precision of the estimate. Therefore, the measure should take all relevant aspects of the precision into account when they are available, such as the standard deviation of the estimate, the sample size, the between-condition correlation for repeated measures, etc.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each requirement is supported by a specific rationale related to the desired functions of the replication value. If the standardization requirement is violated, it becomes impossible to know if differences between effects are due to differences in impact and precision, or if the compared effects are equally precise but measured on different scales. If the meta-analytic updating requirement is violated, there is no mechanism for updating the precision estimate after replications are conducted. This would disrupt a central feature of the replication value; after a finding is replicated, its replication value should decrease. If the effect-size independence requirement is violated, the replication value will become biased (either favorably or unfavorably) towards findings with a large effect size. This is undesirable if we assume that the goal of replication is to reduce uncertainty in an estimate regardless of whether the true effect is large, small or zero (we may not always want to assume this of course). If the exhaustiveness requirement is violated, we risk misrepresenting the actual precision of certain measures. For example, two estimates may have the same sample size and yet, if standard deviations or within-subject correlation differs substantially between the estimates, one estimate can be much more precise than the other. The exhaustiveness requirement could be considered less critical than the other three however. As long as the error introduced by violating it is random, the precision estimate becomes less accurate by not accounting for all relevant factors, but not categorically invalid. It still tracks our conceptual understanding of “precision” to some degree. However, more serious issues arise when not accounting for relevant information leads to systematic bias. For example, if we ignore inter-trial correlation and the fact that each subject contributes at least two data points in within-subject designs, the precision of the estimate (and hence, the replication value) of within-subject measurements will be overestimated compared to between-subjects measurements. In this case, not accounting for the difference in design would ultimately lead us to violate the standardization requirement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;candidate-statistics&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Candidate statistics&lt;/h2&gt;
+&lt;p&gt;There are several potential candidate statistics we could consider as an operationalization of precision, each of which will have benefits and limitations (see table 1 for summary). I will here deal with several of them in turn, show the benefits and limitations of each approach, and give a general justification for the statistic that appears in the example replication value formula we provide in our forthcoming manuscript.&lt;/p&gt;
+&lt;div id=&#34;p-values&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;em&gt;P&lt;/em&gt;-values&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;P&lt;/em&gt;-values are related to precision in that they tend to become smaller with increasing precision of the estimate, provided that the null hypothesis is false. &lt;em&gt;P&lt;/em&gt;-values also have the desirable feature that they are very often reported, which would make the calculation of the replication value feasible for the large majority of effects in the published literature. However, &lt;em&gt;p&lt;/em&gt;-values from null-hypothesis significance tests (NHST) violate the size independence requirement. That is, &lt;em&gt;p&lt;/em&gt;-values behave differently when the true effect is zero compared to when the true effect is not zero. Because &lt;em&gt;p&lt;/em&gt;-values are always uniformly distributed under the null, they never change systematically with increases in measurement precision of a true null effect. In practice, this means that it will not be possible to lower the &lt;em&gt;p&lt;/em&gt;-value of a true null effect by replicating it, which violates the requirement of meta-analytic updating. In addition, when there is a true effect, &lt;em&gt;p&lt;/em&gt;-values entail different precision estimates depending on the size of the effect. That is, as the size of the true effect grows large, even very imprecisely measured effects will tend to yield data that is extremely unlikely given that the null hypothesis is true (i.e. small &lt;em&gt;p&lt;/em&gt;-values). Of course, there might be other aspects of corroboration besides precision for which &lt;em&gt;p&lt;/em&gt;-values would be a suitable operationalization.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bayes-factors&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Bayes Factors&lt;/h3&gt;
+&lt;p&gt;Bayes factors are related to evidence for the null and alternative hypothesis, and - unlike &lt;em&gt;p&lt;/em&gt;-values under NHST - do quantify relative support for the null-hypothesis (relative to a specified alternative hypothesis). Bayes factors require the specification of a prior, which is dependent on the research question and can differ between researchers. This threatens violation of the standardization requirement. Bayes factors also violate the size independence requirement. That is, a large but imprecisely measured effect can yield the same amount of Bayesian evidence as a small but precisely measured effect if we change the hypotheses being compared. Keep in mind that this is only problematic given that the overarching goal is to approximate the broad concept of “corroboration” through the more narrow concept of “precision”. One could easily make case that Bayesian “evidence” is another valid way of approximating corroboration, and a general framework for study selection in replication research that builds on Bayes factors has been outlined in detail elsewhere &lt;span class=&#34;citation&#34;&gt;(Field et al. 2018)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variance-of-the-estimate&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Variance&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; of the estimate&lt;/h3&gt;
+&lt;p&gt;The variance is perhaps the most direct measure of estimate precision. Unlike p-values and Bayes factors, the variance clearly respects the size independence requirement. I.e. it tends to become smaller with increasingly precise estimates, regardless of the effect size of the estimate. However, the variance of raw estimates would still violate the standardization requirement as soon as we compare estimates that are measured on different scales. We can solve this issue by converting all effects into the same standardized scale and then calculating the variance of the standardized effects. There are several scales we could use (Cohen’s d, Pearson’s r, Fisher’s Z, etc.) so we consider the variance formulas for all of them in turn. All variance estimates considered here satisfy the standardization requirement.&lt;/p&gt;
+&lt;div id=&#34;variance-of-cohens-d-hedges-g&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Variance of Cohen’s &lt;em&gt;d&lt;/em&gt; / Hedge’s &lt;em&gt;g&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;The variance of Cohen’s d (for independent groups) is defined as &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 4.20)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+V_d=\frac{n_1+n_2}{n_1n_2}+\frac{d^2}{2(n_1+n_2)}
+\label{eq:vardbet}
+\tag{2}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;em&gt;n&lt;/em&gt; is the group sample size, and &lt;em&gt;d&lt;/em&gt; is the effect size Cohen’s &lt;em&gt;d&lt;/em&gt; for independent groups. Notice the use of d2 in the right hand side of the expression. This leads the variance of d to increase with the effect size d. This means that the variance of &lt;em&gt;d&lt;/em&gt; is, at least to some extent, dependent on the effect size &lt;em&gt;d&lt;/em&gt;, and thus it is in violation of the size independence requirement.&lt;/p&gt;
+&lt;p&gt;The variance of Hedge’s &lt;em&gt;g&lt;/em&gt; is simply the variance of &lt;em&gt;d&lt;/em&gt; multiplied by a correction factor &lt;em&gt;J&lt;/em&gt; &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 4.22 &amp;amp; 4.24)&lt;/span&gt;. Hedge’s &lt;em&gt;g&lt;/em&gt; therefore depends on the effect size d as well, and is in violation of the size independence requirement.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+J=1-\frac{3}{4df-1}
+\label{eq:Jcor}
+\tag{3}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The variance of Cohen’s &lt;em&gt;d&lt;sub&gt;z&lt;/sub&gt;&lt;/em&gt; (for repeated measures/matched groups/pre-post test scores) is defined as &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 4.28)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+V_{d_z}=(\frac{1}{n}+\frac{d_z^2}{2n})2(1-r)
+\label{eq:vardwit}
+\tag{4}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;em&gt;n&lt;/em&gt; is the number of pairs, &lt;em&gt;d&lt;sub&gt;z&lt;/sub&gt;&lt;/em&gt; is the effect size Cohen’s &lt;em&gt;d&lt;/em&gt; for dependent groups, and &lt;em&gt;r&lt;/em&gt; is the correlation between pairs of observations. Notice that, as with Cohen’s &lt;em&gt;d&lt;/em&gt; for independent groups, &lt;em&gt;d&lt;sub&gt;z&lt;/sub&gt;&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt; appears in the right hand side of this expression, meaning that the variance of &lt;em&gt;d&lt;sub&gt;z&lt;/sub&gt;&lt;/em&gt; will be dependent on the effect size &lt;em&gt;d&lt;sub&gt;z&lt;/sub&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variance-of-pearsons-r&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Variance of Pearson’s &lt;em&gt;r&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;The variance of Pearson’s &lt;em&gt;r&lt;/em&gt; is defined as &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 6.1)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+V_r=\frac{(1-r^2)^2}{n-1}
+\label{eq:varr}
+\tag{5}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Again, notice the use of &lt;em&gt;r&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt; in the right side of the expression. In this case, since &lt;em&gt;r&lt;/em&gt;&lt;sup&gt;2&lt;/sup&gt; is subtracted from the numerator, &lt;em&gt;V&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt; will tend to become smaller as &lt;em&gt;r&lt;/em&gt; becomes larger. The variance of &lt;em&gt;r&lt;/em&gt; thus depends on the effect size &lt;em&gt;r&lt;/em&gt;, and is therefore in violation of the size independence requirement.&lt;/p&gt;
+&lt;p&gt;Because the variance of &lt;em&gt;r&lt;/em&gt; depends heavily on the strength of the correlation, it is more common to convert the correlation to Fisher’s &lt;em&gt;Z&lt;/em&gt; scale, and later calculate the variance estimates of Fisher’s &lt;em&gt;Z&lt;/em&gt; back to values of &lt;em&gt;r&lt;/em&gt; &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, equation 6.2, 6.3, and 6.5)&lt;/span&gt;. However, because Pearson’s &lt;em&gt;r&lt;/em&gt; is bounded between 0 and 1, this method produces non-normally distributed intervals around &lt;em&gt;r&lt;/em&gt; that still depend on the strength of the correlation, such that stronger correlations will tend to have smaller variances.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variance-of-log-odds-ratio&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Variance of log odds ratio&lt;/h4&gt;
+&lt;p&gt;The variance of the log odds ratio is given by &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 5.10)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+V_{LogOddsRatio}=\frac{1}{A}+\frac{1}{B}+\frac{1}{C}+\frac{1}{D}
+\label{eq:varlogoddsrat}
+\tag{6}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt;, &lt;em&gt;C&lt;/em&gt; and &lt;em&gt;D&lt;/em&gt; are the four events involved &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, table 5.1)&lt;/span&gt;. Though perhaps less intuitive than for &lt;em&gt;d&lt;/em&gt; and &lt;em&gt;r&lt;/em&gt;, the variance of the log odds ratio is also dependent on the size of the effect. This is due to the fact that for any two odds, the variance of the odds ratio becomes larger the more extreme both of the individual odds are. On the one hand, both odds could be extreme in the same direction, which would give a large variance for the log odds ratio, but a small log odds ratio. On the other hand, if the log odds ratio is large, at least one of the individual odds involved must be large. In other words, the variance will tend to become larger with larger log odds ratios, which means the variance depends on the size of the odds involved. Ultimately, this variance formula is also in violation of the size independence requirement.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variance-of-fishers-z&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Variance of Fisher’s &lt;em&gt;Z&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;The variance of Fisher’s Z is defined as &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 6.3)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+V_Z=\frac{1}{n-3}
+\label{eq:varZ}
+\tag{7}
+\end{equation}
+\]&lt;/span&gt;
+where &lt;em&gt;n&lt;/em&gt; is the sample size. Unlike the previous variance measurements, the variance of &lt;em&gt;Z&lt;/em&gt; is not in violation of the size independence requirement. That is, there is no relationship between the Fisher &lt;em&gt;Z&lt;/em&gt; effect size and the variance estimate &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; for that effect.&lt;/p&gt;
+&lt;p&gt;However, the formula for &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; is in violation of the exhaustiveness requirement. In order to appreciate this, suppose we convert a Cohen’s &lt;em&gt;d&lt;/em&gt; effect size estimate for independent groups &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, formula 4.18)&lt;/span&gt; to Fisher’s &lt;em&gt;Z&lt;/em&gt;. If we calculate the variance for the effect measured in Cohen’s &lt;em&gt;d&lt;/em&gt;, we will take into consideration both total sample size, the relative sample size of the compared groups, and the standard deviation of the estimate, because these factors are all contained within the formula for the variance of &lt;em&gt;d&lt;/em&gt;. However, when we convert Cohen’s &lt;em&gt;d&lt;/em&gt; into Fisher’s &lt;em&gt;Z&lt;/em&gt;, we must also re-calculate the variance, now using the formula for &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt;. Because &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; only depends on the sample size, we effectively lose the extra information that was contained within Vd during conversion from &lt;em&gt;d&lt;/em&gt; to &lt;em&gt;Z&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variance-of-a-nonparametric-common-language-effect-size&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Variance of &lt;em&gt;A&lt;/em&gt; (nonparametric “common language effect size”)&lt;/h4&gt;
+&lt;p&gt;The common language effect size &lt;span class=&#34;citation&#34;&gt;(CLES. Ruscio 2008; Grissom and Kim 2001)&lt;/span&gt; is a standardized measure of the parameter &lt;em&gt;Pr(Y1&amp;gt;Y2)&lt;/em&gt;, or the probability that a randomly chosen member of group 1 scores higher than a randomly chosen member of group 2. The non-parametric version of this effect size (denoted &lt;em&gt;A&lt;/em&gt;) is robust to violation of certain parametric assumptions that are frequently violated in practice, such as normality and heterogeneity of variances. When comparing effects where these parametric assumptions are likely to be violated, &lt;em&gt;A&lt;/em&gt; is arguably the most appropriate scale on which to standardize effects.&lt;/p&gt;
+&lt;p&gt;Variance of A is defined as &lt;span class=&#34;citation&#34;&gt;(Ruscio 2008, formula 9)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+V_A=[(1/n_1)+(1/n_2)+(1/n_1n_2)]/12
+\label{eq:varA}
+\tag{8}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;em&gt;n&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;n&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt; are the group sample sizes. This variance estimate is very similar to &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt;, except that is also takes the group base rates into account (for a given &lt;em&gt;n&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt;+&lt;em&gt;n&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt;, &lt;em&gt;n&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt;*&lt;em&gt;n&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt; is largest when &lt;em&gt;n&lt;sub&gt;1&lt;/sub&gt;&lt;/em&gt;=&lt;em&gt;n&lt;sub&gt;2&lt;/sub&gt;&lt;/em&gt;). Like &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt;, &lt;em&gt;V&lt;sub&gt;A&lt;/sub&gt;&lt;/em&gt; is not in violation of the size independence requirement, but it is in violation of the exhaustiveness requirement. &lt;em&gt;V&lt;sub&gt;A&lt;/sub&gt;&lt;/em&gt; ignores some information about precision, such as the standard deviation of the estimate, even in cases where that information is available and relevant.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;discussion-regarding-the-use-of-variance&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Discussion regarding the use of variance&lt;/h3&gt;
+&lt;p&gt;In summary, surveying the available formulas for standardized variance estimates reveals some flaws with all of them, given the requirements imposed by our definition of precision. However, some are more problematic than others. &lt;em&gt;V&lt;sub&gt;d&lt;/sub&gt;&lt;/em&gt;, &lt;em&gt;V&lt;sub&gt;g&lt;/sub&gt;&lt;/em&gt;, &lt;em&gt;V&lt;sub&gt;r&lt;/sub&gt;&lt;/em&gt;, and &lt;em&gt;V&lt;sub&gt;LogOddsRatio&lt;/sub&gt;&lt;/em&gt; all violate the size independence requirement. Unless we explicitly want to bias the replication value based on the size of effects, none of these variance estimates are recommended for use in a replication value formula.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; and &lt;em&gt;V&lt;sub&gt;A&lt;/sub&gt;&lt;/em&gt; are more promising alternatives. They both adhere to all requirements except exhaustiveness. However, there may be no way to avoid some loss of information if the goal is to compare measures on different effect size scales. We have to standardize all estimates to the same scale to make comparisons, and information unique to each effect size scale will be lost during this standardization process. Violation of the exhaustiveness requirement may be tolerable, given that sample size normally is the major determinant of estimate precision, even in equations that take more information into account &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, chap. 8)&lt;/span&gt;. I.e. we may accept the loss of information about group variances, group base rates, etc., if we can assume that for the large majority of cases, these factors only play a lesser role in determining estimate precision relative to sample size.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;V&lt;sub&gt;A&lt;/sub&gt;&lt;/em&gt; may be slightly more informative than &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; because it takes the ratio of the group sizes into account. However, &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; is a more widely applicable formula because &lt;em&gt;V&lt;sub&gt;A&lt;/sub&gt;&lt;/em&gt; can only be calculated for cases where there are two groups to compare. For this reason, we choose &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; as our operationalization of precision for examples discussed in our forthcoming manuscript. However, note that for sets of findings that only include comparisons between two groups, &lt;em&gt;V&lt;sub&gt;A&lt;/sub&gt;&lt;/em&gt; might be a more accurate measure.&lt;/p&gt;
+&lt;p&gt;There are a few pragmatic benefits to using &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; as a measure of precision, beyond it’s adherence to most of the requirements above. First, the sample size is often reported directly in manuscripts, and may even be possible to extract automatically in many cases &lt;span class=&#34;citation&#34;&gt;(e.g. using Statcheck to extract degrees of freedom, Nuijten et al. 2017)&lt;/span&gt;, which means that the replication value can be calculated for most reported effects with minimal effort. Second, &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; can be used more flexibly than other variance measures, because it is not dependent on knowing the effect size of a particular estimate. This has some practical benefits. For example, if a researcher needs to evaluate the replication value of 100 studies, and it is not feasible to identify the theoretically critical result in all of the studies, the researcher could calculate &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; using the total sample size in each individual study as a rough first guide to the replication value of individual the findings reported within.&lt;/p&gt;
+&lt;p&gt;However, by calculating &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; from pure sample sizes, we will introduce a more serious violation of the exhaustiveness requirement by ignoring the statistical design of the studies we intend to compare, which is another major determinant of precision &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, chap. 8)&lt;/span&gt;. As one example, a paired samples t-test has better precision for the difference score that is calculated between the two measurements than an independent samples t-test, partly because the participants contribute twice as many data points in the paired design, and partly because of within-subject correlation &lt;span class=&#34;citation&#34;&gt;(see Lakens 2016 for a detailed explanation)&lt;/span&gt;. Another example is the differences in precision when estimating a main effect vs an interaction effect using the same sample size &lt;span class=&#34;citation&#34;&gt;(see Simonsohn 2015 for a discussion)&lt;/span&gt;. We can attempt to mitigate these issues, however, by converting the sample sizes from within-subject and interaction designs into the corresponding sample size that would achieve the same precision for a main effect in a between-subjects design. This way, samples sizes from different designs can be reasonably compared on the same scale of precision. At present I am only able to provide a method for conversion between a within-subjects design and a between-subjects design. In the future, however, I hope to be able to provide a similar method for conversion between an interaction effect and a main effect as well, based on the derivations provided by &lt;span class=&#34;citation&#34;&gt;Simonsohn (2015)&lt;/span&gt;.&lt;/p&gt;
+&lt;div id=&#34;converting-within-subjects-sample-size-into-between-subjects-sample-size&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Converting within-subjects sample size into between-subjects sample size&lt;/h4&gt;
+&lt;p&gt;Following equation 47 in &lt;span class=&#34;citation&#34;&gt;Maxwell and Delaney (2004, chap. 11)&lt;/span&gt;, if we assume normal distributions and compound symmetry, and if we ignore the difference in degrees of freedom between the two types of tests, we can solve for &lt;em&gt;N&lt;sub&gt;B&lt;/sub&gt;&lt;/em&gt; and convert the sample size of a within-subject sample into an estimate of a corresponding between-subject sample:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+N_B=\frac{N_Wa}{1-ρ}
+\label{eq:convertwithin}
+\tag{9}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;em&gt;N&lt;sub&gt;W&lt;/sub&gt;&lt;/em&gt; is the sample size of the within-subject design, ρ is the within-subject correlation, &lt;em&gt;a&lt;/em&gt; is the number of groups that each subject contributes data points to, and &lt;em&gt;N&lt;sub&gt;B&lt;/sub&gt;&lt;/em&gt; is the estimated sample size that a between-subject study would need to reach the same level of precision.&lt;/p&gt;
+&lt;p&gt;The population parameter &lt;em&gt;ρ&lt;/em&gt; is usually estimated from the within-subject correlation &lt;em&gt;r&lt;/em&gt; in the sample. A practical issue is that this value is very rarely reported in published manuscripts. In these cases, it is possible to calculate &lt;em&gt;r&lt;/em&gt; from summary statistics. For example, if we has access to the t-value, Cohen’s &lt;em&gt;d&lt;sub&gt;average&lt;/sub&gt;&lt;/em&gt; &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, equation 4.18)&lt;/span&gt;, and the sample size &lt;em&gt;N&lt;sub&gt;W&lt;/sub&gt;&lt;/em&gt;, we can calculate &lt;em&gt;r&lt;/em&gt; by solving for &lt;em&gt;r&lt;/em&gt; in &lt;span class=&#34;citation&#34;&gt;Dunlap et al. (1996 equation 3)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+r=\frac{2t^2-d_{average}^2N_W}{2t^2}
+\label{eq:rfromtval}
+\tag{10}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Or, if we has access to the standard error of the difference and the standard error of both groups, we could calculate &lt;em&gt;r&lt;/em&gt; by solving for &lt;em&gt;r&lt;/em&gt; in &lt;span class=&#34;citation&#34;&gt;Lakens (2013 formula 8)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
+\label{eq:rfromSDs}
+\tag{11}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;If we does not have access to these summary statistics or the raw data, we could estimate &lt;em&gt;ρ&lt;/em&gt; based on &lt;em&gt;r&lt;/em&gt; in conceptually similar studies. If there are no realistic reference points for &lt;em&gt;ρ&lt;/em&gt; whatsoever, we could potentially consider setting &lt;em&gt;ρ&lt;/em&gt; to 0. &lt;em&gt;N&lt;sub&gt;W&lt;/sub&gt;&lt;/em&gt; will still receive a correction in this case from being multiplied by &lt;em&gt;a&lt;/em&gt;. Note however, that this is a very conservative assumption, and unlikely to be realistic in most cases. Moreover, the choice of 0 over any other arbitrary value of ρ is motivated by nothing but a desire to be conservative.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;limitations-when-ignoring-details-of-the-study-design&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Limitations when ignoring details of the study design&lt;/h4&gt;
+&lt;p&gt;In certain situations, it might not be feasible or even possible to acquire the information necessary to convert different study sample sizes to the same precision scale. This may not always be problematic. For example, there is no need to convert the sample size if we know that every study is using a within-subjects design, and we assume that all effects of interest are main effects. However, when such assumptions cannot be made, be aware that a corroboration estimate based on sample size will tend to systematically overestimate the corroboration of some designs relative to others.&lt;/p&gt;
+&lt;p&gt;Whether it is appropriate to approximate precision of the estimate via participant sample size for any given effect will also depend on our assumptions about which factors contribute to the variance of the estimate. Imagine a study involving participants observing stimuli in two conditions, where we are interested in estimating precision for the main effect between conditions. The precision of this estimate will depend on whether we believe the condition effect is likely to vary systematically between participants and/or between the stimuli presented. In other words, it will depend on whether we treat participants and stimuli as random effects in our model &lt;span class=&#34;citation&#34;&gt;(Rouder and Haaf 2018; Westfall, Kenny, and Judd 2014; Westfall 2015)&lt;/span&gt;, and it will depend on how much variance we believe any random effect contributes to the total variance estimate. Subsequently, the number of participants, the number of stimuli, and the number of trials included in our study design might all be required to accurately assess estimate precision.&lt;/p&gt;
+&lt;p&gt;Approximating precision of the estimate through participant sample size relies on the fundamental assumption that random variation in an effect across participants is the only important contributor to the total variance. This can happen in cases where no other variance partitioning coefficient &lt;span class=&#34;citation&#34;&gt;(VPC, see Westfall, Kenny, and Judd 2014)&lt;/span&gt; exerts a meaningful influence (e.g. we assume that the effect does not vary between labs, stimuli used, trials within a participant, etc.). Alternatively, this can happen in cases where all other VPCs have been measured so precisely that their influence on the variance approaches zero. If our goal is to compare precision estimates across a set of studies we must assume that all studies in the set represent either of these two cases. Violations of this assumption has important consequences for the correlation between participant sample size and the actual precision of the estimate.&lt;/p&gt;
+&lt;p&gt;For example, imagine that we attempt to assess the precision of the estimate for a two-condition mean difference, and we assume that the mean difference varies substantially between participants, between stimuli, and across trials. In this case, we have multiple VPCs that contribute to the total variance: random effects of stimulus presented, random effects of participants measured, interactions between these effects and the main effect of condition, and random variation in responses across trials &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014)&lt;/span&gt;. In addition to the number of participants tested, the precision of the estimate will depend on how many stimuli were included, because precision relies partially on how well we can estimate the random effect of stimulus, and this can only be measured more accurately by having a larger sample of stimuli. We also need to know what design was used, because this tells us which variance components are relevant &lt;span class=&#34;citation&#34;&gt;(Westfall, Kenny, and Judd 2014)&lt;/span&gt;. Finally, we need to know the total amount of trials in the design &lt;span class=&#34;citation&#34;&gt;(however, increasing the number of trials without adding novel participants or stimuli tends to matter less for the precision of the estimate when the random effects contributes more to the total variance than random variance across trials. See e.g. Rouder and Haaf 2018; Westfall, Kenny, and Judd 2014)&lt;/span&gt;. If we approximate estimate precision through participant sample size alone in cases like this, comparisons of estimate precision between studies will only be accurate if we assume that the other VPCs have been close to perfectly measured in all studies compared.&lt;/p&gt;
+&lt;p&gt;Conversely, imagine that we attempt to assess the precision of the estimate for the same mean difference as in the previous example, but now we assume negligible change in mean difference across participants and stimuli. This assumption might sometimes be appropriate in basic perception research and other disciplines where n=1 studies are a valid approach. In these cases, since the effect is more or less the same for all subjects and all stimuli, all that matters for assessing estimate precision is the number of trials used to estimate the random variation across trials. If we approximate estimate precision through participant sample size in cases like this, comparisons of estimate precision between studies will only be accurate if we assume that the number of trials equals the number of participants. This would amount to assuming that &lt;em&gt;I=K&lt;/em&gt; in the formulas from &lt;span class=&#34;citation&#34;&gt;Rouder and Haaf (2018)&lt;/span&gt;. In cases where there are multiple trials per participant, approximating precision through participant sample size will underestimate the precision of the estimates. The more trials per participant, the more inaccurate this approximation becomes.&lt;/p&gt;
+&lt;p&gt;Approximation inaccuracies like those mentioned above can introduce systematic biases in the comparison of precision across a set of studies. If we compare estimate precision for a set of studies by looking only at their respective sample sizes, we will tend to overestimate the precision of studies where other VPCs (e.g. random effect of stimuli) are poorly measured, and we will tend to underestimate the precision of studies that have few participants but many trials, and where the random effect of participants is negligible. Ideally, we would calculate precision of the estimate based on relevant information about VPCs and how accurately they are measured for every study in a set. However, this information may often be cumbersome or impossible to acquire from the published record and approximation by participant sample size may be the only relevant information easily available. In those circumstances, researchers need to think carefully about whether the assumptions required for this approximation to work is likely to be violated in their sample of studies.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;When our goal is to compare precision across a range of conceptually different findings, it seems most appropriate to use the variance of Fisher’s &lt;em&gt;Z&lt;/em&gt; (&lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt;) as a general operationalization of the “precision” of an estimate. If different study designs are to be compared, the sample size needs to be adjusted for differences in the designs.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; satisfies the most important requirements for a precision estimate. It is however limited in that it does not take into account information that in many cases is relevant for precision as well, such as the standard deviation of the estimate. On the other hand, all formulas that incorporate more information seem to violate the critical requirement of size independence. While the input to &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt;, sample size, is only one among several factors that contribute to estimate precision, it is normally an important contributor even if we take other factors into account as well &lt;span class=&#34;citation&#34;&gt;(Borenstein 2009, chap. 8)&lt;/span&gt;. Furthermore, sample size has the practical advantage of being available for the vast majority of published effects that we may want to estimate precision for. The same cannot be said for information such as within-subject correlation and group standard deviations. For the purposes of calculating replication value of published findings, we therefore generally recommend using &lt;em&gt;V&lt;sub&gt;Z&lt;/sub&gt;&lt;/em&gt; (with sample size adjusted for study design when possible) as a rudimentary but relatively straight-forward measure of estimate precision, and to further take this precision estimate as a rough approximation of the corroboration of a finding.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Table 1:&lt;/strong&gt; Summary of the limitations of each operationalization of “precision”.&lt;/p&gt;
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;20%&#34; /&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;68%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Candidate statistic&lt;/th&gt;
+&lt;th&gt;Requirements violated&lt;/th&gt;
+&lt;th&gt;Reason for violation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;em&gt;P&lt;/em&gt;-value&lt;/td&gt;
+&lt;td&gt;Effect size independence&lt;/td&gt;
+&lt;td&gt;The &lt;em&gt;p&lt;/em&gt;-value does not track precision of true null effects because it is uniformly distributed when the null is true. In addition, depends on effect size of true effect.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Bayes factor&lt;/td&gt;
+&lt;td&gt;Effect size independence&lt;/td&gt;
+&lt;td&gt;The Bayes factor depends on the size of the effect relative to the hypotheses being compared.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Cohens’s d variance&lt;/td&gt;
+&lt;td&gt;Effect size independence&lt;/td&gt;
+&lt;td&gt;As Cohen’s d becomes larger, the variance of d becomes larger.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Pearson’s r variance&lt;/td&gt;
+&lt;td&gt;Effect size independence&lt;/td&gt;
+&lt;td&gt;As Pearson’s r becomes larger, the variance of r becomes smaller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Log odds ratio variance&lt;/td&gt;
+&lt;td&gt;Effect size independence&lt;/td&gt;
+&lt;td&gt;As the odds involved become larger, the variance of log odds ratio becomes larger.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Fisher’s &lt;em&gt;Z&lt;/em&gt; variance&lt;/td&gt;
+&lt;td&gt;Exhaustiveness, standardization&lt;/td&gt;
+&lt;td&gt;Only depends on sample size, and will tend to overestimate precision for between-subject designs and interaction effects.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Variance of &lt;em&gt;A&lt;/em&gt; (non-parametric CLES)&lt;/td&gt;
+&lt;td&gt;Exhaustiveness, standardization&lt;/td&gt;
+&lt;td&gt;Only depends on sample size, and will tend to overestimate precision for between-subject designs and interaction effects.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Fisher’s &lt;em&gt;Z&lt;/em&gt; variance with adjusted sample size&lt;/td&gt;
+&lt;td&gt;Exhaustiveness&lt;/td&gt;
+&lt;td&gt;Only depends on sample size.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div id=&#34;acknowledgments&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Acknowledgments&lt;/h2&gt;
+&lt;p&gt;Thanks to multiple members of the Open Science Collaboration for the rigorous testing and discussion of different operationalizations that provided the background material for this post. Thanks to &lt;a href=&#34;https://twitter.com/lakens&#34;&gt;Daniël Lakens&lt;/a&gt; for extensive feedback and supervision, and to &lt;a href=&#34;https://twitter.com/EmmaHendersonRR&#34;&gt;Emma Henderson&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/OrbenAmy&#34;&gt;Amy Orben&lt;/a&gt;, and various other members of the Red^2 lab for your input and suggestions!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-Borenstein2009&#34;&gt;
+&lt;p&gt;Borenstein, Michael, ed. 2009. &lt;em&gt;Introduction to Meta-Analysis&lt;/em&gt;. Chichester, U.K: John Wiley &amp;amp; Sons.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Brown2017&#34;&gt;
+&lt;p&gt;Brown, Nicholas J. L., and James A. J. Heathers. 2017. “The GRIM Test: A Simple Technique Detects Numerous Anomalies in the Reporting of Results in Psychology.” &lt;em&gt;Social Psychological and Personality Science&lt;/em&gt; 8 (4): 363–69. &lt;a href=&#34;https://doi.org/10.1177/1948550616673876&#34;&gt;https://doi.org/10.1177/1948550616673876&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Dunlap1996&#34;&gt;
+&lt;p&gt;Dunlap, William P., Jose M. Cortina, Joel B. Vaslow, and Michael J. Burke. 1996. “Meta-Analysis of Experiments with Matched Groups or Repeated Measures Designs.” &lt;em&gt;Psychological Methods&lt;/em&gt; 1 (2): 170–77. &lt;a href=&#34;https://doi.org/10.1037//1082-989X.1.2.170&#34;&gt;https://doi.org/10.1037//1082-989X.1.2.170&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Dwan2008&#34;&gt;
+&lt;p&gt;Dwan, Kerry, Douglas G. Altman, Juan A. Arnaiz, Jill Bloom, An-Wen Chan, Eugenia Cronin, Evelyne Decullier, et al. 2008. “Systematic Review of the Empirical Evidence of Study Publication Bias and Outcome Reporting Bias.” Edited by Nandi Siegfried. &lt;em&gt;PLoS ONE&lt;/em&gt; 3 (8): e3081. &lt;a href=&#34;https://doi.org/10.1371/journal.pone.0003081&#34;&gt;https://doi.org/10.1371/journal.pone.0003081&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Field2018&#34;&gt;
+&lt;p&gt;Field, Sarahanne, Rink Hoekstra, Laura Bringmann, and Don van Ravenzwaaij. 2018. “When and Why to Replicate: As Easy as 1, 2, 3?” &lt;em&gt;Open Science Framework&lt;/em&gt;. &lt;a href=&#34;https://doi.org/10.17605/osf.io/3rf8b&#34;&gt;https://doi.org/10.17605/osf.io/3rf8b&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Grissom2001&#34;&gt;
+&lt;p&gt;Grissom, Robert J., and John J. Kim. 2001. “Review of Assumptions and Problems in the Appropriate Conceptualization of Effect Size.” &lt;em&gt;Psychological Methods&lt;/em&gt; 6 (2): 135–46. &lt;a href=&#34;https://doi.org/10.1037/1082-989X.6.2.135&#34;&gt;https://doi.org/10.1037/1082-989X.6.2.135&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Hands2008&#34;&gt;
+&lt;p&gt;Hands, D. Wade. 2008. “Popper and Lakatos in Economic Methodology.” In &lt;em&gt;The Philosophy of Economics: An Anthology&lt;/em&gt;, 3rd ed. New York: Cambridge University Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Heathers2018&#34;&gt;
+&lt;p&gt;Heathers, James A. J., Jordan Anaya, Tim van der Zee, and Nicholas J. L. Brown. 2018. “Recovering Data from Summary Statistics: Sample Parameter Reconstruction via Iterative TEchniques (SPRITE).” Preprint. PeerJ Preprints. &lt;a href=&#34;https://doi.org/10.7287/peerj.preprints.26968v1&#34;&gt;https://doi.org/10.7287/peerj.preprints.26968v1&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Kerr1998&#34;&gt;
+&lt;p&gt;Kerr, Norbert L. 1998. “HARKing: Hypothesizing After the Results Are Known.” &lt;em&gt;Personality and Social Psychology Review&lt;/em&gt; 2 (3): 196–217. &lt;a href=&#34;https://doi.org/10.1207/s15327957pspr0203_4&#34;&gt;https://doi.org/10.1207/s15327957pspr0203_4&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakatos1978&#34;&gt;
+&lt;p&gt;Lakatos, Imre. 1978. &lt;em&gt;The Methodology of Scientific Research Programmes&lt;/em&gt;. Vol. 1. Cambridge: Cambridge University Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakens2013&#34;&gt;
+&lt;p&gt;Lakens, Daniel. 2013. “Calculating and Reporting Effect Sizes to Facilitate Cumulative Science: A Practical Primer for T-Tests and ANOVAs.” &lt;em&gt;Frontiers in Psychology&lt;/em&gt; 4. &lt;a href=&#34;https://doi.org/10.3389/fpsyg.2013.00863&#34;&gt;https://doi.org/10.3389/fpsyg.2013.00863&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakens2016&#34;&gt;
+&lt;p&gt;———. 2016. “Why Within-Subject Designs Require Fewer Participants Than Between-Subject Designs.” &lt;em&gt;The 20% Statistician&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lakens2019a&#34;&gt;
+&lt;p&gt;———. 2019. “The Practical Alternative to the P-Value Is the Correctly Used P-Value.” April. &lt;a href=&#34;https://doi.org/10.31234/osf.io/shm8v&#34;&gt;https://doi.org/10.31234/osf.io/shm8v&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-LeBel2018&#34;&gt;
+&lt;p&gt;LeBel, Etienne P., Randy J. McCarthy, Brian D. Earp, Malte Elson, and Wolf Vanpaemel. 2018. “A Unified Framework to Quantify the Credibility of Scientific Findings.” &lt;em&gt;Advances in Methods and Practices in Psychological Science&lt;/em&gt; 1 (3): 389–402. &lt;a href=&#34;https://doi.org/10.1177/2515245918787489&#34;&gt;https://doi.org/10.1177/2515245918787489&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Maxwell2004&#34;&gt;
+&lt;p&gt;Maxwell, Scott E., and Harold D. Delaney. 2004. &lt;em&gt;Designing Experiments and Analyzing Data: A Model Comparison Perspective&lt;/em&gt;. 2nd ed. Mahwah, N.J: Lawrence Erlbaum Associates.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Nuijten2017&#34;&gt;
+&lt;p&gt;Nuijten, Michele B., Marcel A. L. M. van Assen, Chris Hubertus Joseph Hartgerink, Sacha Epskamp, and Jelte M. Wicherts. 2017. “The Validity of the Tool ‘Statcheck’ in Discovering Statistical Reporting Inconsistencies.” Preprint. PsyArXiv. &lt;a href=&#34;https://doi.org/10.31234/osf.io/tcxaj&#34;&gt;https://doi.org/10.31234/osf.io/tcxaj&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Rouder2018&#34;&gt;
+&lt;p&gt;Rouder, Jeffrey N., and Julia M. Haaf. 2018. “Power, Dominance, and Constraint: A Note on the Appeal of Different Design Traditions.” &lt;em&gt;Advances in Methods and Practices in Psychological Science&lt;/em&gt; 1 (1): 19–26. &lt;a href=&#34;https://doi.org/10.1177/2515245917745058&#34;&gt;https://doi.org/10.1177/2515245917745058&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Ruscio2008&#34;&gt;
+&lt;p&gt;Ruscio, John. 2008. “A Probability-Based Measure of Effect Size: Robustness to Base Rates and Other Factors.” &lt;em&gt;Psychological Methods&lt;/em&gt; 13 (1): 19–30. &lt;a href=&#34;https://doi.org/10.1037/1082-989X.13.1.19&#34;&gt;https://doi.org/10.1037/1082-989X.13.1.19&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Simonsohn2015&#34;&gt;
+&lt;p&gt;Simonsohn, Uri. 2015. “[17] No-Way Interactions.” &lt;em&gt;The Winnower&lt;/em&gt;, March. &lt;a href=&#34;https://doi.org/10.15200/winn.142559.90552&#34;&gt;https://doi.org/10.15200/winn.142559.90552&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Simonsohn2014&#34;&gt;
+&lt;p&gt;Simonsohn, Uri, Leif D. Nelson, and Joseph P. Simmons. 2014. “P-Curve: A Key to the File-Drawer.” &lt;em&gt;Journal of Experimental Psychology: General&lt;/em&gt; 143 (2): 534–47. &lt;a href=&#34;https://doi.org/10.1037/a0033242&#34;&gt;https://doi.org/10.1037/a0033242&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-westfall2015pangea&#34;&gt;
+&lt;p&gt;Westfall, Jacob. 2015. “PANGEA: Power Analysis for General Anova Designs.” &lt;em&gt;Unpublished Manuscript. Available at Http://Jakewestfall.org/Publications/Pangea.pdf&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Westfall2014&#34;&gt;
+&lt;p&gt;Westfall, Jacob, David A. Kenny, and Charles M. Judd. 2014. “Statistical Power and Optimal Design in Experiments in Which Samples of Participants Respond to Samples of Stimuli.” &lt;em&gt;Journal of Experimental Psychology: General&lt;/em&gt; 143 (5): 2020–45. &lt;a href=&#34;https://doi.org/10.1037/xge0000014&#34;&gt;https://doi.org/10.1037/xge0000014&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;By “severe test”, I mean a test that has a high chance of falsifying the statement “X is Y” if it really is the case that X is not Y.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;Some readers may wonder why I do not take the extra step and discuss the standard error of the estimates, which is perhaps more intuitive to think about than their variance. For all practical purposes, the discussion in this section would be the same, since the standard error is simply the square root of the variance. I choose to frame the discussion in terms of variance here to to simplify equations, and so that equations from other sources can be cited directly.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -37,8 +693,58 @@ The Psychological Science Accelerator (PSA) is a global network of psychological
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/how-to-share-your-data-with-osf/</guid>
-      <description>####Disclaimer:In the time I spent writing up this blog post, Courtney Soderberg published a tutorial manuscript for data sharing on OSF in the journal AMPPS. I highly recommend checking it out!
-IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs.</description>
+      <description>&lt;p&gt;####&lt;strong&gt;Disclaimer:&lt;/strong&gt;
+&lt;em&gt;In the time I spent writing up this blog post, &lt;a href=&#34;https://twitter.com/cksoderberg&#34;&gt;Courtney Soderberg&lt;/a&gt; published &lt;a href=&#34;https://doi.org/10.1177%2F2515245918757689&#34;&gt;a tutorial manuscript for data sharing on OSF&lt;/a&gt; in the journal AMPPS. I highly recommend checking it out!&lt;/em&gt;&lt;/p&gt;
+&lt;div id=&#34;intro&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Intro&lt;/h4&gt;
+&lt;p&gt;The Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs. I think every researcher will stand to benefit from these uptakes in open practices. However, it is one thing to preach open science, and antother to practice it.&lt;/p&gt;
+&lt;p&gt;If you have never made data available online before, it might all seem a bit daunting. Where should I put the data? What should I put up? What do I need to consider before I do it? Fortunately, making data available online does not need to be be very difficult. There are a few things you should know before posting your data online, but if you learn how to do it once, the procedure is overall quite similar from dataset to dataset. The time investement is well worth it in my experience. Katherine Wood has already written &lt;a href=&#34;https://katherinemwood.github.io/post/data_sharing_tips/&#34;&gt;an excellent blog post&lt;/a&gt; with general tips and advice on sharing data and analysis scripts. So exellent in fact, that you should just read it, and come back afterwards. See you soon!&lt;/p&gt;
+&lt;p&gt;…&lt;/p&gt;
+&lt;p&gt;Welcome back! Now that you know what you should think about when making your data and analysis scripts open, let me walk you through a practical example of how you can do this on The Open Science Frameword (OSF). This is just one of many platforms for data sharing you could consider, but OSF’s flexibility and general user friendliness makes it a good place to start.&lt;/p&gt;
+&lt;p&gt;OSF is a website maintained by the Center for Open Science, and is a hub for everything Open Science. OSF will store your data &lt;em&gt;for free&lt;/em&gt;, and they have a back-up fund in case they run out of money, guaranteeing that your data will be accessible for at least 50 years. In other words, you get a free back-up of your data, and you can die happy, knowing that your data will live on long after you are gone. On that cheerful note, let’s get started!&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/OSF_how_to/OSF_frontpage.png&#34; alt=&#34;Figure 1: OSF Frontpage.&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; OSF Frontpage.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;####Create a profile&lt;/p&gt;
+&lt;p&gt;First, you need to head over to OSF and create a profile. As mentioned, this is completely free. On the front page, click the green “Sign up” button, fill in your personal details, and you should be good to go.&lt;/p&gt;
+&lt;p&gt;When you are signed up and logged in, you should find yourself on the OSF dashboard. OSF keeps data and materials sorted into “projects”, and on the home screen you get an overview of your projects. In the upper right corner you will find a taskbar. If you click your name and then click “My Profile” in the drop-down menu, you can see and add information about yourself such as social media accounts, your ORCID ID, etc. To get back to the dashboard from anywhere, click the “OSF &lt;strong&gt;HOME&lt;/strong&gt;” button on the upper left of the page. Now let’s create a project and see how we can add data to it.&lt;/p&gt;
+&lt;p&gt;####Create a new project&lt;/p&gt;
+&lt;p&gt;When on the dashboard page, click the green “Create new project” button. This will open a dialogue box prompting you to fill in the name of the project. Try to write a sensible name that describes the content of the project (I.e. not “Data”). A good solution is to use the title of the paper/manuscript/grant proposal that is connected to the data you want to share. You will also be prompted to choose at which location you would prefer your data to be stored. If you are an EU researcher, choose “Germany - frankfurt” as your storage location to make your data &lt;a href=&#34;https://www.insight.mrc.ac.uk/2018/04/16/gdpr-research-changes/&#34;&gt;GDPR&lt;/a&gt; compliant. Check out &lt;a href=&#34;http://help.osf.io/m/settings/l/952786-set-a-global-storage-location&#34;&gt;this link&lt;/a&gt; to learn how to change the default storage location for all your future projects. You can also click “more” below the title box, and add a description (you can edit this later as well). When done, click “create”, and click “Go to new project” in the following dialogue box.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/OSF_how_to/new_project_dialogue.png&#34; alt=&#34;Figure 2: Dialogue box for creating new project.&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; Dialogue box for creating new project.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Welcome to your new project! You should now be looking at your brand new project page! On this page you can add all the files and information relevant to your project/study. Notice immediately that your project is currently private (fig 3.1). This means that only you have access to this project and its contents. You can add collaborators in privat mode (like a shared folder on Dropbox), but the project and its content will not be &lt;em&gt;publicly&lt;/em&gt; available until you decide to make it so. If all you want is a way of sharing data with collaborators, you can even choose to &lt;em&gt;never&lt;/em&gt; make the project public. If you do make it public, also note the citation box (fig 3.2). You, or anyone visiting your project, can click the arrow in the far right corner of the box and get a dropdown box of citations in different style formats. In addition to this, public projects can also get a DOI (Once you make a project public, a “Create DOI/ARKID” link appears about 5 lines below the project name). This makes it easy for you to cite your project in a manuscript or CV, and for others to cite your project in their publications.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/OSF_how_to/OSF_project_page_reference_image2.png&#34; alt=&#34;Figure 3: OSF project page. Numbers are referenced in text as “fig 3.[1-10]”.&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; OSF project page. Numbers are referenced in text as “fig 3.[1-10]”.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;####Set up and navigate the project page&lt;/p&gt;
+&lt;p&gt;Now let’s give people a reason to cite this project! Here is a step by step by step guide for setting up your project in a way that makes it easy for people to find and use the information you want to share.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Add a description of your project (fig 3.3). If you have already written a manuscript on the data, you could just click this field and paste the abstract. In any case, the description should make it clear what the project is intended for, and what kind of information one can expect to find here.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add a license for your project (fig 3.4). Having a liberal license for your data is more important than you may think. If you share materials without a license, people are not strictly allowed to reuse it (without risking legal prosecution from you). You can find more information about licensing your data &lt;a href=&#34;https://wiki.creativecommons.org/wiki/Data&#34;&gt;here&lt;/a&gt;. If you just want to get on with it however, click “add a license”, and in the “&lt;strong&gt;Choose a license:&lt;/strong&gt;” drop-down menu, choose either the &lt;a href=&#34;https://creativecommons.org/publicdomain/zero/1.0/&#34;&gt;CC0 1.0 Universal&lt;/a&gt; or the &lt;a href=&#34;https://creativecommons.org/licenses/by/4.0/&#34;&gt;CC By Attribution 4.0 International&lt;/a&gt;. They are both aimed at making your data open and reducable by others with minimal legal restrictions. If you want to know more about why licensing is important, or you want to know the difference between the CC licenses, &lt;a href=&#34;https://twitter.com/chartgerink&#34;&gt;Chris Hartgerink&lt;/a&gt; has written &lt;a href=&#34;https://medium.com/read-write-participate/copyright-and-licenses-in-open-access-publishing-da73e0ca8ed3&#34;&gt;a short, informative, and accessible article on Medium&lt;/a&gt; about it.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Before uploading, make sure that people can understand and work with the materials you upload. This implies the following:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: lower-alpha&#34;&gt;
+&lt;li&gt;Name the variables in your dataset sensibly, and perhaps add a document that defines and describes each variable (a &lt;a href=&#34;http://www.ddialliance.org/training/getting-started-new-content/create-a-codebook&#34;&gt;codebook&lt;/a&gt;). In addition, adding extra materials, such as experiment presentation files, design descriptions, etc., can be a crucial supplement to the methods section of your paper for someone who really wants to understand how the experiment was conducted.&lt;/li&gt;
+&lt;li&gt;Provide a complete recipe script for any published analyses in case someone wants to doublecheck your reporting. In SPSS, this is made in a syntax (.sps) file. In R, this is made in an R script (.R) file. The script should start by importing/loading the raw (anonymized) data, then include every manipulation imposed on the data (like deletions, renamings, and exclusions), and end with the functions for generating the plots running the statistical tests that you report. In other words, a person who downloads your data and analysis files should just have to press play in the appropriate software to reproduce the numbers in your paper. If you can’t add raw data for ethical reasons, add a dataset as close to the raw as possible. Why? Imagine you made a mistake in renaming a variable, or someone disagrees with your exclusion critera. If someone then wants to change the way the data is manipulated, they will need access to the pre-manipulation version of the dataset.&lt;/li&gt;
+&lt;li&gt;Make sure that accessing your data is free, or as cheap as possible. If you use SPSS for data analysis, something you might never think about is the fact that all the files you save in .sav, .spv, and .sps format requires SPSS to open them. So anyone who wants to reuse your data will need SPSS as well, and that baby costs $99 per month! Same goes for matlab ($580-$2300 per license), e-prime ($995 per license) and other common commercial research software. A &lt;a href=&#34;https://www.computerhope.com/issues/ch001357.htm&#34;&gt;.csv&lt;/a&gt; version of your dataset can be read and created by basically any program, so &lt;a href=&#34;https://www.computerhope.com/issues/ch001356.htm&#34;&gt;create one&lt;/a&gt; and add it just in case.&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Upload your data and materials! This is as simple as dragging and dropping the files into the “Files” box (fig 3.5). You can also click on “OSF Storage” (fig 3.6) and click on the “upload” button that appears above. If you want to import data directly from services like Dropbox, Google Drive, or GitHub, you will find a list of add-ons you can integrate by going to Settings (fig 3.7).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add some relevant tags (fig 3.8) to make your project easy to find on Google and OSF search.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If you want to add some information about the project, consider putting it into the project Wiki (fig 3.9). Detailed info on how to edit the wiki can be found &lt;a href=&#34;http://help.osf.io/m/collaborating/l/524109-using-the-wiki&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Let the public in! If you are happy with the content, settings, and information included in your project (and you want to make it public), press the “Make Public” button (fig 3.10). Read through the warnings that pops up and, if you are sure that your project meets ethical requirements for open data sharing, click “Confirm”.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;####Finding help and more information&lt;/p&gt;
+&lt;p&gt;Did you run into any trouble along the way? Fear not! Reliable sources tell me that OSF also has a very real and friendly human person you can reach at &lt;a href=&#34;mailto:support@osf.io&#34; class=&#34;email&#34;&gt;support@osf.io&lt;/a&gt;, who would be happy to help you out.&lt;/p&gt;
+&lt;p&gt;No more trouble? Then congratulations! You now have an open, licensed, reuasable, and citable version of your data and materials that can be accessed by anyone for the forseeable future. Just put a link to the project in your manuscript and voilà! Anyone can make use of your openly shared data, at no extra cost to you!
+
+&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;PS: If you want to see an example of any of the recommendations offered here, check out &lt;a href=&#34;https://osf.io/r2gbv/&#34;&gt;the OSF project for this post&lt;/a&gt; where I tried to address them all. You can also find a lot more information and help on the &lt;a href=&#34;https://osf.io/support/&#34;&gt;OSF support pages&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;PPSS: If you are interested in learning more about how to increase the transparency of your research practices, check out this &lt;a href=&#34;http://doi.org/10.1525/collabra.158&#34;&gt;detailed practical guide to transparency in psychological science&lt;/a&gt;, by Klein et al.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -47,7 +753,54 @@ IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow
       <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/ganging-up-on-psych-science/</guid>
-      <description>##Everything is awesome. Everything is cool when you’re part of a team.The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
+      <description>&lt;p&gt;##Everything is awesome. Everything is cool when you’re part of a team.
+&lt;br/&gt;
+The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take &lt;a href=&#34;https://home.cern/&#34;&gt;CERN&lt;/a&gt;, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.&lt;/p&gt;
+&lt;p&gt;The utility of large scale collaborations in psychology is much the same as in physics. Sometimes, the costs of doing good science outgrows the resources available to the individual researcher. In physics, this might be the money and manpower required to build machinery necessary for empirical observation. For example, the Large Hadron Collider experiments has an expected price-tag of around 5.5 billion USD &lt;span class=&#34;citation&#34;&gt;(“Large Hadron Collider” 2018)&lt;/span&gt;. In psychology, large scale collaboration has the potential to help us muster the organizational resources required to collect sufficiently large and diverse (non-WEIRD) samples from the human population. It can also can mitigate subpar research practices caused by individual knowledge gaps by bringing together multiple researchers with a wide variety of skills and expertise.&lt;/p&gt;
+&lt;p&gt;Large scale collaborations are already beginning to impact psychology in important ways. For example, a summary of the 100 replication studies included in the “Reproducibility Project: Psychology” was published in Science &lt;span class=&#34;citation&#34;&gt;(Open Science Collaboration 2015)&lt;/span&gt;, and the project has helped elevate the status of replication research in psychology ever since. The idea of reproducibility projects has also spread to neighbouring areas, and similar collaborative undertakings can now be found in experimental economics &lt;span class=&#34;citation&#34;&gt;(Camerer et al. 2016)&lt;/span&gt;, cancer biology &lt;span class=&#34;citation&#34;&gt;(“Effort to Reproduce Cancer Studies Scales down to 18 Papers,” n.d.)&lt;/span&gt;, experimental philosophy &lt;span class=&#34;citation&#34;&gt;(Cova et al. 2018)&lt;/span&gt;, and social science research published in Science and Nature &lt;span class=&#34;citation&#34;&gt;(Camerer et al. 2018)&lt;/span&gt;. Other established collaborations include the “Many Labs” projects, which have published authoritative reports on the role of contextual effects in psychological research, including the infamous end-of-semester effect &lt;span class=&#34;citation&#34;&gt;(Ebersole et al. 2016)&lt;/span&gt;. The “Many Babies” project &lt;span class=&#34;citation&#34;&gt;(“The ManyBabies Project,” n.d.)&lt;/span&gt; is studying thousands of infants in an attempt to address some big questions in developmental psychology. To illustrate how do these collaborations function and how they help us do good science, let me describe the one I am a member of in a little more detail.&lt;/p&gt;
+&lt;p&gt;In August 2017, Dr. Christopher R. Chartier published a &lt;a href=&#34;https://christopherchartier.com/2017/08/26/building-a-cern-for-psychological-science/&#34;&gt;blog post&lt;/a&gt; outlining a new kind of collaboration project within psychology. Inspired by the structure of CERN, this would be a standing network of volunteer labs from all across the world that would work together on huge and distributed data collection efforts, with a democratic and decentralized system of governance. Just 27 days later, the &lt;a href=&#34;https://psysciacc.org/&#34;&gt;Psychological Science Accelerator&lt;/a&gt; (PSA) was born. Today, over 300 psychology labs from more than 50 countries have voluntarily signed up as members of the network, and several operations and advisory committees are hard at work hammering out our guidelines and operational procedures. We have three research projects in the pipeline so far, and continually send out calls for new project proposals. You do not have to be a member to propose a project to the network, and once projects are accepted, labs from the network volunteer for data collection on each individual project.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://fusiontables.googleusercontent.com/embedviz?q=select+col4+from+1IATtTqIk8ESi6su86_UlIwE9XZ49JDgWMCI-jvkk&amp;amp;viz=MAP&amp;amp;h=false&amp;amp;lat=49.95961088342022&amp;amp;lng=17.430138088922604&amp;amp;t=1&amp;amp;z=4&amp;amp;l=col4&amp;amp;y=2&amp;amp;tmplt=2&amp;amp;hml=ONE_COL_LAT_LNG&#34;&gt;&lt;img src=&#34;/img/PSA_map.png&#34; alt=&#34;PSA network map as of 20-08-2018&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The purpose of the PSA is to provide the manpower necessary to conduct high-quality studies of important research questions in psychology. We aim to address several of the key issues facing psychological research all at once. Every project conducted by the PSA network will be pre-registered, and simultaneously replicated by multiple labs. Projects will be guaranteed a sample size large enough to provide accurate estimates of the effects of interest. Because the network contains labs from all continents, we also have the ability to facilitate culturally diverse sampling by default. In addition to increased and culturally diverse samples, we are bringing together hundreds of scientists with a diverse set of skills, backgrounds and knowledge. Because we can draw on such an immense pool of expertise, we are uniquely able to secure the quality of study designs. we can also distribute tasks that would normally be extremely time-consuming, like the translation of materials into several different languages. The first study the PSA took on, which will test the valence-dominance model of social perception, now has 117 labs from around the world committed to data collection. Study materials are being translated into 22 separate languages, and committees are assisting the lead authors with everything from ethics applications to statistical analysis. Replication. WEIRD samples. Precision. Expertise. The goal is to address them all in one coordinated effort.&lt;/p&gt;
+&lt;p&gt;It is hard to accurately describe just how impactful the data from these collaboration projects may turn out to be for psychology. The “Reproducibility Project: Psychology” has ignited discussions of reproducibility throughout and beyond the realm of psychology. The Many Labs projects have done much to nuance these discussions and to enhance our understanding of how psychological effects behave across experiments. Both projects have stimulated a host of innovations in our methods and research practices. In addition, it is usually standard practice for large scale collaborations to make their data freely accessible online. This adds value in at least two ways. First, it respects the principle of transparency in science, and makes it possible for independent researchers to verify any reported results &lt;span class=&#34;citation&#34;&gt;(which can be extremely important. See e.g. Etchells and Chambers 2018)&lt;/span&gt;. Second, it allows independent researchers to reuse the data in novel ways. For example, data from Many Labs 3 have been reanalyzed to provide falsifying tests of ego depletion theory &lt;span class=&#34;citation&#34;&gt;(Vadillo, Gold, and Osman 2018)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The collaborations here mentioned are all fairly recent projects, so we can only speculate what their long term impact on the field will be. However, my hunch is that we are witnessing the early version of what will become a new gold standard for research in psychology. By no means do I think that large scale collaboration projects will be the only research conducted in psychology. These projects are slow moving, inflexible, and resource intensive compared to small scale lab research, and sometimes studies needs to be cheap and flexible. But I do think that large scale collaboration projects will become the most rigorous empirical process we can subject many of our research questions to. As such, I also think the data from these projects will eventually constitute much of the foundation upon which novel psychological theory will build. I therefore heartily recommend checking out the research that is coming out of these projects. They are authoritative reports on the topics they cover, and they have taught me a lot about psychological science in general.&lt;/p&gt;
+&lt;p&gt;If you are passionate about psychological research, why not join a collaboration yourself? The Psychological Science Accelerator welcomes members from all walks of academia. Contribution is voluntary, and level of contribution is completely up to you. At our website you can find a link to &lt;a href=&#34;https://psysciacc.org/get-involved/&#34;&gt;our sign-up form&lt;/a&gt;. We need help with everything from reviewing incoming project proposals, to feedback on policy, to data collection. I’m unfortunately not sure how other projects handle lab recruitment at the time of writing. If you do, let me know in the comment section!&lt;/p&gt;
+&lt;p&gt;I suppose the deeper reason why I see large scale collaboration as a solution to current issues is that I believe science is a fundamentally collaborative effort. If you share your discovery, we all make the discovery. If you share your knowledge, we all become knowledgeable. Ambition, prestige and a competitive spirit may drive individual scientists to do great things, but there would be no moon landing, no human genome project, no penicillin, no internet, if not for the ability of all scientists to work together in a common pursuit of knowledge.&lt;/p&gt;
+&lt;p&gt;##Acknowledgements
+This is a shortened, translated version of an article to be published in “Psykologisk tidsskrift NTNU”, a pscyhology magazine run by students at the Norwegian University of Science and Technology. Thanks to Gerit Phul for providing feedback on the english version of the manuscript.&lt;/p&gt;
+&lt;p&gt;#References&lt;/p&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-Camerer2016&#34;&gt;
+&lt;p&gt;Camerer, Colin F., Anna Dreber, Eskil Forsell, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2016. “Evaluating Replicability of Laboratory Experiments in Economics.” &lt;em&gt;Science&lt;/em&gt;, March, aaf0918. &lt;a href=&#34;https://doi.org/10.1126/science.aaf0918&#34;&gt;https://doi.org/10.1126/science.aaf0918&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Camerer2018&#34;&gt;
+&lt;p&gt;Camerer, Colin F., Anna Dreber, Felix Holzmeister, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2018. “Evaluating the Replicability of Social Science Experiments in Nature and Science Between 2010 and 2015.” &lt;em&gt;Nature Human Behaviour&lt;/em&gt;, August, 1. &lt;a href=&#34;https://doi.org/10.1038/s41562-018-0399-z&#34;&gt;https://doi.org/10.1038/s41562-018-0399-z&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Cova2018&#34;&gt;
+&lt;p&gt;Cova, Florian, Brent Strickland, Angela Abatista, Aurélien Allard, James Andow, Mario Attie, James Beebe, et al. 2018. “Estimating the Reproducibility of Experimental Philosophy.” &lt;em&gt;Review of Philosophy and Psychology&lt;/em&gt;, June. &lt;a href=&#34;https://doi.org/10.1007/s13164-018-0400-9&#34;&gt;https://doi.org/10.1007/s13164-018-0400-9&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Ebersole2016&#34;&gt;
+&lt;p&gt;Ebersole, Charles R., Olivia E. Atherton, Aimee L. Belanger, Hayley M. Skulborstad, Jill M. Allen, Jonathan B. Banks, Erica Baranski, et al. 2016. “Many Labs 3: Evaluating Participant Pool Quality Across the Academic Semester via Replication.” &lt;em&gt;Journal of Experimental Social Psychology&lt;/em&gt; 67 (November): 68–82. &lt;a href=&#34;https://doi.org/10.1016/j.jesp.2015.10.012&#34;&gt;https://doi.org/10.1016/j.jesp.2015.10.012&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-zotero-1577&#34;&gt;
+&lt;p&gt;“Effort to Reproduce Cancer Studies Scales down to 18 Papers.” n.d. &lt;em&gt;The Scientist Magazine&lt;/em&gt;. https://www.the-scientist.com/news-opinion/effort-to-reproduce-cancer-studies-scales-down-effort-to-18-papers-64593.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Etchells2018&#34;&gt;
+&lt;p&gt;Etchells, Pete, and Chris Chambers. 2018. “Mindless Eating: Is There Something Rotten Behind the Research?” &lt;em&gt;The Guardian&lt;/em&gt;, February.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-2018b&#34;&gt;
+&lt;p&gt;“Large Hadron Collider.” 2018. &lt;em&gt;Wikipedia&lt;/em&gt;, August.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-OpenScienceCollaboration2015&#34;&gt;
+&lt;p&gt;Open Science Collaboration. 2015. “Estimating the Reproducibility of Psychological Science.” &lt;em&gt;Science&lt;/em&gt; 349 (6251): aac4716–aac4716. &lt;a href=&#34;https://doi.org/10.1126/science.aac4716&#34;&gt;https://doi.org/10.1126/science.aac4716&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-zotero-1543&#34;&gt;
+&lt;p&gt;“The ManyBabies Project.” n.d. &lt;em&gt;Manybabies.github.io&lt;/em&gt;. https://manybabies.github.io/.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Vadillo2018&#34;&gt;
+&lt;p&gt;Vadillo, Miguel A., Natalie Gold, and Magda Osman. 2018. “Searching for the Bottom of the Ego Well: Failure to Uncover Ego Depletion in Many Labs 3.” &lt;em&gt;Royal Society Open Science&lt;/em&gt; 5 (8): 180390. &lt;a href=&#34;https://doi.org/10.1098/rsos.180390&#34;&gt;https://doi.org/10.1098/rsos.180390&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -56,7 +809,162 @@ IntroThe Open Science movement is here to stay. Journals, reviewers, and fellow
       <pubDate>Sat, 09 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/what-to-replicate/</guid>
-      <description>##Justifications of study choice from 85 replication studies.In their recent BBS article, Zwaan et al. (2017) synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article (Coles et al. 2018). In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate.</description>
+      <description>&lt;p&gt;##Justifications of study choice from 85 replication studies.
+&lt;br/&gt;
+In their recent BBS article, &lt;span class=&#34;citation&#34;&gt;Zwaan et al. (2017)&lt;/span&gt; synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article &lt;span class=&#34;citation&#34;&gt;(Coles et al. 2018)&lt;/span&gt;. In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate. In other words, assume that a researcher has limited resources and can either replicate a previous study or run an original study of their own. Both of these options have costs (e.g. money for subject recruitment, time spent conducting the study) and benefits (e.g. theoretical innovation, estimate accuracy, societal impact). Considering both options, the researcher will need to decide which has the higher cost/benefit ratio.&lt;/p&gt;
+&lt;p&gt;In a another project I am working on for the Open Science Collaboration, we are trying to develop some formalized tools to help researchers justify their decisions of which studies to replicate. We make the assumption that every researcher has to make decisions under resource constraints, and we assume that they have already decided to conduct a replication. They now face a new problem: There are many original findings that they could replicate. Which one should they choose? We may all agree with Zwaan et al. (2017) that “the idea that observations can be recreated and verified by independent sources is usually seen as a bright line of demarcation that separates science from non-science”, but that does not really help us prioritize which observations to recreate. What makes a study more valuable to replicate than another?&lt;/p&gt;
+&lt;p&gt;In the process of coming up with answers to this question, I thought it would be useful to take a look at how researchers “in the wild” justify their replication efforts. They must have some reason for choosing a specific study to replicate, and it seems reasonable to assume that authors would provide these reasons in their report. So I went to the “Curated Replications” dataset at &lt;a href=&#34;http://curatescience.org&#34;&gt;curatescience.org&lt;/a&gt; and started working my way through the links in the table. Eighty-five papers later, here are my takeaways.&lt;/p&gt;
+&lt;p&gt;#Replication Justifications&lt;/p&gt;
+&lt;p&gt;Based on my reading of and subjective judgement of similarity between the justifications for study selection mentioned in the 85 replication reports, I have grouped them into five major categories: theoretical impact, personal interest, academic impact, public/social impact, and methodological concerns. For each category I have included a short description, and a few illustrative quotes with a reference to the quoted articles in each case. It should be noted that any given replication will usually deploy more than one justification for why a finding was considered valuable to replicate, often drawing from several different categories. At the end of this article you can find a link to a spreadsheet containing the justification quotes I have based my review on, as well as article DOIs, for almost all of the 85 reports reviewed (some reports did not have a justification and/or DOI).&lt;/p&gt;
+&lt;p&gt;##&lt;strong&gt;Theoretical impact&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;One of the most widely deployed justifications for replication is arguing for the theoretical significance of the finding. These arguments are sometimes quite specific:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;IJzerman et al. (2014)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“This latter effect [age*gender interaction] is an important component of the theory that sexual jealousy is evolutionarily prepared, as the theory predicts sex differences for both age groups…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Other times justifications are more general. They might simply state that the original finding has generated a lot of novel research, or that it has been important for theorizing within the field:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Cheung et al. (2016)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“This highly cited paper serves as a cornerstone for the theoretical importance of relationship commitment as a predictor of relationship outcomes, including forgiveness. The findings have important implications for the theoretical understanding of forgiveness…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;##&lt;strong&gt;Personal interest&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Similar to theoretical impact, though harder to nail down in a specific quote, personal interest represents the author’s own interest in the topic they are studying. A large portion of replications I reviewed were phrased in such a way that the authors seemed partially motivated by their own personal interest in the topic at hand. Some illustrative cases are found in conceptual replications, where the replication itself is often a stepping stone on the way to what the authors really care about: extending current research paradigms.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Ronay et al. (2017)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“The goal of the current research was twofold. First, we intended to replicate Carney et al.’s (2010) main effects and to test the possibility that the relationship between embodied power and risk-taking is statistically mediated by increases in testosterone… Our second goal was to test the possibility that elevated levels of testosterone increase overconfidence, which in turn may facilitate risk-taking…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;##&lt;strong&gt;Academic impact&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Another common justification for choosing a finding to replicate is to refer to the academic impact of either the original finding or the paper it is reported in. There are many indicators of academic impact researchers can use, some more quantifiable than others, but all are related in some way to the standing of the paper among scientists in the field. Examples of less quantifiable justifications include the following:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example (generative finding)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Lynott et al. (2014)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“The [original] findings… has impacted subsequent research investigating how experiences of hot and cold can prime other behaviors…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example(textbook case)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Vermeulen et al. (2014)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“Moreover, the study appears in nearly every student textbook on persuasion and consumer psychology (e.g., Cialdini, 2001; Fennis &amp;amp; Stroebe, 2010; Peck &amp;amp; Childers, 2008; Saad, 2007)…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example (“classic” study)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Wesselmann et al. (2014)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“Schachter’s groundbreaking demonstration of the deviation-rejection link has captivated social psychologists for decades. The findings and paradigm were so compelling that the deviation-rejection link is often taken for granted and sometimes may be misrepresented…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A more quantifiable approach is to quote the citation impact of the original study in question. In these cases it is often common to state the date and source of the citation number as well. Though often used, it is not apparent what constitutes a “widely cited” article. In the 85 articles reviewed here, quoted numbers range from 21 to over 1600. To provide a reference point for these numbers, I acquired the Crossref citation counts for 2854 empirical papers from the psychology literature. These papers are part of a dataset of psychological effects reported in meta-analyses, which is currently being curated by our lab. Median citation count was 29. Citation frequencies are plotted in Figure 1.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example (citation count)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Harris et al. (2013)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“Because the paper has been cited well over 1100 times, an attempt to replicate its findings would seem warranted…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2018-06-09-what-to-replicate_files/figure-html/figs-1.png&#34; alt=&#34;Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. The black vertical line represents the median of the distribution. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Histogram of Crossref citation counts for 2854 empirical research papers from the psychological literature. The black vertical line represents the median of the distribution. 1.7% of papers were cited more than 400 times. For visual purposes, these are not displayed.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;##&lt;strong&gt;Public/societal impact&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Somewhat less common are appeals to the public or societal impact of a finding. This can refer to mentions of the finding in the popular press, bringing up altmetrics-related numbers, practical use cases of the findings such as in therapy or in court cases, or the public policy informed by a particular finding. The three examples listed below are just a sample of the justifications deployed in the literature:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example (public impact)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Connors et al. (2016)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“This research was also featured in such premiere outlets as Scientific American Mind, The Financial Times, The Wall Street Journal, The Huffington Post, NBC News and The Globe and Mail…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example (policy)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Mcarthy et al. (2016)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“The 10 Commandments study also has political implications: It was cited as a critical building block of self-concept maintenance theory in a set of policy recommendations made to President Obama as part of the REVISE model (Shahar, Gino, Barkan, &amp;amp; Ariely, 2015)…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example: (practical implementation)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Pashler, Rohrer, and Harris (2013)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“If this effect is robust, it would seem to have considerable potential impact in practical areas. Collection of self-report data from people is a commonplace and costly activity in domains ranging from marketing research to public health and opinion polling. A very low-cost method of increasing candor from respondents would have major significance…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;##&lt;strong&gt;Methodological concerns&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The umbrella term “methodological concerns” covers perhaps the largest range of qualitatively different justifications. However, they share a fundamental similarity: they all express some doubt in the conclusions of the original research.&lt;/p&gt;
+&lt;p&gt;The reason for doubt varies. In some cases, original estimates of quantities are just not very precise, and researchers may express a desire to increase the accuracy, or narrow the confidence intervals, of a given estimate. In other cases, there may be reasons to believe that the original estimates cannot be trusted due to failures to replicate conceptually similar findings, due to contradicting findings in the existing literature, or the replicating researcher may suspect that questionable research practices (QRPs) or publication bias is biasing the reported numbers. I have not seen these concerns directed towards the the original study authors personally, but replicating authors might refer to widespread problems with QRPs in general. For example, they might express suspicion based on the general tendency for effect sizes in psychology to be overestimated. Finally, replicating authors may simply point out that few or no direct replications of the original finding exist, and/or that the original authors have called for replication of their own findings. The examples listed below do not capture the full nuance of justifications based on methodological concerns. I refer the interested reader to the spreadsheet for more cases.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example (imprecise estimate)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Donnellan, Lucas, and Cesario (2015)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“We undertook this [replication] effort for at least three reasons… First and foremost, the original studies were based on small samples (n = 51 and n = 41) and therefore they generated effect size estimates with relatively wide confidence intervals…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example (QRPs)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Harris et al. (2013)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“it seems at least possible that the social and goal priming literature might contain many large observed effects due to numerous false alarms. This could occur if a great number of small underpowered experiments have been conducted, with only those results reaching significance having been published…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example (lack of replications)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Cheung et al. (2016)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“No direct replications of [the original] study have been published. This RRR is designed to provide a direct replication of this influential finding and to provide a more precise estimate of the size of the effect…”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example (Existing evidence is equivocal)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Sinclair, Hood, and Wright (2014)&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;“Since the original study, replications of the effect have been elusive… Few studies find support for anything approximating the effect. Instead, most find the ‘‘social network effect’’ whereby disapproval from one’s social network – whether family or friends – leads to declines in romantic relationship quality… A limitation of the counterevidence for the Romeo and Juliet effect is the fact that none of the follow-up studies used the original scales.”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;##&lt;strong&gt;Large Scale Collaborations&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A discussion of replication justifications would not be complete without considering how the large scale lab replication collaborations like Many Labs and the Reproducibility Projects justify their sampling procedures. These are special cases in at least three ways.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The authors are often interested in introducing some element of randomness into the study selection process in order to get a more representative sample from the population of effects in the literature.&lt;/li&gt;
+&lt;li&gt;Because of the sheer volume of replication efforts to be undertaken, practical constraints such as the length of the experimental design become an issue.&lt;/li&gt;
+&lt;li&gt;Because they are all preregistered, and original study selection is part of their sampling procedure, justifications are usually more elaborate than for the average replication study.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The exact justification text varies somewhat from project to project. It is however interesting to note that academic impact features in the justification process for almost all of these large scale projects. I refer the reader to the spreadsheet for details of each collaboration’s justifications.&lt;/p&gt;
+&lt;p&gt;#&lt;strong&gt;Caveats &amp;amp; Summary&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I do want to highlight some caveats of this project. First and foremost, I did not apply formal qualitative methods to this literature search, nor did I comprehensively comb through the literature to make sure I discovered every available justification out there. I am sure that there are more examples of justifications in studies I did not review. In fact, I am pretty sure there are justifications in the papers I did review that I might have missed. Second, as was pointed out to me by a colleague, there is no guarantee that the justifications that authors put down in their papers are the real reasons for why they choose this studyover that study. If researchers sometimes rewrite the introduction section of their original research papers to spice up the importance of their work, they might also do this when writing replication-research papers. For example, the researchers could have been motivated purely by strong personal doubts in an effect, but might choose to refer to the citations of the original work because this seems more objective. Finally, the overwhelming majority of the replication reports reviewed here are from psychological science, and scholars in other fields of science may of course have widely differing justifications for conducting replications. Consider this a non-representative sample of possible justifications. If you think I have missed important justifications, or mischaracterized the intentions of any author mentioned here, let me know!&lt;/p&gt;
+&lt;p&gt;In the paper I am working on, I hope to elaborate more on how researchers could formalize some of these justifications by specifying formulas for replication value. Until then, I hope this will serve as a useful starting point if you are looking to do replication research, and are curious about how researchers go about justifying which finding to replicate.&lt;/p&gt;
+&lt;p&gt;Happy replicating!&lt;/p&gt;
+&lt;p&gt;###Updates&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A registered and citeable version of this blog post, including a copy of the linked spreadsheet, is available at &lt;a href=&#34;https://doi.org/10.5281/zenodo.1286715&#34; class=&#34;uri&#34;&gt;https://doi.org/10.5281/zenodo.1286715&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;###Spreadsheet of Justifications&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/1HzBePXvDAeGu8ND04E18u7BynT75LgW4vcLFNDUn7GU/edit?usp=sharing&#34; class=&#34;uri&#34;&gt;https://docs.google.com/spreadsheets/d/1HzBePXvDAeGu8ND04E18u7BynT75LgW4vcLFNDUn7GU/edit?usp=sharing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The spreadsheet include quotes from the 85 papers reviewed for this piece. Please note the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Three dots (…) signal that text has been skipped.&lt;/li&gt;
+&lt;li&gt;Square brackets [] signal paraphrasing.&lt;/li&gt;
+&lt;li&gt;Cells in the “DOI” column are listed as NA when a DOI could not be obtained.&lt;/li&gt;
+&lt;li&gt;Cells “Replication Justifications” column are listed as NA when no discernable justification for the replication could be derived from either the introduction or discussion section of the manuscript.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;###Acknowledgements&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&#34;https://twitter.com/coles_nicholas_&#34;&gt;Nicholas Coles&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/chrisharms&#34;&gt;Christopher Harms&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/lakens&#34;&gt;Daniël Lakens&lt;/a&gt;, and &lt;a href=&#34;https://twitter.com/LeonidTiokhin&#34;&gt;Leonid Tiokhin&lt;/a&gt; for helpful comments and suggestions on drafts for this post. Thanks to &lt;a href=&#34;https://twitter.com/eplebel&#34;&gt;Etienne LeBel&lt;/a&gt; for curating the dataset used for this post and making it freely available online. Thanks to &lt;a href=&#34;https://twitter.com/hardsci&#34;&gt;Sanjay Srivastava&lt;/a&gt; for making me aware of some recent replications not included in the CurateScience dataset.&lt;/p&gt;
+&lt;p&gt;#References&lt;/p&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-Cheung2016&#34;&gt;
+&lt;p&gt;Cheung, I., L. Campbell, E. P. LeBel, R. A. Ackerman, B. Aykutoğlu, š. Bahnı́k, J. D. Bowen, et al. 2016. “Registered Replication Report: Study 1 from Finkel, Rusbult, Kumashiro, &amp;amp; Hannon (2002).” &lt;em&gt;Perspectives on Psychological Science&lt;/em&gt; 11 (5): 750–64. &lt;a href=&#34;https://doi.org/10.1177/1745691616664694&#34;&gt;https://doi.org/10.1177/1745691616664694&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Coles2018&#34;&gt;
+&lt;p&gt;Coles, Nicholas, Leonid Tiokhin, Anne Scheel, Peder Isager, and Daniel Lakens. 2018. “The Costs and Benefits of Replication Studies.” &lt;a href=&#34;https://doi.org/10.17605/osf.io/c8akj&#34;&gt;https://doi.org/10.17605/osf.io/c8akj&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Connors2016&#34;&gt;
+&lt;p&gt;Connors, Scott, Mansur Khamitov, Sarah Moroz, Lorne Campbell, and Claire Henderson. 2016. “Time, Money, and Happiness: Does Putting a Price on Time Affect Our Ability to Smell the Roses?” &lt;em&gt;Journal of Experimental Social Psychology&lt;/em&gt; 67 (November): 60–64. &lt;a href=&#34;https://doi.org/10.1016/j.jesp.2015.08.005&#34;&gt;https://doi.org/10.1016/j.jesp.2015.08.005&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Donnellan2015&#34;&gt;
+&lt;p&gt;Donnellan, M. Brent, Richard E. Lucas, and Joseph Cesario. 2015. “On the Association Between Loneliness and Bathing Habits: Nine Replications of Bargh and Shalev (2012) Study 1.” &lt;em&gt;Emotion&lt;/em&gt; 15 (1): 109–19. &lt;a href=&#34;https://doi.org/10.1037/a0036079&#34;&gt;https://doi.org/10.1037/a0036079&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Harris2013&#34;&gt;
+&lt;p&gt;Harris, Christine R., Noriko Coburn, Doug Rohrer, and Harold Pashler. 2013. “Two Failures to Replicate High-Performance-Goal Priming Effects.” Edited by Jan de Fockert. &lt;em&gt;PLoS ONE&lt;/em&gt; 8 (8): e72467. &lt;a href=&#34;https://doi.org/10.1371/journal.pone.0072467&#34;&gt;https://doi.org/10.1371/journal.pone.0072467&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-IJzerman2014&#34;&gt;
+&lt;p&gt;IJzerman, Hans, Irene Blanken, Mark J. Brandt, J. M. Oerlemans, Marloes M. W. Van den Hoogenhof, Stephanie J. M. Franken, and Mathe W. G. Oerlemans. 2014. “Sex Differences in Distress from Infidelity in Early Adulthood and in Later Life: A Replication and Meta-Analysis of Shackelford et Al. (2004).” &lt;em&gt;Social Psychology&lt;/em&gt; 45 (3): 202–8. &lt;a href=&#34;https://doi.org/10.1027/1864-9335/a000185&#34;&gt;https://doi.org/10.1027/1864-9335/a000185&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Lynott2014&#34;&gt;
+&lt;p&gt;Lynott, Dermot, Katherine S. Corker, Jessica Wortman, Louise Connell, M. Brent Donnellan, Richard E. Lucas, and Kerry O’Brien. 2014. “Replication of ‘Experiencing Physical Warmth Promotes Interpersonal Warmth’ by Williams and Bargh (2008).” &lt;em&gt;Social Psychology&lt;/em&gt; 45 (3): 216–22. &lt;a href=&#34;https://doi.org/10.1027/1864-9335/a000187&#34;&gt;https://doi.org/10.1027/1864-9335/a000187&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Mcarthy2016&#34;&gt;
+&lt;p&gt;Mcarthy, Randy, John Skowronski, Bruno Verschuere, Ewout Meijer, Jim Ariane, Katherine Hoogesteyn, and Robin Orthey. 2016. “Registered Replication Report: Srull &amp;amp; Wyer (1979).” https://osf.io/29xv5/.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Pashler2013&#34;&gt;
+&lt;p&gt;Pashler, Harold, Doug Rohrer, and Christine R. Harris. 2013. “Can the Goal of Honesty Be Primed?” &lt;em&gt;Journal of Experimental Social Psychology&lt;/em&gt; 49 (6): 959–64. &lt;a href=&#34;https://doi.org/10.1016/j.jesp.2013.05.011&#34;&gt;https://doi.org/10.1016/j.jesp.2013.05.011&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Ronay2017&#34;&gt;
+&lt;p&gt;Ronay, Richard, Joshua M. Tybur, Dian van Huijstee, and Margot Morssinkhof. 2017. “Embodied Power, Testosterone, and Overconfidence as a Causal Pathway to Risk-Taking.” &lt;em&gt;Comprehensive Results in Social Psychology&lt;/em&gt; 2 (1): 28–43. &lt;a href=&#34;https://doi.org/10.1080/23743603.2016.1248081&#34;&gt;https://doi.org/10.1080/23743603.2016.1248081&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Sinclair2014&#34;&gt;
+&lt;p&gt;Sinclair, H. Colleen, Kristina B. Hood, and Brittany L. Wright. 2014. “Revisiting the Romeo and Juliet Effect (Driscoll, Davis, &amp;amp; Lipetz, 1972): Reexamining the Links Between Social Network Opinions and Romantic Relationship Outcomes.” &lt;em&gt;Social Psychology&lt;/em&gt; 45 (3): 170–78. &lt;a href=&#34;https://doi.org/10.1027/1864-9335/a000181&#34;&gt;https://doi.org/10.1027/1864-9335/a000181&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Vermeulen2014&#34;&gt;
+&lt;p&gt;Vermeulen, Ivar, Anika Batenburg, Camiel J. Beukeboom, and Tim Smits. 2014. “Breakthrough or One-Hit Wonder?: Three Attempts to Replicate Single-Exposure Musical Conditioning Effects on Choice Behavior (Gorn, 1982).” &lt;em&gt;Social Psychology&lt;/em&gt; 45 (3): 179–86. &lt;a href=&#34;https://doi.org/10.1027/1864-9335/a000182&#34;&gt;https://doi.org/10.1027/1864-9335/a000182&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Wesselmann2014&#34;&gt;
+&lt;p&gt;Wesselmann, Eric D., Kipling D. Williams, John B. Pryor, Fredrick A. Eichler, Devin M. Gill, and John D. Hogue. 2014. “Revisiting Schachter’s Research on Rejection, Deviance, and Communication (1951).” &lt;em&gt;Social Psychology&lt;/em&gt; 45 (3): 164–69. &lt;a href=&#34;https://doi.org/10.1027/1864-9335/a000180&#34;&gt;https://doi.org/10.1027/1864-9335/a000180&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Zwaan2017&#34;&gt;
+&lt;p&gt;Zwaan, Rolf A., Alexander Etz, Richard E. Lucas, and M. Brent Donnellan. 2017. “Making Replication Mainstream.” &lt;em&gt;Behavioral and Brain Sciences&lt;/em&gt;, October, 1–50. &lt;a href=&#34;https://doi.org/10.1017/S0140525X17001972&#34;&gt;https://doi.org/10.1017/S0140525X17001972&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>
