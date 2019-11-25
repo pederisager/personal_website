@@ -11,7 +11,7 @@ header:
   caption: ''
   image: 'headers/equivalence_test.png'
 categories: []
-slug: mixed_model_equivalence_references
+slug: mixed_model_equivalence
 tags: ["equivalence" , "statistics", "mixed model"]
 bibliography: mixed_model_equivalence.bib
 summary: "How to calculate an equivalence test, and power for an equivalence test, for a fixed effect in a mixed effects model using R and PANGEA."

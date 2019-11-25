@@ -12,10 +12,10 @@
     
     <item>
       <title>Mixed model equivalence test using R and PANGEA</title>
-      <link>/post/mixed_model_equivalence_references/</link>
+      <link>/post/mixed_model_equivalence/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/mixed_model_equivalence_references/</guid>
+      <guid>/post/mixed_model_equivalence/</guid>
       <description>&lt;p&gt;&lt;em&gt;How to calculate an equivalence test, and power for an equivalence test, for a fixed effect in a mixed effects model using R and PANGEA.&lt;/em&gt;&lt;/p&gt;
 &lt;div id=&#34;introduction-to-a-two-part-problem&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Introduction to a two-part problem&lt;/h2&gt;
@@ -99,7 +99,7 @@ sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alp
 plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999946234458505&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999939941427205&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;
