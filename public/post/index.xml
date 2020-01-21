@@ -126,7 +126,7 @@ sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alp
 plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.99995012822211&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999948254035823&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;
@@ -233,10 +233,8 @@ lower&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
 ## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.7306643 0.2484732 0.2603645&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df   t value      lower     upper
-## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732
-##      Pr(&amp;gt;|t|)
-## 1 0.007803275&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df   t value      lower     upper    Pr(&amp;gt;|t|)
+## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732 0.007803275&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The test provided by &lt;code&gt;contest1D&lt;/code&gt; is two-sided, but we can easily recalculate the required one-sided tests from the t-values provided (or simply divide by 2 the p-values provided by &lt;code&gt;contest1D&lt;/code&gt;):&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(lower$`t value`, lower$df, lower.tail = FALSE)  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
@@ -720,8 +718,10 @@ r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/how-to-share-your-data-with-osf/</guid>
-      <description>&lt;p&gt;####&lt;strong&gt;Disclaimer:&lt;/strong&gt;
-&lt;em&gt;In the time I spent writing up this blog post, &lt;a href=&#34;https://twitter.com/cksoderberg&#34;&gt;Courtney Soderberg&lt;/a&gt; published &lt;a href=&#34;https://doi.org/10.1177%2F2515245918757689&#34;&gt;a tutorial manuscript for data sharing on OSF&lt;/a&gt; in the journal AMPPS. I highly recommend checking it out!&lt;/em&gt;&lt;/p&gt;
+      <description>&lt;div id=&#34;disclaimer&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;In the time I spent writing up this blog post, &lt;a href=&#34;https://twitter.com/cksoderberg&#34;&gt;Courtney Soderberg&lt;/a&gt; published &lt;a href=&#34;https://doi.org/10.1177%2F2515245918757689&#34;&gt;a tutorial manuscript for data sharing on OSF&lt;/a&gt; in the journal AMPPS. I highly recommend checking it out!&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
 &lt;div id=&#34;intro&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Intro&lt;/h4&gt;
 &lt;p&gt;The Open Science movement is here to stay. Journals, reviewers, and fellow scientists increasingly expect that data and materials from research findings be made available upon publication. There are very good reasons for this, as open data and materials have the potential to increase reproducibility and collaboration, reduce the cost of data collection, and shift the focus from single findings to cumulative research programs. I think every researcher will stand to benefit from these uptakes in open practices. However, it is one thing to preach open science, and antother to practice it.&lt;/p&gt;
@@ -733,10 +733,14 @@ r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
 &lt;img src=&#34;/img/OSF_how_to/OSF_frontpage.png&#34; alt=&#34;Figure 1: OSF Frontpage.&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; OSF Frontpage.&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;####Create a profile&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;create-a-profile&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Create a profile&lt;/h4&gt;
 &lt;p&gt;First, you need to head over to OSF and create a profile. As mentioned, this is completely free. On the front page, click the green “Sign up” button, fill in your personal details, and you should be good to go.&lt;/p&gt;
 &lt;p&gt;When you are signed up and logged in, you should find yourself on the OSF dashboard. OSF keeps data and materials sorted into “projects”, and on the home screen you get an overview of your projects. In the upper right corner you will find a taskbar. If you click your name and then click “My Profile” in the drop-down menu, you can see and add information about yourself such as social media accounts, your ORCID ID, etc. To get back to the dashboard from anywhere, click the “OSF &lt;strong&gt;HOME&lt;/strong&gt;” button on the upper left of the page. Now let’s create a project and see how we can add data to it.&lt;/p&gt;
-&lt;p&gt;####Create a new project&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;create-a-new-project&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Create a new project&lt;/h4&gt;
 &lt;p&gt;When on the dashboard page, click the green “Create new project” button. This will open a dialogue box prompting you to fill in the name of the project. Try to write a sensible name that describes the content of the project (I.e. not “Data”). A good solution is to use the title of the paper/manuscript/grant proposal that is connected to the data you want to share. You will also be prompted to choose at which location you would prefer your data to be stored. If you are an EU researcher, choose “Germany - frankfurt” as your storage location to make your data &lt;a href=&#34;https://www.insight.mrc.ac.uk/2018/04/16/gdpr-research-changes/&#34;&gt;GDPR&lt;/a&gt; compliant. Check out &lt;a href=&#34;http://help.osf.io/m/settings/l/952786-set-a-global-storage-location&#34;&gt;this link&lt;/a&gt; to learn how to change the default storage location for all your future projects. You can also click “more” below the title box, and add a description (you can edit this later as well). When done, click “create”, and click “Go to new project” in the following dialogue box.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;/img/OSF_how_to/new_project_dialogue.png&#34; alt=&#34;Figure 2: Dialogue box for creating new project.&#34; /&gt;
@@ -747,7 +751,9 @@ r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
 &lt;img src=&#34;/img/OSF_how_to/OSF_project_page_reference_image2.png&#34; alt=&#34;Figure 3: OSF project page. Numbers are referenced in text as “fig 3.[1-10]”.&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; OSF project page. Numbers are referenced in text as “fig 3.[1-10]”.&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;####Set up and navigate the project page&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;set-up-and-navigate-the-project-page&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Set up and navigate the project page&lt;/h4&gt;
 &lt;p&gt;Now let’s give people a reason to cite this project! Here is a step by step by step guide for setting up your project in a way that makes it easy for people to find and use the information you want to share.&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;p&gt;Add a description of your project (fig 3.3). If you have already written a manuscript on the data, you could just click this field and paste the abstract. In any case, the description should make it clear what the project is intended for, and what kind of information one can expect to find here.&lt;/p&gt;&lt;/li&gt;
@@ -763,7 +769,9 @@ r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
 &lt;li&gt;&lt;p&gt;If you want to add some information about the project, consider putting it into the project Wiki (fig 3.9). Detailed info on how to edit the wiki can be found &lt;a href=&#34;http://help.osf.io/m/collaborating/l/524109-using-the-wiki&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Let the public in! If you are happy with the content, settings, and information included in your project (and you want to make it public), press the “Make Public” button (fig 3.10). Read through the warnings that pops up and, if you are sure that your project meets ethical requirements for open data sharing, click “Confirm”.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;####Finding help and more information&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;finding-help-and-more-information&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Finding help and more information&lt;/h4&gt;
 &lt;p&gt;Did you run into any trouble along the way? Fear not! Reliable sources tell me that OSF also has a very real and friendly human person you can reach at &lt;a href=&#34;mailto:support@osf.io&#34; class=&#34;email&#34;&gt;support@osf.io&lt;/a&gt;, who would be happy to help you out.&lt;/p&gt;
 &lt;p&gt;No more trouble? Then congratulations! You now have an open, licensed, reuasable, and citable version of your data and materials that can be accessed by anyone for the forseeable future. Just put a link to the project in your manuscript and voilà! Anyone can make use of your openly shared data, at no extra cost to you!
 
@@ -780,8 +788,9 @@ r=\frac{SD_1^2+SD_2^2-S_{diff}^2}{2SD_1SD_2}
       <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/ganging-up-on-psych-science/</guid>
-      <description>&lt;p&gt;##Everything is awesome. Everything is cool when you’re part of a team.
-&lt;br/&gt;
+      <description>&lt;div id=&#34;everything-is-awesome.-everything-is-cool-when-youre-part-of-a-team.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Everything is awesome. Everything is cool when you’re part of a team.&lt;/h2&gt;
+&lt;p&gt;&lt;br/&gt;
 The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take &lt;a href=&#34;https://home.cern/&#34;&gt;CERN&lt;/a&gt;, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.&lt;/p&gt;
 &lt;p&gt;The utility of large scale collaborations in psychology is much the same as in physics. Sometimes, the costs of doing good science outgrows the resources available to the individual researcher. In physics, this might be the money and manpower required to build machinery necessary for empirical observation. For example, the Large Hadron Collider experiments has an expected price-tag of around 5.5 billion USD &lt;span class=&#34;citation&#34;&gt;(“Large Hadron Collider” 2018)&lt;/span&gt;. In psychology, large scale collaboration has the potential to help us muster the organizational resources required to collect sufficiently large and diverse (non-WEIRD) samples from the human population. It can also can mitigate subpar research practices caused by individual knowledge gaps by bringing together multiple researchers with a wide variety of skills and expertise.&lt;/p&gt;
 &lt;p&gt;Large scale collaborations are already beginning to impact psychology in important ways. For example, a summary of the 100 replication studies included in the “Reproducibility Project: Psychology” was published in Science &lt;span class=&#34;citation&#34;&gt;(Open Science Collaboration 2015)&lt;/span&gt;, and the project has helped elevate the status of replication research in psychology ever since. The idea of reproducibility projects has also spread to neighbouring areas, and similar collaborative undertakings can now be found in experimental economics &lt;span class=&#34;citation&#34;&gt;(Camerer et al. 2016)&lt;/span&gt;, cancer biology &lt;span class=&#34;citation&#34;&gt;(“Effort to Reproduce Cancer Studies Scales down to 18 Papers,” n.d.)&lt;/span&gt;, experimental philosophy &lt;span class=&#34;citation&#34;&gt;(Cova et al. 2018)&lt;/span&gt;, and social science research published in Science and Nature &lt;span class=&#34;citation&#34;&gt;(Camerer et al. 2018)&lt;/span&gt;. Other established collaborations include the “Many Labs” projects, which have published authoritative reports on the role of contextual effects in psychological research, including the infamous end-of-semester effect &lt;span class=&#34;citation&#34;&gt;(Ebersole et al. 2016)&lt;/span&gt;. The “Many Babies” project &lt;span class=&#34;citation&#34;&gt;(“The ManyBabies Project,” n.d.)&lt;/span&gt; is studying thousands of infants in an attempt to address some big questions in developmental psychology. To illustrate how do these collaborations function and how they help us do good science, let me describe the one I am a member of in a little more detail.&lt;/p&gt;
@@ -792,9 +801,13 @@ The idea of having heaps of scientists come together to accomplish something non
 &lt;p&gt;The collaborations here mentioned are all fairly recent projects, so we can only speculate what their long term impact on the field will be. However, my hunch is that we are witnessing the early version of what will become a new gold standard for research in psychology. By no means do I think that large scale collaboration projects will be the only research conducted in psychology. These projects are slow moving, inflexible, and resource intensive compared to small scale lab research, and sometimes studies needs to be cheap and flexible. But I do think that large scale collaboration projects will become the most rigorous empirical process we can subject many of our research questions to. As such, I also think the data from these projects will eventually constitute much of the foundation upon which novel psychological theory will build. I therefore heartily recommend checking out the research that is coming out of these projects. They are authoritative reports on the topics they cover, and they have taught me a lot about psychological science in general.&lt;/p&gt;
 &lt;p&gt;If you are passionate about psychological research, why not join a collaboration yourself? The Psychological Science Accelerator welcomes members from all walks of academia. Contribution is voluntary, and level of contribution is completely up to you. At our website you can find a link to &lt;a href=&#34;https://psysciacc.org/get-involved/&#34;&gt;our sign-up form&lt;/a&gt;. We need help with everything from reviewing incoming project proposals, to feedback on policy, to data collection. I’m unfortunately not sure how other projects handle lab recruitment at the time of writing. If you do, let me know in the comment section!&lt;/p&gt;
 &lt;p&gt;I suppose the deeper reason why I see large scale collaboration as a solution to current issues is that I believe science is a fundamentally collaborative effort. If you share your discovery, we all make the discovery. If you share your knowledge, we all become knowledgeable. Ambition, prestige and a competitive spirit may drive individual scientists to do great things, but there would be no moon landing, no human genome project, no penicillin, no internet, if not for the ability of all scientists to work together in a common pursuit of knowledge.&lt;/p&gt;
-&lt;p&gt;##Acknowledgements
-This is a shortened, translated version of an article to be published in “Psykologisk tidsskrift NTNU”, a pscyhology magazine run by students at the Norwegian University of Science and Technology. Thanks to Gerit Phul for providing feedback on the english version of the manuscript.&lt;/p&gt;
-&lt;p&gt;#References&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;acknowledgements&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;This is a shortened, translated version of an article to be published in “Psykologisk tidsskrift NTNU”, a pscyhology magazine run by students at the Norwegian University of Science and Technology. Thanks to Gerit Phul for providing feedback on the english version of the manuscript.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
 &lt;div id=&#34;ref-Camerer2016&#34;&gt;
 &lt;p&gt;Camerer, Colin F., Anna Dreber, Eskil Forsell, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, et al. 2016. “Evaluating Replicability of Laboratory Experiments in Economics.” &lt;em&gt;Science&lt;/em&gt;, March, aaf0918. &lt;a href=&#34;https://doi.org/10.1126/science.aaf0918&#34;&gt;https://doi.org/10.1126/science.aaf0918&lt;/a&gt;.&lt;/p&gt;
@@ -827,6 +840,7 @@ This is a shortened, translated version of an article to be published in “Psyk
 &lt;p&gt;Vadillo, Miguel A., Natalie Gold, and Magda Osman. 2018. “Searching for the Bottom of the Ego Well: Failure to Uncover Ego Depletion in Many Labs 3.” &lt;em&gt;Royal Society Open Science&lt;/em&gt; 5 (8): 180390. &lt;a href=&#34;https://doi.org/10.1098/rsos.180390&#34;&gt;https://doi.org/10.1098/rsos.180390&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -836,14 +850,18 @@ This is a shortened, translated version of an article to be published in “Psyk
       <pubDate>Sat, 09 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/what-to-replicate/</guid>
-      <description>&lt;p&gt;##Justifications of study choice from 85 replication studies.
-&lt;br/&gt;
+      <description>&lt;div id=&#34;justifications-of-study-choice-from-85-replication-studies.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Justifications of study choice from 85 replication studies.&lt;/h2&gt;
+&lt;p&gt;&lt;br/&gt;
 In their recent BBS article, &lt;span class=&#34;citation&#34;&gt;Zwaan et al. (2017)&lt;/span&gt; synthesized arguments for and against replication research and laid out a convincing argument for the value of direct replication in science. My collaborators and I wrote a commentary on this article &lt;span class=&#34;citation&#34;&gt;(Coles et al. 2018)&lt;/span&gt;. In it, we argued that in order to maximize the utility of replication in a science that is operating under resource constraints (there is only so much time and money for doing research), we need to deal with the question of when to replicate. In other words, assume that a researcher has limited resources and can either replicate a previous study or run an original study of their own. Both of these options have costs (e.g. money for subject recruitment, time spent conducting the study) and benefits (e.g. theoretical innovation, estimate accuracy, societal impact). Considering both options, the researcher will need to decide which has the higher cost/benefit ratio.&lt;/p&gt;
 &lt;p&gt;In a another project I am working on for the Open Science Collaboration, we are trying to develop some formalized tools to help researchers justify their decisions of which studies to replicate. We make the assumption that every researcher has to make decisions under resource constraints, and we assume that they have already decided to conduct a replication. They now face a new problem: There are many original findings that they could replicate. Which one should they choose? We may all agree with Zwaan et al. (2017) that “the idea that observations can be recreated and verified by independent sources is usually seen as a bright line of demarcation that separates science from non-science”, but that does not really help us prioritize which observations to recreate. What makes a study more valuable to replicate than another?&lt;/p&gt;
 &lt;p&gt;In the process of coming up with answers to this question, I thought it would be useful to take a look at how researchers “in the wild” justify their replication efforts. They must have some reason for choosing a specific study to replicate, and it seems reasonable to assume that authors would provide these reasons in their report. So I went to the “Curated Replications” dataset at &lt;a href=&#34;http://curatescience.org&#34;&gt;curatescience.org&lt;/a&gt; and started working my way through the links in the table. Eighty-five papers later, here are my takeaways.&lt;/p&gt;
-&lt;p&gt;#Replication Justifications&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;replication-justifications&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Replication Justifications&lt;/h1&gt;
 &lt;p&gt;Based on my reading of and subjective judgement of similarity between the justifications for study selection mentioned in the 85 replication reports, I have grouped them into five major categories: theoretical impact, personal interest, academic impact, public/social impact, and methodological concerns. For each category I have included a short description, and a few illustrative quotes with a reference to the quoted articles in each case. It should be noted that any given replication will usually deploy more than one justification for why a finding was considered valuable to replicate, often drawing from several different categories. At the end of this article you can find a link to a spreadsheet containing the justification quotes I have based my review on, as well as article DOIs, for almost all of the 85 reports reviewed (some reports did not have a justification and/or DOI).&lt;/p&gt;
-&lt;p&gt;##&lt;strong&gt;Theoretical impact&lt;/strong&gt;&lt;/p&gt;
+&lt;div id=&#34;theoretical-impact&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Theoretical impact&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;One of the most widely deployed justifications for replication is arguing for the theoretical significance of the finding. These arguments are sometimes quite specific:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;IJzerman et al. (2014)&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -854,13 +872,17 @@ In their recent BBS article, &lt;span class=&#34;citation&#34;&gt;Zwaan et al. (
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;“This highly cited paper serves as a cornerstone for the theoretical importance of relationship commitment as a predictor of relationship outcomes, including forgiveness. The findings have important implications for the theoretical understanding of forgiveness…”&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;##&lt;strong&gt;Personal interest&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;personal-interest&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Personal interest&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Similar to theoretical impact, though harder to nail down in a specific quote, personal interest represents the author’s own interest in the topic they are studying. A large portion of replications I reviewed were phrased in such a way that the authors seemed partially motivated by their own personal interest in the topic at hand. Some illustrative cases are found in conceptual replications, where the replication itself is often a stepping stone on the way to what the authors really care about: extending current research paradigms.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Ronay et al. (2017)&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;“The goal of the current research was twofold. First, we intended to replicate Carney et al.’s (2010) main effects and to test the possibility that the relationship between embodied power and risk-taking is statistically mediated by increases in testosterone… Our second goal was to test the possibility that elevated levels of testosterone increase overconfidence, which in turn may facilitate risk-taking…”&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;##&lt;strong&gt;Academic impact&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;academic-impact&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Academic impact&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Another common justification for choosing a finding to replicate is to refer to the academic impact of either the original finding or the paper it is reported in. There are many indicators of academic impact researchers can use, some more quantifiable than others, but all are related in some way to the standing of the paper among scientists in the field. Examples of less quantifiable justifications include the following:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example (generative finding)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Lynott et al. (2014)&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -886,7 +908,9 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;p&gt;##&lt;strong&gt;Public/societal impact&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;publicsocietal-impact&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Public/societal impact&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Somewhat less common are appeals to the public or societal impact of a finding. This can refer to mentions of the finding in the popular press, bringing up altmetrics-related numbers, practical use cases of the findings such as in therapy or in court cases, or the public policy informed by a particular finding. The three examples listed below are just a sample of the justifications deployed in the literature:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example (public impact)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Connors et al. (2016)&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -900,7 +924,9 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;“If this effect is robust, it would seem to have considerable potential impact in practical areas. Collection of self-report data from people is a commonplace and costly activity in domains ranging from marketing research to public health and opinion polling. A very low-cost method of increasing candor from respondents would have major significance…”&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;##&lt;strong&gt;Methodological concerns&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;methodological-concerns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Methodological concerns&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;The umbrella term “methodological concerns” covers perhaps the largest range of qualitatively different justifications. However, they share a fundamental similarity: they all express some doubt in the conclusions of the original research.&lt;/p&gt;
 &lt;p&gt;The reason for doubt varies. In some cases, original estimates of quantities are just not very precise, and researchers may express a desire to increase the accuracy, or narrow the confidence intervals, of a given estimate. In other cases, there may be reasons to believe that the original estimates cannot be trusted due to failures to replicate conceptually similar findings, due to contradicting findings in the existing literature, or the replicating researcher may suspect that questionable research practices (QRPs) or publication bias is biasing the reported numbers. I have not seen these concerns directed towards the the original study authors personally, but replicating authors might refer to widespread problems with QRPs in general. For example, they might express suspicion based on the general tendency for effect sizes in psychology to be overestimated. Finally, replicating authors may simply point out that few or no direct replications of the original finding exist, and/or that the original authors have called for replication of their own findings. The examples listed below do not capture the full nuance of justifications based on methodological concerns. I refer the interested reader to the spreadsheet for more cases.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Example (imprecise estimate)&lt;/strong&gt;: &lt;span class=&#34;citation&#34;&gt;Donnellan, Lucas, and Cesario (2015)&lt;/span&gt;&lt;/p&gt;
@@ -919,7 +945,9 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;“Since the original study, replications of the effect have been elusive… Few studies find support for anything approximating the effect. Instead, most find the ‘‘social network effect’’ whereby disapproval from one’s social network – whether family or friends – leads to declines in romantic relationship quality… A limitation of the counterevidence for the Romeo and Juliet effect is the fact that none of the follow-up studies used the original scales.”&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;##&lt;strong&gt;Large Scale Collaborations&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;large-scale-collaborations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Large Scale Collaborations&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;A discussion of replication justifications would not be complete without considering how the large scale lab replication collaborations like Many Labs and the Reproducibility Projects justify their sampling procedures. These are special cases in at least three ways.&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;The authors are often interested in introducing some element of randomness into the study selection process in order to get a more representative sample from the population of effects in the literature.&lt;/li&gt;
@@ -927,15 +955,21 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
 &lt;li&gt;Because they are all preregistered, and original study selection is part of their sampling procedure, justifications are usually more elaborate than for the average replication study.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The exact justification text varies somewhat from project to project. It is however interesting to note that academic impact features in the justification process for almost all of these large scale projects. I refer the reader to the spreadsheet for details of each collaboration’s justifications.&lt;/p&gt;
-&lt;p&gt;#&lt;strong&gt;Caveats &amp;amp; Summary&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;caveats-summary&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;Caveats &amp;amp; Summary&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;I do want to highlight some caveats of this project. First and foremost, I did not apply formal qualitative methods to this literature search, nor did I comprehensively comb through the literature to make sure I discovered every available justification out there. I am sure that there are more examples of justifications in studies I did not review. In fact, I am pretty sure there are justifications in the papers I did review that I might have missed. Second, as was pointed out to me by a colleague, there is no guarantee that the justifications that authors put down in their papers are the real reasons for why they choose this studyover that study. If researchers sometimes rewrite the introduction section of their original research papers to spice up the importance of their work, they might also do this when writing replication-research papers. For example, the researchers could have been motivated purely by strong personal doubts in an effect, but might choose to refer to the citations of the original work because this seems more objective. Finally, the overwhelming majority of the replication reports reviewed here are from psychological science, and scholars in other fields of science may of course have widely differing justifications for conducting replications. Consider this a non-representative sample of possible justifications. If you think I have missed important justifications, or mischaracterized the intentions of any author mentioned here, let me know!&lt;/p&gt;
 &lt;p&gt;In the paper I am working on, I hope to elaborate more on how researchers could formalize some of these justifications by specifying formulas for replication value. Until then, I hope this will serve as a useful starting point if you are looking to do replication research, and are curious about how researchers go about justifying which finding to replicate.&lt;/p&gt;
 &lt;p&gt;Happy replicating!&lt;/p&gt;
-&lt;p&gt;###Updates&lt;/p&gt;
+&lt;div id=&#34;updates&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Updates&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;A registered and citeable version of this blog post, including a copy of the linked spreadsheet, is available at &lt;a href=&#34;https://doi.org/10.5281/zenodo.1286715&#34; class=&#34;uri&#34;&gt;https://doi.org/10.5281/zenodo.1286715&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;###Spreadsheet of Justifications&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;spreadsheet-of-justifications&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Spreadsheet of Justifications&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/1HzBePXvDAeGu8ND04E18u7BynT75LgW4vcLFNDUn7GU/edit?usp=sharing&#34; class=&#34;uri&#34;&gt;https://docs.google.com/spreadsheets/d/1HzBePXvDAeGu8ND04E18u7BynT75LgW4vcLFNDUn7GU/edit?usp=sharing&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The spreadsheet include quotes from the 85 papers reviewed for this piece. Please note the following:&lt;/p&gt;
 &lt;ul&gt;
@@ -944,9 +978,14 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
 &lt;li&gt;Cells in the “DOI” column are listed as NA when a DOI could not be obtained.&lt;/li&gt;
 &lt;li&gt;Cells “Replication Justifications” column are listed as NA when no discernable justification for the replication could be derived from either the introduction or discussion section of the manuscript.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;###Acknowledgements&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;acknowledgements&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Acknowledgements&lt;/h3&gt;
 &lt;p&gt;Thanks to &lt;a href=&#34;https://twitter.com/coles_nicholas_&#34;&gt;Nicholas Coles&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/chrisharms&#34;&gt;Christopher Harms&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/lakens&#34;&gt;Daniël Lakens&lt;/a&gt;, and &lt;a href=&#34;https://twitter.com/LeonidTiokhin&#34;&gt;Leonid Tiokhin&lt;/a&gt; for helpful comments and suggestions on drafts for this post. Thanks to &lt;a href=&#34;https://twitter.com/eplebel&#34;&gt;Etienne LeBel&lt;/a&gt; for curating the dataset used for this post and making it freely available online. Thanks to &lt;a href=&#34;https://twitter.com/hardsci&#34;&gt;Sanjay Srivastava&lt;/a&gt; for making me aware of some recent replications not included in the CurateScience dataset.&lt;/p&gt;
-&lt;p&gt;#References&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
 &lt;div id=&#34;ref-Cheung2016&#34;&gt;
 &lt;p&gt;Cheung, I., L. Campbell, E. P. LeBel, R. A. Ackerman, B. Aykutoğlu, š. Bahnı́k, J. D. Bowen, et al. 2016. “Registered Replication Report: Study 1 from Finkel, Rusbult, Kumashiro, &amp;amp; Hannon (2002).” &lt;em&gt;Perspectives on Psychological Science&lt;/em&gt; 11 (5): 750–64. &lt;a href=&#34;https://doi.org/10.1177/1745691616664694&#34;&gt;https://doi.org/10.1177/1745691616664694&lt;/a&gt;.&lt;/p&gt;
@@ -989,6 +1028,7 @@ Figure 1: Histogram of Crossref citation counts for 2854 empirical research pape
 &lt;/div&gt;
 &lt;div id=&#34;ref-Zwaan2017&#34;&gt;
 &lt;p&gt;Zwaan, Rolf A., Alexander Etz, Richard E. Lucas, and M. Brent Donnellan. 2017. “Making Replication Mainstream.” &lt;em&gt;Behavioral and Brain Sciences&lt;/em&gt;, October, 1–50. &lt;a href=&#34;https://doi.org/10.1017/S0140525X17001972&#34;&gt;https://doi.org/10.1017/S0140525X17001972&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

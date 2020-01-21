@@ -12,7 +12,7 @@ header:
   image: 'headers/CERN-blog-header.jpg'
 ---
 
-##Everything is awesome. Everything is cool when you’re part of a team.
+## Everything is awesome. Everything is cool when you’re part of a team.
 <br/>
 The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take [CERN](https://home.cern/), established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world's biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web. 
 
@@ -34,7 +34,7 @@ If you are passionate about psychological research, why not join a collaboration
 
 I suppose the deeper reason why I see large scale collaboration as a solution to current issues is that I believe science is a fundamentally collaborative effort. If you share your discovery, we all make the discovery. If you share your knowledge, we all become knowledgeable. Ambition, prestige and a competitive spirit may drive individual scientists to do great things, but there would be no moon landing, no human genome project, no penicillin, no internet, if not for the ability of all scientists to work together in a common pursuit of knowledge. 
 
-##Acknowledgements
+## Acknowledgements
 This is a shortened, translated version of an article to be published in "Psykologisk tidsskrift NTNU", a pscyhology magazine run by students at the Norwegian University of Science and Technology. Thanks to Gerit Phul for providing feedback on the english version of the manuscript.  
 
-#References
+# References

@@ -12,7 +12,7 @@ header:
   image: '/headers/badge_header.png'
 ---
 
-####**Disclaimer:** 
+#### **Disclaimer:** 
 *In the time I spent writing up this blog post, [Courtney Soderberg](https://twitter.com/cksoderberg) published [a tutorial manuscript for data sharing on OSF](https://doi.org/10.1177%2F2515245918757689) in the journal AMPPS. I highly recommend checking it out!*
 
 #### Intro
@@ -31,13 +31,13 @@ OSF is a website maintained by the Center for Open Science, and is a hub for eve
 
 ![**Figure 1:** OSF Frontpage.](/img/OSF_how_to/OSF_frontpage.png)
 
-####Create a profile
+#### Create a profile
 
 First, you need to head over to OSF and create a profile. As mentioned, this is completely free. On the front page, click the green "Sign up" button, fill in your personal details, and you should be good to go.
 
 When you are signed up and logged in, you should find yourself on the OSF dashboard. OSF keeps data and materials sorted into "projects", and on the home screen you get an overview of your projects. In the upper right corner you will find a taskbar. If you click your name and then click "My Profile" in the drop-down menu, you can see and add information about yourself such as social media accounts, your ORCID ID, etc. To get back to the dashboard from anywhere, click the "OSF **HOME**" button on the upper left of the page. Now let's create a project and see how we can add data to it. 
 
-####Create a new project
+#### Create a new project
 
 When on the dashboard page, click the green "Create new project" button. This will open a dialogue box prompting you to fill in the name of the project. Try to write a sensible name that describes the content of the project (I.e. not "Data"). A good solution is to use the title of the paper/manuscript/grant proposal that is connected to the data you want to share. You will also be prompted to choose at which location you would prefer your data to be stored. If you are an EU researcher, choose "Germany - frankfurt" as your storage location to make your data [GDPR](https://www.insight.mrc.ac.uk/2018/04/16/gdpr-research-changes/) compliant. Check out [this link](http://help.osf.io/m/settings/l/952786-set-a-global-storage-location) to learn how to change the default storage location for all your future projects. You can also click "more" below the title box, and add a description (you can edit this later as well). When done, click "create", and click "Go to new project" in the following dialogue box.
 
@@ -47,7 +47,7 @@ Welcome to your new project! You should now be looking at your brand new project
 
 ![**Figure 3:** OSF project page. Numbers are referenced in text as "fig 3.[1-10]".](/img/OSF_how_to/OSF_project_page_reference_image2.png)
 
-####Set up and navigate the project page
+#### Set up and navigate the project page
 
 Now let's give people a reason to cite this project! Here is a step by step by step guide for setting up your project in a way that makes it easy for people to find and use the information you want to share. 
 
@@ -64,7 +64,7 @@ Now let's give people a reason to cite this project! Here is a step by step by s
 1. If you want to add some information about the project, consider putting it into the project Wiki (fig 3.9). Detailed info on how to edit the wiki can be found [here](http://help.osf.io/m/collaborating/l/524109-using-the-wiki).
 1. Let the public in! If you are happy with the content, settings, and information included in your project (and you want to make it public), press the "Make Public" button (fig 3.10). Read through the warnings that pops up and, if you are sure that your project meets ethical requirements for open data sharing, click "Confirm". 
 
-####Finding help and more information
+#### Finding help and more information
 
 Did you run into any trouble along the way? Fear not! Reliable sources tell me that OSF also has a very real and friendly human person you can reach at support@osf.io, who would be happy to help you out. 
 

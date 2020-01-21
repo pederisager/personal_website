@@ -102,7 +102,7 @@ sim &lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alpha =
 plot(sim[,1], sim[,2], xlab = &quot;ncp power&quot;, ylab = &quot;powerTOSTone&quot;)</code></pre>
 <p><img src="/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>paste(&quot;Pearson correlation =&quot;, cor(sim[,1], sim[,2]))</code></pre>
-<pre><code>## [1] &quot;Pearson correlation = 0.99995012822211&quot;</code></pre>
+<pre><code>## [1] &quot;Pearson correlation = 0.999948254035823&quot;</code></pre>
 </div>
 <div id="part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea" class="section level2">
 <h2>Part 2: Extending the ncp approach to mixed designs using PANGEA</h2>
@@ -209,10 +209,8 @@ lower</code></pre>
 <pre><code>##     Estimate Std. Error       df  t value      lower     upper  Pr(&gt;|t|)
 ## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.7306643 0.2484732 0.2603645</code></pre>
 <pre class="r"><code>upper</code></pre>
-<pre><code>##     Estimate Std. Error       df   t value      lower     upper
-## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732
-##      Pr(&gt;|t|)
-## 1 0.007803275</code></pre>
+<pre><code>##     Estimate Std. Error       df   t value      lower     upper    Pr(&gt;|t|)
+## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732 0.007803275</code></pre>
 <p>The test provided by <code>contest1D</code> is two-sided, but we can easily recalculate the required one-sided tests from the t-values provided (or simply divide by 2 the p-values provided by <code>contest1D</code>):</p>
 <pre class="r"><code>pt(lower$`t value`, lower$df, lower.tail = FALSE)  # test against lower bound</code></pre>
 <pre><code>## [1] 0.1301823</code></pre>
