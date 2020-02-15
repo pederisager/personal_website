@@ -22,9 +22,18 @@
     </item>
     
     <item>
+      <title>Causal graphs</title>
+      <link>/tags/causal-graphs/</link>
+      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/causal-graphs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Corroboration</title>
       <link>/tags/corroboration/</link>
-      <pubDate>Fri, 12 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/corroboration/</guid>
       <description></description>
@@ -49,11 +58,29 @@
     </item>
     
     <item>
+      <title>Equivalence</title>
+      <link>/tags/equivalence/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/equivalence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>GDPR</title>
       <link>/tags/gdpr/</link>
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/gdpr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Graph theory</title>
+      <link>/tags/graph-theory/</link>
+      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/graph-theory/</guid>
       <description></description>
     </item>
     
@@ -72,6 +99,24 @@
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/licensing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta-science</title>
+      <link>/tags/meta-science/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/meta-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mixed model</title>
+      <link>/tags/mixed-model/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mixed-model/</guid>
       <description></description>
     </item>
     
@@ -105,7 +150,7 @@
     <item>
       <title>PSA</title>
       <link>/tags/psa/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/psa/</guid>
       <description></description>
@@ -141,9 +186,18 @@
     <item>
       <title>Research practice</title>
       <link>/tags/research-practice/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/research-practice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>/tags/statistics/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     

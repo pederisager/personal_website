@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Fri, 12 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/corroboration/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fifty ways to leave your model</title>
+      <link>/post/fifty-ways-to-leave-your-model/</link>
+      <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fifty-ways-to-leave-your-model/</guid>
+      <description>The problem is all inside your head, she said to me. The answer is easy if you take it logically. I’d like to help you in your struggle to be free. There must be fifty2.2162 ways to leave your lovermodel.
+Suppose we have a theory about the mechanism that sustains insomnia. The theory can be roughly summarized in a (dynamic) causal graph model like so:
+Figure 1: Example causal model.</description>
+    </item>
     
     <item>
       <title>Quantifying the corroboration of a finding</title>

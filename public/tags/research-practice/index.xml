@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/research-practice/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Meta-research at the Psychological Science Accelerator</title>
+      <link>/post/meta-research-at-the-psa/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/meta-research-at-the-psa/</guid>
+      <description>(This is a reposting of a blog post originally posted to: https://metaresearch.nl/blog/2019/12/16/meta-research-at-the-psychological-science-accelerator)
+Friday November 22, 2019, the Meta-research center at Tilburg University (https://metaresearch.nl/) organized the meta-research day. Around 90 researchers attended the meta-research day that involved three plenary lectures, by John Ioannidis (who received an honorary doctorate from Tilburg University a day earlier), Ana Marušić, and Sarah de Rijcke, and seven parallel sessions on meta-research (https://www.tilburguniversity.edu/about/schools/socialsciences/organization/departments/methodology-statistics/colloquia/meta-research-day). One of these sessions was titled How can meta-research improve the Psychological Science Accelerator (PSA) and how can the PSA improve meta-research?</description>
+    </item>
     
     <item>
       <title>Proposing a theory committee at the Psychological Science Accelerator</title>
@@ -28,7 +38,7 @@ The Psychological Science Accelerator (PSA) is a global network of psychological
       <pubDate>Fri, 31 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/ganging-up-on-psych-science/</guid>
-      <description>##Everything is awesome. Everything is cool when you’re part of a team.The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
+      <description>Everything is awesome. Everything is cool when you’re part of a team.The idea of having heaps of scientists come together to accomplish something none of them could do on their own is not new. Take CERN, established in 1954 and one of the most famous large scale collaborations in science to date. CERN is a massive experimental undertaking with a mission to address fundamental problems in physics. Today, it employs over 2500 scientists from 22 countries and has lead to some pretty impressive innovations, like the construction of the Large Hadron Collider (the world’s biggest machine), the discovery of the Higgs boson, and the invention of the Word Wide Web.</description>
     </item>
     
   </channel>
