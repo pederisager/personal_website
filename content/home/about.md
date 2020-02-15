@@ -32,4 +32,4 @@ weight = 5
 
 # Biography
 
-I am a PhD student studying research practices in psychology at Eindhoven University of Technology. I am working with [Daniël Lakens](https://twitter.com/lakens) and [Anne Scheel](https://twitter.com/annemscheel) on the project "Increasing the Reliability and Efficiency of Psychological Science". I am also a board member on the Methodology & Data Analysis committee at the [Psychological Science Accelerator](https://psysciacc.org/). 
+I am a PhD student studying research practices in psychology at Eindhoven University of Technology. I am working with [Daniël Lakens](https://twitter.com/lakens), [Anne Scheel](https://twitter.com/annemscheel) and [Leo Tiokhin](https://twitter.com/LeonidTiokhin) on the project "Increasing the Reliability and Efficiency of Psychological Science". I am also a board member on the Methodology & Data Analysis committee at the [Psychological Science Accelerator](https://psysciacc.org/). 
