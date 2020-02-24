@@ -67,11 +67,14 @@ Netherlands                        phone: 0047 976 51 974
 
 ## Publications
 
+### 2019
+
+Botvinik-Nezer, R., Holzmeister, F., Camerer, C. F., Dreber, A., Huber, J., Johannesson, M., ..., **Isager, P. M.**, ... & Avesani, P. (2019). Variability in the analysis of a single neuroimaging dataset by many teams. *bioRxiv*. https://doi.org/10.1101/843193
 
 ### 2018
 
 
-Moshontz, H., Campbell, L., Ebersole, C. R., IJzerman, H., Urry, H. L., ..., **Isager, P. M.**., ... Chartier, C. R. (2018). The Psychological Science Accelerator: Advancing Psychology Through a Distributed Collaborative Network. *Advances in Methods and Practices in Psychological Science*, 1(4), 501–515. https://doi.org/10.1177/2515245918797607
+Moshontz, H., Campbell, L., Ebersole, C. R., IJzerman, H., Urry, H. L., ..., **Isager, P. M.**, ... Chartier, C. R. (2018). The Psychological Science Accelerator: Advancing Psychology Through a Distributed Collaborative Network. *Advances in Methods and Practices in Psychological Science*, 1(4), 501–515. https://doi.org/10.1177/2515245918797607
 
 Holmgren, J.\*, **Isager, P. M.,**\*, Schubert, T. W. (2018). Evidence for magnitude representations of social hierarchies: Size and distance effects. *PLOS ONE* 13(9), e0203263. https://doi.org/10.1371/journal.pone.0203263. \**Joint first-authors*
 
@@ -103,12 +106,22 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 
 ### Organization
 
+2020
+:   **Symposium chair**; Berlin, Germany
+
+    Chaired and helped organize symposium at the Reward|EQUATOR conference, held at Charité, Berlin.
+
 2016
 :   **Head organizer of dept. research symposium**; University of Oslo
 
     Local symposium communicating department research projects to students. Responsibilities: Securing funding; Recruiting speakers; Promotion; Event logistics, project presentation at event.
 
 ### Presentations
+
+2020
+:   **Reward|EQUATOR conference**; Berlin, Germany
+
+    Isager, P. M., *: Quantifying the replication value of research findings: Increase the return on investment in replication research.*
 
 2019
 :   **Tilburg Meta-Research Day**; Tilburg, Netherlands

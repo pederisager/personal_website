@@ -38,7 +38,7 @@ Models=||edges||^{pairs}
 \tag{1}
 \end{equation}
 \]</span></p>
-<p>How many edges are there? An undirected graph has only 2 possible edges for every pair of nodes (“A ー B” and “A ⊥ B”). A directed acyclic graph has three possible edges (“A → B”, “A ← B”, “A ⊥ B”), and a dynamic causal model has four (“A → B”, “A ← B”, “A ⊥ B”, and “A ↔︎ B”). Since our example model is dynamic (it contains a feedback loop), we must allow for dynamic “↔︎” edges. Then we have four possible edges in the set of edges:</p>
+<p>How many edges are there? An undirected graph has only 2 possible edges for every pair of nodes (“A ー B” and “A ⊥ B”). A directed acyclic graph has three possible edges (“A → B”, “A ← B”, “A ⊥ B”), and a dynamic causal model has four (“A → B”, “A ← B”, “A ⊥ B”, and “A ↔ B”). Since our example model is dynamic (it contains a feedback loop), we must allow for dynamic “↔” edges. Then we have four possible edges in the set of edges:</p>
 <p><span class="math display">\[
 \begin{equation}
 ||edges||=4
@@ -89,7 +89,7 @@ Models=\displaystyle\prod_{i=1}^{pairs} edges_{i}
 \tag{6}
 \end{equation}
 \]</span>
-Suppose we conduct an experiment which shows that insomnia causes fatigue and not the other way around (with absolute certainty, for the sake of illustration). Thus, we have determined (Insomnia → Fatigue) and falsified (Insomnia ← Fatigue), (Insomnia ↔︎ Fatigue) and (Insomnia ⊥ Fatigue). Now we have 5 pairs with 4 possible edges, and 1 pair (insomnia, fatigue) with only 1 possible edge (“→”). We can find the number of models that are equivalent with our finding like so:</p>
+Suppose we conduct an experiment which shows that insomnia causes fatigue and not the other way around (with absolute certainty, for the sake of illustration). Thus, we have determined (Insomnia → Fatigue) and falsified (Insomnia ← Fatigue), (Insomnia ↔ Fatigue) and (Insomnia ⊥ Fatigue). Now we have 5 pairs with 4 possible edges, and 1 pair (insomnia, fatigue) with only 1 possible edge (“→”). We can find the number of models that are equivalent with our finding like so:</p>
 <p><span class="math display">\[
 \begin{equation}
 Models=\displaystyle\prod_{i=1}^{pairs} edges_{i}=4\times4\times4\times4\times4\times1=4^51^1=1024
@@ -109,7 +109,7 @@ Models=\displaystyle\prod_{i=1}^{pairs} edges_{i}=4\times4\times4\times3\times3\
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>4096≈50<sup>2.1262</sup>, which means my title is almost no stretch at all!<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>You could also substitute this equation for equation <span class="math inline">\(\eqref{eq:models}\)</span> and arrive at the exact same results.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>4096≈50<sup>2.1262</sup>, which means my title is almost no stretch at all!<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>You could also substitute this equation for equation <span class="math inline">\(\eqref{eq:models}\)</span> and arrive at the exact same results.<a href="#fnref2" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
