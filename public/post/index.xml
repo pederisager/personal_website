@@ -11,6 +11,33 @@
     <atom:link href="/post/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Choosing what to replicate: recorded talk for Rotterdam RIOTS club</title>
+      <link>/post/choosing-what-to-replicate-talk/</link>
+      <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/choosing-what-to-replicate-talk/</guid>
+      <description>&lt;p&gt;I recently had an opportunity to present some of my recent work on replication value for the &lt;a href=&#34;https://rdam-riot-science-club.github.io/&#34;&gt;Rotterdam RIOTS club&lt;/a&gt;. Because COVID-19 is still a concern the talk was held online, and due to the amazing organizing skills of the local RIOTS committee, the talk and question round was recorded and put up on Youtube.&lt;/p&gt;
+&lt;p&gt;In lieu of a preprint (which is oh-so-close to completion) this talk is probably the most up-to-date documentation of my work on replication value. If the topic of replication study selection interests you, this talk should be up your alley. If you watch it and have feedback or criticism, feel most welcome to contact me!&lt;/p&gt;
+&lt;p&gt;Note that the talk is based on a forthcoming paper, for which many collaborators deserves credit. However, all views expressed in this talk are mine alone. The writing and discussion process for the forthcoming paper was very much ongoing at the time I presented my talk, and I do not want to suggest that my collaborators would agree with all elements of my talk.&lt;/p&gt;
+&lt;div id=&#34;presentation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Presentation:&lt;/h1&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/0j-nKDCPcRQ&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;p&gt;Link to slides on OSF: &lt;a href=&#34;https://osf.io/tpnmf&#34; class=&#34;uri&#34;&gt;https://osf.io/tpnmf&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;post-hoc-caveats-to-the-presentation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Post-hoc caveats to the presentation&lt;/h1&gt;
+&lt;p&gt;The talk contains a few errors/blunders (I will update the list if I become aware of more):&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;At several points I talk in terms of “&lt;em&gt;my&lt;/em&gt; model”, “&lt;em&gt;my&lt;/em&gt; assumptions”, etc. This should in no way be taken to mean that the work I am presenting is mine alone. This work has been a team effort all the way, and much of the theoretical development has either been developed by, or inspired by, the work of several collaborators and colleages.&lt;/li&gt;
+&lt;li&gt;Around 50:20 I say that “uncertainty could still be low”, but I obviously mean “uncertainty could still be HIGH”&lt;/li&gt;
+&lt;li&gt;Correction of my answer to the question “what if you do a replication study that increases uncertainty”: Specifically, the model assumes that all we want is to be right about the claim (if the claim is true we want to believe it is true. If it is false we want to belive it is false). Suppose that a claim is really false, but there is an original study that indicates that the claim is true. Then, even if we conduct a replication that fails to replicate the original study, we have still reduced our uncertainty about the truth of the claim. I.e. we are closer to believing that the claim is false (which is true) after replication. However, the current definition of uncertainty in the model does not elegantly incorporate the problem of false/misplaced certainty.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Fifty ways to leave your model</title>
       <link>/post/fifty-ways-to-leave-your-model/</link>
       <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
@@ -229,7 +256,7 @@ sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alp
 plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999949546598227&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.999943710511243&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;

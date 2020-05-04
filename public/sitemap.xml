@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/choosing-what-to-replicate-talk/</loc>
+      <lastmod>2020-05-04T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/fifty-ways-to-leave-your-model/</loc>
       <lastmod>2020-02-15T00:00:00+00:00</lastmod>
     </url>
@@ -169,7 +178,7 @@
     <url>
     
       <loc>/tags/causal-graphs/</loc>
-      <lastmod>2020-02-15T00:00:00+00:00</lastmod>
+      <lastmod>2020-05-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -359,7 +368,7 @@
     <url>
     
       <loc>/tags/replication/</loc>
-      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
+      <lastmod>2020-05-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -369,7 +378,7 @@
     <url>
     
       <loc>/tags/replication-value/</loc>
-      <lastmod>2019-04-12T00:00:00+00:00</lastmod>
+      <lastmod>2020-05-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -400,6 +409,16 @@
     
       <loc>/tags/</loc>
       <lastmod>2017-01-01T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/talk/</loc>
+      <lastmod>2020-05-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

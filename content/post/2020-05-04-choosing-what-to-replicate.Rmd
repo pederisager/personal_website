@@ -1,0 +1,36 @@
+---
+title: "Choosing what to replicate: recorded talk for Rotterdam RIOTS club"
+author: "Peder M. Isager"
+date: "2020-05-04"
+output:
+  html_document:
+header:
+  caption: ''
+  image: 'headers/replication-study-selection-model.png'
+categories: []
+slug: choosing-what-to-replicate-talk
+tags: ["replication value" , "replication", "causal graphs", "talk"]
+---
+
+
+I recently had an opportunity to present some of my recent work on replication value for the [Rotterdam RIOTS club](https://rdam-riot-science-club.github.io/). Because COVID-19 is still a concern the talk was held online, and due to the amazing organizing skills of the local RIOTS committee, the talk and question round was recorded and put up on Youtube.
+
+In lieu of a preprint (which is oh-so-close to completion) this talk is probably the most up-to-date documentation of my work on replication value. If the topic of replication study selection interests you, this talk should be up your alley. If you watch it and have feedback or criticism, feel most welcome to contact me! 
+
+Note that the talk is based on a forthcoming paper, for which many collaborators deserves credit. However, all views expressed in this talk are mine alone. The writing and discussion process for the forthcoming paper was very much ongoing at the time I presented my talk, and I do not want to suggest that my collaborators would agree with all elements of my talk. 
+
+
+# Presentation: 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0j-nKDCPcRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Link to slides on OSF: https://osf.io/tpnmf 
+
+
+# Post-hoc caveats to the presentation 
+
+The talk contains a few errors/blunders (I will update the list if I become aware of more): 
+
+1. At several points I talk in terms of "*my* model", "*my* assumptions", etc. This should in no way be taken to mean that the work I am presenting is mine alone. This work has been a team effort all the way, and much of the theoretical development has either been developed by, or inspired by, the work of several collaborators and colleages.
+1. Around 50:20 I say that "uncertainty could still be low", but I obviously mean "uncertainty could still be HIGH"
+1. Correction of my answer to the question "what if you do a replication study that increases uncertainty": Specifically, the model assumes that all we want is to be right about the claim (if the claim is true we want to believe it is true. If it is false we want to belive it is false). Suppose that a claim is really false, but there is an original study that indicates that the claim is true. Then, even if we conduct a replication that fails to replicate the original study, we have still reduced our uncertainty about the truth of the claim. I.e. we are closer to believing that the claim is false (which is true) after replication. However, the current definition of uncertainty in the model does not elegantly incorporate the problem of false/misplaced certainty. 
