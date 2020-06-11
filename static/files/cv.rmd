@@ -91,6 +91,14 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 
 ## Invited talks
 
+2020
+:   **What is worth replicating? Formalizing a core decision problem in replication research**; University of Cambridge
+\
+
+2020
+:   **Choosing what to replicate: Efficient study selection in the modern age**; Rotterdam RIOTS club. Link to online recording: https://www.youtube.com/watch?v=0j-nKDCPcRQ
+\
+
 2019
 :   **Sharing data via the Open Science Framework**; Eindhoven University of Technology
 \
