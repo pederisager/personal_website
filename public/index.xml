@@ -62,7 +62,11 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Reply: Although most replicators will of course strive for a rigorous replication, some replication studies might not add much in terms of reducing uncertainty (e.g. if no resources are available to achieve adequate power). It seems most of these bullets assume the replication itself is ‘good’ but we should stay critical there as well. For selecting a study to replicate, the question of how much uncertainty the replication can reduce may for instance be raised when phase 1 reviewers judge a replication proposal.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;“Value of becoming certain”&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;value-of-becoming-certain&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Value of becoming certain&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Scientific impact&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;“Real world” consequences&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Number of citations&lt;/p&gt;
@@ -118,7 +122,7 @@
 &lt;li&gt;&lt;p&gt;When do we say “there is no need of further replication” of a study or theoretical construct?&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;em&gt;Peder: This is a good and difficult question, and it relates to a few other comments made in the session. In general, you probably always need to consider this question as relative to other replication studies you could do. I.e. once you have conducted a replication of study A, is it worth replicating A again, or is there now a study B that has become more important to replicate than A, given that A is corroborated/falsified by the replication you just conducted? &lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;Anna: this also reminds me that we as researchers are generally bad at knowing how to weigh the evidence we are looking at, perhaps because we are not used to calibrating our conclusions with the evidence, or because we are still catching up when it comes to reporting and expressing our certainty in terms of confidence intervals. For a good read on planning your sample size on the basis of how accurate you want you estimate to be, &lt;a href=&#34;10.1146/annurev.psych.59.103006.093735&#34;&gt;see Maxwell, Kelley &amp;amp; Rausch, 2008&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Anna: this also reminds me that we as researchers are generally bad at knowing how to weigh the evidence we are looking at, perhaps because we are not used to calibrating our conclusions with the evidence, or because we are still catching up when it comes to reporting and expressing our certainty in terms of confidence intervals. For a good read on planning your sample size on the basis of how accurate you want your estimate to be, &lt;a href=&#34;10.1146/annurev.psych.59.103006.093735&#34;&gt;see Maxwell, Kelley &amp;amp; Rausch, 2008&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Most replications are probably conducted by students interested in the subject matter at hand (which might incidentally include some of these factors like influence, importance, likelihood etc.).&lt;/p&gt;
 &lt;ul&gt;
@@ -388,7 +392,7 @@ sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alp
 plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.99994161311406&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.99994502267087&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;

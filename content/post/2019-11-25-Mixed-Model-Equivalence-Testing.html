@@ -102,7 +102,7 @@ sim &lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alpha =
 plot(sim[,1], sim[,2], xlab = &quot;ncp power&quot;, ylab = &quot;powerTOSTone&quot;)</code></pre>
 <p><img src="/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>paste(&quot;Pearson correlation =&quot;, cor(sim[,1], sim[,2]))</code></pre>
-<pre><code>## [1] &quot;Pearson correlation = 0.99994161311406&quot;</code></pre>
+<pre><code>## [1] &quot;Pearson correlation = 0.99994502267087&quot;</code></pre>
 </div>
 <div id="part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea" class="section level2">
 <h2>Part 2: Extending the ncp approach to mixed designs using PANGEA</h2>
