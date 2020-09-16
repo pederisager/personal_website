@@ -387,7 +387,7 @@ sim &lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alpha =
 plot(sim[,1], sim[,2], xlab = &quot;ncp power&quot;, ylab = &quot;powerTOSTone&quot;)</code></pre>
 <p><img src="/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>paste(&quot;Pearson correlation =&quot;, cor(sim[,1], sim[,2]))</code></pre>
-<pre><code>## [1] &quot;Pearson correlation = 0.99994502267087&quot;</code></pre>
+<pre><code>## [1] &quot;Pearson correlation = 0.99993642520938&quot;</code></pre>
 </div>
 <div id="part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea" class="section level2">
 <h2>Part 2: Extending the ncp approach to mixed designs using PANGEA</h2>
@@ -454,8 +454,9 @@ library(lmerTest)</code></pre>
 <pre class="r"><code>fm &lt;- lmer(response ~ condition + 
              (1 + condition | participant) + 
              (1 + condition | stimulus), 
-           data)
-summary(fm)</code></pre>
+           data)</code></pre>
+<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre class="r"><code>summary(fm)</code></pre>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: 
@@ -467,56 +468,58 @@ summary(fm)</code></pre>
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.38964 -0.77469  0.01926  0.77850  1.77989 
+## -2.38943 -0.77473  0.01916  0.77860  1.77988 
 ## 
 ## Random effects:
 ##  Groups      Name        Variance Std.Dev. Corr 
-##  participant (Intercept) 0.095561 0.30913       
-##              condition1  0.179121 0.42323  -0.90
-##  stimulus    (Intercept) 0.001334 0.03652       
-##              condition1  0.023547 0.15345  1.00 
-##  Residual                0.647701 0.80480       
+##  participant (Intercept) 0.09554  0.3091        
+##              condition1  0.17918  0.4233   -0.90
+##  stimulus    (Intercept) 0.00134  0.0366        
+##              condition1  0.02356  0.1535   1.00 
+##  Residual                0.64767  0.8048        
 ## Number of obs: 100, groups:  participant, 10; stimulus, 10
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error      df t value Pr(&gt;|t|)
-## (Intercept)   0.1316     0.1505  8.9488   0.874    0.405
-## condition1   -0.2411     0.2149  8.5999  -1.122    0.292
+## (Intercept)   0.1316     0.1505  8.9493   0.874    0.405
+## condition1   -0.2411     0.2149  8.6014  -1.122    0.292
 ## 
 ## Correlation of Fixed Effects:
 ##            (Intr)
-## condition1 -0.749</code></pre>
+## condition1 -0.749
+## convergence code: 0
+## boundary (singular) fit: see ?isSingular</code></pre>
 <p>The <code>lmerTest</code> package adds a t-test with Welch-Satterthwaite approximation to df for each fixed effect in our model (in this case, intercept and condition). This is the same t-test approach that PANGEA calculates power for <span class="citation">(Westfall 2015)</span>. It is directly calculated from the estimated effect and std.error provided in the basic <code>lmer</code> model.</p>
 <p>There are at least three ways to calculate an equivalence test from the data provided in this model. First, we can use the <code>contest1D</code> functions of the lmerTest package to perform tests centered on the lower and upper equivalence bound, using the <code>rhs</code> option:</p>
 <pre class="r"><code>lower &lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l) # get t value for test against lower bound
 upper &lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_u) # get t value for test against upper bound
 lower</code></pre>
 <pre><code>##     Estimate Std. Error       df  t value      lower     upper  Pr(&gt;|t|)
-## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.7306643 0.2484732 0.2603645</code></pre>
+## 1 -0.2410955   0.214897 8.601367 1.204784 -0.7306825 0.2484914 0.2603875</code></pre>
 <pre class="r"><code>upper</code></pre>
 <pre><code>##     Estimate Std. Error       df   t value      lower     upper    Pr(&gt;|t|)
-## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732 0.007803275</code></pre>
+## 1 -0.2410955   0.214897 8.601367 -3.448608 -0.7306825 0.2484914 0.007803962</code></pre>
 <p>The test provided by <code>contest1D</code> is two-sided, but we can easily recalculate the required one-sided tests from the t-values provided (or simply divide by 2 the p-values provided by <code>contest1D</code>):</p>
 <pre class="r"><code>pt(lower$`t value`, lower$df, lower.tail = FALSE)  # test against lower bound</code></pre>
-<pre><code>## [1] 0.1301823</code></pre>
+<pre><code>## [1] 0.1301938</code></pre>
 <pre class="r"><code>lower$`Pr(&gt;|t|)`/2  # test against lower bound</code></pre>
-<pre><code>## [1] 0.1301823</code></pre>
+<pre><code>## [1] 0.1301938</code></pre>
 <pre class="r"><code>pt(upper$`t value`, upper$df, lower.tail = TRUE)  # test against upper bound</code></pre>
-<pre><code>## [1] 0.003901638</code></pre>
+<pre><code>## [1] 0.003901981</code></pre>
 <pre class="r"><code>upper$`Pr(&gt;|t|)`/2  # test against upper bound</code></pre>
-<pre><code>## [1] 0.003901638</code></pre>
+<pre><code>## [1] 0.003901981</code></pre>
 <p>If both these tests are significant, so is the test for equivalence. In this case, the test against the lower bound is not significant, which means that we cannot reject that the true value is not equal to or more extreme than <code>bound_l</code>, which means that we failed to obtain an equivalent result.</p>
 <p>Instead of relying on <code>lmerTest</code>, we can also calculate the equivalence test directly from the estimated effects, standard error and degrees of freedom in the basic <code>lme4</code> model. All we need to do is subtract each bound from the effect size when calculating the t value:</p>
 <pre class="r"><code># Reproduce test without the use of rhs, by subtracting the bound t values from the estimated effect
 pt((lower$Estimate-bound_l)/lower$`Std. Error`, lower$df, lower.tail = FALSE)  # test against lower bound </code></pre>
-<pre><code>## [1] 0.1301823</code></pre>
+<pre><code>## [1] 0.1301938</code></pre>
 <pre class="r"><code>pt((upper$Estimate-bound_u)/upper$`Std. Error`, upper$df, lower.tail = TRUE)  # test against upper bound</code></pre>
-<pre><code>## [1] 0.003901638</code></pre>
+<pre><code>## [1] 0.003901981</code></pre>
 <p>The result should be identical to the solution provided by lmerTest.</p>
 <p>Finally, we can compare our upper and lower equivalence bound to the 90% (or alpha*2 more generally) confidence interval of an effect estimate, again using <code>contest1D</code>:</p>
 <pre class="r"><code>contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l, level = 0.9)</code></pre>
 <pre><code>##     Estimate Std. Error       df  t value      lower     upper  Pr(&gt;|t|)
-## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.6370974 0.1549064 0.2603645</code></pre>
+## 1 -0.2410955   0.214897 8.601367 1.204784 -0.6371148 0.1549237 0.2603875</code></pre>
 <p>If the <code>lower</code> and <code>upper</code> bounds of the 90% confidence interval falls within the boundry specified by our SESOI, the equivalence test is significant.</p>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>

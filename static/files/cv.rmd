@@ -67,12 +67,21 @@ Netherlands                        phone: 0047 976 51 974
 
 ## Publications
 
+### 2020
+
+**Isager, P. M.**, van Aert, R. C. M., Bahník, Š., Brandt, M. J., DeSoto, K. A., Giner-Sorolla, R., ... Lakens, D. (2020, September 2). Deciding what to replicate: A formal definition of “replication value” and a decision model for replication study selection. *MetaArXiv*, https://doi.org/10.31222/osf.io/2gurz
+
+Scheel, A. M., Tiokhin, L., **Isager, P. M.**, & Lakens, D. (2020, September 6). Why hypothesis testers should spend less time testing hypotheses. *PsyArXiv*, https://doi.org/10.31234/osf.io/vekpu
+
+Botvinik-Nezer, R., Holzmeister, F., Camerer, C. F., Dreber, A., Huber, J., Johannesson, M., ..., **Isager, P. M.**, ... & Avesani, P. (2020). Variability in the analysis of a single neuroimaging dataset by many teams. *Nature*, 582, 84–88, https://doi.org/10.1038/s41586-020-2314-9
+
 ### 2019
 
-Botvinik-Nezer, R., Holzmeister, F., Camerer, C. F., Dreber, A., Huber, J., Johannesson, M., ..., **Isager, P. M.**, ... & Avesani, P. (2019). Variability in the analysis of a single neuroimaging dataset by many teams. *bioRxiv*. https://doi.org/10.1101/843193
+McIntyre, S., Moungou, A., Boehme, R., **Isager, P. M.**, Lau, F., Israr, A., ... & Olausson, H. (2019, July). Affective touch communication in close adult relationships. In *2019 IEEE World Haptics Conference (WHC)* (pp. 175-180). IEEE.
+
+Buchanan, E. M., Crain, S. E., Cunningham, A. L., Johnson, H. R., Stash, H. E., ... **Isager, P. M.**, ... Aczel, B. (2019, May 20). Getting Started Creating Data Dictionaries: How to Create a Shareable Dataset. https://doi.org/10.31219/osf.io/vd4y3
 
 ### 2018
-
 
 Moshontz, H., Campbell, L., Ebersole, C. R., IJzerman, H., Urry, H. L., ..., **Isager, P. M.**, ... Chartier, C. R. (2018). The Psychological Science Accelerator: Advancing Psychology Through a Distributed Collaborative Network. *Advances in Methods and Practices in Psychological Science*, 1(4), 501–515. https://doi.org/10.1177/2515245918797607
 
@@ -90,6 +99,10 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 
 
 ## Invited talks
+
+2020
+:   **Deciding what to replicate**; University of Groningen
+\
 
 2020
 :   **What is worth replicating? Formalizing a core decision problem in replication research**; University of Cambridge
@@ -127,24 +140,29 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 ### Presentations
 
 2020
+:   **Psychological Science Accelerator Conference 2020**; Online
+
+    Silan, M,, Isager, P. M., Szabelska, A., a t almedia, I., Pfuhl, G. *Theory and Measurement Projects - Possible Submission Types?*
+
+2020
 :   **Reward|EQUATOR conference**; Berlin, Germany
 
-    Isager, P. M., *: Quantifying the replication value of research findings: Increase the return on investment in replication research.*
+    Isager, P. M. *Quantifying the replication value of research findings: Increase the return on investment in replication research.*
 
 2019
 :   **Tilburg Meta-Research Day**; Tilburg, Netherlands
 
-    Isager, P. M., van Assen, M., *How can meta-research improve the Psychological Science Accelerator (PSA) and how can the PSA improve meta-research?*
+    Isager, P. M., van Assen, M. *How can meta-research improve the Psychological Science Accelerator (PSA) and how can the PSA improve meta-research?*
 
 2019
 :   **ZPID Open Science**; Trier, Germany
 
-    Isager, P. M., *Quantifying replication value: A formula-based approach to study selection in replication research*
+    Isager, P. M. *Quantifying replication value: A formula-based approach to study selection in replication research*
 
 2017
 :   **International Convention of Psychological Science**; Vienna, Austria
 
-    Isager P, Holmgren J, Schubert T.W. *Social status as magnitude: The distance effect in social hierarchies. Part of the symposium Space for Cognition: Consequences of Biases in Spatial Cognition.*
+    Isager P. M., Holmgren J, Schubert T.W. *Social status as magnitude: The distance effect in social hierarchies. Part of the symposium Space for Cognition: Consequences of Biases in Spatial Cognition.*
 
 
 ### Posters
@@ -157,14 +175,19 @@ Lakens, D., McLatchie, N., **Isager, P. M.**, Scheel, A. M., & Dienes, Z. (2018)
 2016
 :   **Reading Emotions**; Reading, United Kingdom
 
-    **Isager P**, Eikemo M, Holmgren J, Nilsen AS, Vindenes V, Johnstone T, Leknes S. *Effect of morphine on hedonic evaluation of palatable food images in healthy humans.*
+    **Isager P. M.**, Eikemo M, Holmgren J, Nilsen AS, Vindenes V, Johnstone T, Leknes S. *Effect of morphine on hedonic evaluation of palatable food images in healthy humans.*
     
 2015
 :   **Center for Social and Affective Neuroscience, Inaugural symposium**; Linköping, Sweden
 
-    **Isager P**, Eikemo E, Vindenes V, Leknes S. *Effects of $\mu$-opioid agonism on reward behavior: subjective liking and disliking of win/loss stimuli.*
+    **Isager P. M.**, Eikemo E, Vindenes V, Leknes S. *Effects of $\mu$-opioid agonism on reward behavior: subjective liking and disliking of win/loss stimuli.*
 
 ### Abstracts
+
+2020
+:    **Psychological Science Accelerator Conference 2020**; Online
+
+    Silan, M,, **Isager P. M.** *Study Incubation as an Alternative to Standard Peer Review.*
 
 2018
 :   **Organization for Human Brain Mapping, annual meeting**; Singapore

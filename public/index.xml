@@ -392,7 +392,7 @@ sim &amp;lt;- replicate(500, simPower(es = es, s = s, n = sample(10:300, 1), alp
 plot(sim[,1], sim[,2], xlab = &amp;quot;ncp power&amp;quot;, ylab = &amp;quot;powerTOSTone&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-11-25-Mixed-Model-Equivalence-Testing_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;paste(&amp;quot;Pearson correlation =&amp;quot;, cor(sim[,1], sim[,2]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.99994502267087&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Pearson correlation = 0.99993642520938&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;part-2-extending-the-ncp-approach-to-mixed-designs-using-pangea&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Part 2: Extending the ncp approach to mixed designs using PANGEA&lt;/h2&gt;
@@ -459,8 +459,9 @@ library(lmerTest)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fm &amp;lt;- lmer(response ~ condition + 
              (1 + condition | participant) + 
              (1 + condition | stimulus), 
-           data)
-summary(fm)&lt;/code&gt;&lt;/pre&gt;
+           data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## boundary (singular) fit: see ?isSingular&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(fm)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed model fit by REML. t-tests use Satterthwaite&amp;#39;s method [
 ## lmerModLmerTest]
 ## Formula: 
@@ -472,56 +473,58 @@ summary(fm)&lt;/code&gt;&lt;/pre&gt;
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.38964 -0.77469  0.01926  0.77850  1.77989 
+## -2.38943 -0.77473  0.01916  0.77860  1.77988 
 ## 
 ## Random effects:
 ##  Groups      Name        Variance Std.Dev. Corr 
-##  participant (Intercept) 0.095561 0.30913       
-##              condition1  0.179121 0.42323  -0.90
-##  stimulus    (Intercept) 0.001334 0.03652       
-##              condition1  0.023547 0.15345  1.00 
-##  Residual                0.647701 0.80480       
+##  participant (Intercept) 0.09554  0.3091        
+##              condition1  0.17918  0.4233   -0.90
+##  stimulus    (Intercept) 0.00134  0.0366        
+##              condition1  0.02356  0.1535   1.00 
+##  Residual                0.64767  0.8048        
 ## Number of obs: 100, groups:  participant, 10; stimulus, 10
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error      df t value Pr(&amp;gt;|t|)
-## (Intercept)   0.1316     0.1505  8.9488   0.874    0.405
-## condition1   -0.2411     0.2149  8.5999  -1.122    0.292
+## (Intercept)   0.1316     0.1505  8.9493   0.874    0.405
+## condition1   -0.2411     0.2149  8.6014  -1.122    0.292
 ## 
 ## Correlation of Fixed Effects:
 ##            (Intr)
-## condition1 -0.749&lt;/code&gt;&lt;/pre&gt;
+## condition1 -0.749
+## convergence code: 0
+## boundary (singular) fit: see ?isSingular&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The &lt;code&gt;lmerTest&lt;/code&gt; package adds a t-test with Welch-Satterthwaite approximation to df for each fixed effect in our model (in this case, intercept and condition). This is the same t-test approach that PANGEA calculates power for &lt;span class=&#34;citation&#34;&gt;(Westfall 2015)&lt;/span&gt;. It is directly calculated from the estimated effect and std.error provided in the basic &lt;code&gt;lmer&lt;/code&gt; model.&lt;/p&gt;
 &lt;p&gt;There are at least three ways to calculate an equivalence test from the data provided in this model. First, we can use the &lt;code&gt;contest1D&lt;/code&gt; functions of the lmerTest package to perform tests centered on the lower and upper equivalence bound, using the &lt;code&gt;rhs&lt;/code&gt; option:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower &amp;lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l) # get t value for test against lower bound
 upper &amp;lt;- contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_u) # get t value for test against upper bound
 lower&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
-## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.7306643 0.2484732 0.2603645&lt;/code&gt;&lt;/pre&gt;
+## 1 -0.2410955   0.214897 8.601367 1.204784 -0.7306825 0.2484914 0.2603875&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df   t value      lower     upper    Pr(&amp;gt;|t|)
-## 1 -0.2410955  0.2148833 8.599947 -3.448827 -0.7306643 0.2484732 0.007803275&lt;/code&gt;&lt;/pre&gt;
+## 1 -0.2410955   0.214897 8.601367 -3.448608 -0.7306825 0.2484914 0.007803962&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The test provided by &lt;code&gt;contest1D&lt;/code&gt; is two-sided, but we can easily recalculate the required one-sided tests from the t-values provided (or simply divide by 2 the p-values provided by &lt;code&gt;contest1D&lt;/code&gt;):&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(lower$`t value`, lower$df, lower.tail = FALSE)  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301938&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lower$`Pr(&amp;gt;|t|)`/2  # test against lower bound&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301938&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt(upper$`t value`, upper$df, lower.tail = TRUE)  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901981&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;upper$`Pr(&amp;gt;|t|)`/2  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901981&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If both these tests are significant, so is the test for equivalence. In this case, the test against the lower bound is not significant, which means that we cannot reject that the true value is not equal to or more extreme than &lt;code&gt;bound_l&lt;/code&gt;, which means that we failed to obtain an equivalent result.&lt;/p&gt;
 &lt;p&gt;Instead of relying on &lt;code&gt;lmerTest&lt;/code&gt;, we can also calculate the equivalence test directly from the estimated effects, standard error and degrees of freedom in the basic &lt;code&gt;lme4&lt;/code&gt; model. All we need to do is subtract each bound from the effect size when calculating the t value:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Reproduce test without the use of rhs, by subtracting the bound t values from the estimated effect
 pt((lower$Estimate-bound_l)/lower$`Std. Error`, lower$df, lower.tail = FALSE)  # test against lower bound &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.1301823&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.1301938&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pt((upper$Estimate-bound_u)/upper$`Std. Error`, upper$df, lower.tail = TRUE)  # test against upper bound&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.003901638&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.003901981&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The result should be identical to the solution provided by lmerTest.&lt;/p&gt;
 &lt;p&gt;Finally, we can compare our upper and lower equivalence bound to the 90% (or alpha*2 more generally) confidence interval of an effect estimate, again using &lt;code&gt;contest1D&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;contest1D(fm, c(0, 1), confint=TRUE, rhs=bound_l, level = 0.9)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Estimate Std. Error       df  t value      lower     upper  Pr(&amp;gt;|t|)
-## 1 -0.2410955  0.2148833 8.599947 1.204861 -0.6370974 0.1549064 0.2603645&lt;/code&gt;&lt;/pre&gt;
+## 1 -0.2410955   0.214897 8.601367 1.204784 -0.6371148 0.1549237 0.2603875&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If the &lt;code&gt;lower&lt;/code&gt; and &lt;code&gt;upper&lt;/code&gt; bounds of the 90% confidence interval falls within the boundry specified by our SESOI, the equivalence test is significant.&lt;/p&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;
